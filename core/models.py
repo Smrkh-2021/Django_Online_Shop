@@ -1,6 +1,9 @@
 from django.db import models
 
 # Create your models here.
+from django.utils.datetime_safe import datetime
+
+
 class BaseManager(models.Manager):
     """
     Base Class Manager for Customize the Query Set and Filter by Deleted
@@ -41,3 +44,25 @@ class BaseModel(models.Model):
 
     def deactivate(self):
         self.is_active = False
+
+
+
+
+class BaseDiscount(models.Model):
+
+    expire_time = models.DateField(null=True)
+    max_price = models.PositiveIntegerField(null=True, blank=True)
+    value = models.PositiveIntegerField(null=False)
+    type = models.CharField(max_length=10, choices=[('price', 'Price'), ('percent', 'Percent')], null=False)
+    def profit_value(self, price: int):
+        """
+        Calculate and Return the profit of the discount
+        :param price: int (item value)
+        :return: profit
+        """
+        if self.expire_time != datetime.now():
+            if self.type == 'price':
+                return min(self.value, price)
+            else:  # percent
+                raw_profit = int((self.value/100) * price)
+                return int(min(raw_profit, int(self.max_price))) if self.max_price else raw_profit
