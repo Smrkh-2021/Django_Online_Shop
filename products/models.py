@@ -3,7 +3,7 @@ from core.models import BaseModel, BaseDiscount
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
-class Discount(BaseModel, BaseDiscount):
+class Discount(BaseDiscount):
     """
      Discount Model: for Apply discount on Product Price
     """
@@ -54,11 +54,25 @@ class Product(BaseModel):
     name = models.CharField(max_length=50)
     price = models.PositiveIntegerField()
     image = models.FileField()
-    count = models.PositiveIntegerField()
-    color = models.CharField(max_length=50)
-    dimension = models.CharField(max_length=50)
-    weight = models.CharField(max_length=20)
-    properties = models.TextField()
+    count = models.PositiveIntegerField(help_text=_("Number of Products item in Repository"))
+    color = models.CharField(max_length=50, null=True, blank=True, default=None)
+    dimension = models.CharField(max_length=50, null=True, blank=True, default=None)
+    weight = models.CharField(max_length=20, null=True, blank=True, default=None)
+    properties = models.TextField(help_text=_("Enter Details of your products"))
     discount_id = models.ForeignKey(Discount, on_delete=models.CASCADE)
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True, default=None)
+
+
+class Comment(BaseModel):
+    """
+     Comment Model: for all Products comments that shows in detail view
+    """
+
+    class Meta:
+        verbose_name = _("Comment")
+        verbose_name_plural = _("Comments")
+
+
+    title = models.CharField(max_length=50, null=True, blank=True)
+    content = models.TextField(help_text=_("Enter Text Demand"))

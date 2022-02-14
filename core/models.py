@@ -48,7 +48,7 @@ class BaseModel(models.Model):
 
 
 
-class BaseDiscount(models.Model):
+class BaseDiscount(BaseModel):
 
     expire_time = models.DateField(null=True)
     max_price = models.PositiveIntegerField(null=True, blank=True)
