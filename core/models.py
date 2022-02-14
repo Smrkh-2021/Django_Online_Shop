@@ -16,11 +16,13 @@ class BaseModel(models.Model):
     """
     Basic Class Model for Inheritance All Other Class Model from it
     """
+
     objects = BaseManager()
     create_datetime = models.DateTimeField(auto_now_add=True, editable=False)
     modify_datetime = models.DateTimeField(auto_now=True, editable=False)
+    delete_datetime = models.DateTimeField(default=None)
     is_active = models.BooleanField(default=True)
-    is_delete = models.BooleanField(default=False)
+    is_delete = models.BooleanField(default=False, editable=False, db_index=True)
 
     class Meta:
         abstract = True
