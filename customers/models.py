@@ -10,6 +10,10 @@ class Customer(BaseModel):
     """
     Customer class for whoes to see products and categories and create new Orders
     """
+    class Meta:
+        verbose_name = _("Customer")
+        verbose_name_plural = _("Customers")
+
     fname = models.CharField(max_length=50)
     lname = models.CharField(max_length=50)
     username = models.CharField(max_length=50)
@@ -21,6 +25,10 @@ class Address(BaseModel):
     """
     Adress Class for customer's addresses
     """
+    class Meta:
+        verbose_name = _("Address")
+        verbose_name_plural = _("Addresses")
+
     province = models.CharField(max_length=30)
     city = models.CharField(max_length=30)
     street = models.CharField(max_length=50)

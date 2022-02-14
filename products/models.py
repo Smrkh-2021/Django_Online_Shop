@@ -1,19 +1,56 @@
 from django.db import models
-from core.models import BaseModel
-
+from core.models import BaseModel, BaseDiscount
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
-class Discount(BaseModel):
+class Discount(BaseModel, BaseDiscount):
+    """
+     Discount Model: for Apply discount on Product Price
+    """
+    class Meta:
+        verbose_name = _("Discount")
+        verbose_name_plural = _("Discounts")
 
-    type = models.CharField(max_length=20, choices=[('value','Value'),('percent', 'Percent')], null=False)
-
+    title = models.CharField(max_length=50)
 
 
 
 class Category(BaseModel):
-    ...
+    """
+     Category Model: for Apply discount on Product Price
+    """
+    class Meta:
+        verbose_name = _("Category")
+        verbose_name_plural = _("Categories")
+
+    name = models.CharField(max_length=50)
+    category_id = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, default=None)
+    discount = models.ForeignKey(Discount, on_delete=models.CASCADE)
+
+
+class Brand(BaseModel):
+    """
+     Brand Model: for brand producer of all Products
+    """
+    class Meta:
+        verbose_name = _("Brand")
+        verbose_name_plural = _("Brands")
+
+
+    name = models.CharField(max_length=50)
+    country = models.CharField(max_length=50)
+
+
 
 class Product(BaseModel):
+    """
+     Product Model: for all Products to show in home page
+    """
+    class Meta:
+        verbose_name = _("Product")
+        verbose_name_plural = _("Products")
+
+
     name = models.CharField(max_length=50)
     price = models.PositiveIntegerField()
     image = models.FileField()
@@ -22,3 +59,6 @@ class Product(BaseModel):
     dimension = models.CharField(max_length=50)
     weight = models.CharField(max_length=20)
     properties = models.TextField()
+    discount_id = models.ForeignKey(Discount, on_delete=models.CASCADE)
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
