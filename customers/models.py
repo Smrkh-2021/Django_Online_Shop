@@ -35,4 +35,4 @@ class Address(BaseModel):
     alley = models.CharField(max_length=50)
     number = models.PositiveIntegerField()
     description = models.TextField(help_text=_("Enter your extra description of your address"))
-    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)

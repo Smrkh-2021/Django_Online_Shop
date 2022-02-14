@@ -24,7 +24,7 @@ class Category(BaseModel):
         verbose_name_plural = _("Categories")
 
     name = models.CharField(max_length=50)
-    category_id = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, default=None)
+    category = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, default=None)
     discount = models.ForeignKey(Discount, on_delete=models.CASCADE)
 
 
@@ -59,8 +59,8 @@ class Product(BaseModel):
     dimension = models.CharField(max_length=50, null=True, blank=True, default=None)
     weight = models.CharField(max_length=20, null=True, blank=True, default=None)
     properties = models.TextField(help_text=_("Enter Details of your products"))
-    discount_id = models.ForeignKey(Discount, on_delete=models.CASCADE)
-    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    discount = models.ForeignKey(Discount, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True, default=None)
 
 
