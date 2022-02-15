@@ -11,8 +11,8 @@ class Status(BaseModel):
      Status Model: This is Status of Order/Cart that contain: Paide, UnPaide, Canceled
     """
     class Meta:
-        verbose_name = _("Off code")
-        verbose_name_plural = _("Off codes")
+        verbose_name = _("Status")
+        verbose_name_plural = _("Statuses")
 
     title = models.CharField(verbose_name=_('Order Status'), max_length=50, unique=True)
 
@@ -23,8 +23,8 @@ class OffCode(BaseDiscount):
     """
 
     class Meta:
-        verbose_name = _("Offcode")
-        verbose_name_plural = _("Offcodes")
+        verbose_name = _("Off Code")
+        verbose_name_plural = _("Off Codes")
 
     code = models.PositiveIntegerField(verbose_name=_('off code'), help_text=_("Off Code"), null=True, blank=True)
 

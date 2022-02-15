@@ -23,7 +23,7 @@ class BaseModel(models.Model):
     objects = BaseManager()
     create_datetime = models.DateTimeField(auto_now_add=True, editable=False)
     modify_datetime = models.DateTimeField(auto_now=True, editable=False)
-    delete_datetime = models.DateTimeField(default=None)
+    delete_datetime = models.DateTimeField(default=None, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_delete = models.BooleanField(default=False, editable=False, db_index=True)
 
@@ -51,7 +51,7 @@ class BaseModel(models.Model):
 class BaseDiscount(BaseModel):
 
     expire_time = models.DateField(null=True)
-    max_price = models.PositiveIntegerField(null=True, blank=True)
+    max_price = models.PositiveIntegerField()
     value = models.PositiveIntegerField(null=False)
     type = models.CharField(max_length=10, choices=[('price', 'Price'), ('percent', 'Percent')], null=False)
     def profit_value(self, price: int):
