@@ -13,6 +13,8 @@ class Discount(BaseDiscount):
 
     title = models.CharField(max_length=50)
 
+    def __str__(self):
+        return f'{self.title}: {self.value} {self.type}'
 
 
 class Category(BaseModel):
@@ -25,7 +27,10 @@ class Category(BaseModel):
 
     name = models.CharField(max_length=50)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, default=None)
-    discount = models.ForeignKey(Discount, on_delete=models.CASCADE)
+    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, null=True, blank=True, default=None)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Brand(BaseModel):
@@ -40,6 +45,8 @@ class Brand(BaseModel):
     name = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
 
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Product(BaseModel):
@@ -58,8 +65,8 @@ class Product(BaseModel):
     color = models.CharField(max_length=50, null=True, blank=True, default=None)
     dimension = models.CharField(max_length=50, null=True, blank=True, default=None)
     weight = models.CharField(max_length=20, null=True, blank=True, default=None)
-    properties = models.TextField(help_text=_("Enter Details of your products"))
-    discount = models.ForeignKey(Discount, on_delete=models.CASCADE)
+    properties = models.TextField(help_text=_("Enter Details of your products"), null=True, blank=True, default=None)
+    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, null=True, blank=True, default=None)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True, default=None)
 

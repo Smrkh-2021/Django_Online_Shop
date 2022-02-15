@@ -20,6 +20,9 @@ class Customer(BaseModel):
     email = models.EmailField()
     phone = models.CharField(max_length=15)
 
+    def __str__(self):
+        return f'{self.username}'
+
 
 class Address(BaseModel):
     """
@@ -34,5 +37,10 @@ class Address(BaseModel):
     street = models.CharField(max_length=50)
     alley = models.CharField(max_length=50)
     number = models.PositiveIntegerField()
-    description = models.TextField(help_text=_("Enter your extra description of your address"))
+    description = models.TextField(help_text=_("Enter your extra description of your address"), null=True, blank=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Address Customer: {self.customer}'
+
+

@@ -16,6 +16,9 @@ class Status(BaseModel):
 
     title = models.CharField(verbose_name=_('Order Status'), max_length=50, unique=True)
 
+    def __str__(self):
+        return f'{self.title}'
+
 
 class OffCode(BaseDiscount):
     """
@@ -26,7 +29,10 @@ class OffCode(BaseDiscount):
         verbose_name = _("Off Code")
         verbose_name_plural = _("Off Codes")
 
-    code = models.PositiveIntegerField(verbose_name=_('off code'), help_text=_("Off Code"), null=True, blank=True)
+    code = models.PositiveIntegerField(verbose_name=_('off code'))
+
+    def __str__(self):
+        return f'Off Code: {self.value} {self.type}'
 
 
 class Order(BaseModel):
