@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.db import models
 
 # Create your models here.
@@ -49,9 +51,8 @@ class BaseModel(models.Model):
 
 
 class BaseDiscount(BaseModel):
-
-    expire_time = models.DateField(null=True)
-    max_price = models.PositiveIntegerField()
+    expire_time = models.DateField(null=True, default=lambda: datetime.now().date()+timedelta(days=2))
+    max_price = models.PositiveIntegerField(null=True, blank=True)
     value = models.PositiveIntegerField(null=False)
     type = models.CharField(max_length=10, choices=[('price', 'Price'), ('percent', 'Percent')], null=False)
     def profit_value(self, price: int):
@@ -60,9 +61,15 @@ class BaseDiscount(BaseModel):
         :param price: int (item value)
         :return: profit
         """
-        if self.expire_time != datetime.now():
+        print('datetime:', datetime.now().date())
+        print('type datetime:', type(datetime.now().date()))
+        print('expire_time:', self.expire_time)
+        print('type expire_time:', type(self.expire_time))
+        if self.expire_time >= datetime.now():
             if self.type == 'price':
                 return min(self.value, price)
             else:  # percent
                 raw_profit = int((self.value/100) * price)
                 return int(min(raw_profit, int(self.max_price))) if self.max_price else raw_profit
+        else:
+            return '0'

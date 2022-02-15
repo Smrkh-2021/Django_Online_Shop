@@ -60,7 +60,7 @@ class Product(BaseModel):
 
     name = models.CharField(max_length=50)
     price = models.PositiveIntegerField()
-    image = models.FileField()
+    image = models.FileField(upload_to='products')
     count = models.PositiveIntegerField(help_text=_("Number of Products item in Repository"))
     color = models.CharField(max_length=50, null=True, blank=True, default=None)
     dimension = models.CharField(max_length=50, null=True, blank=True, default=None)
@@ -69,6 +69,9 @@ class Product(BaseModel):
     discount = models.ForeignKey(Discount, on_delete=models.CASCADE, null=True, blank=True, default=None)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True, default=None)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Comment(BaseModel):
