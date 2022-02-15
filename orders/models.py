@@ -17,7 +17,7 @@ class Status(BaseModel):
     title = models.CharField(verbose_name=_('Order Status'), max_length=50, unique=True)
 
 
-class Offcode(BaseDiscount):
+class OffCode(BaseDiscount):
     """
      Offcode Model: This is Discount Code for Order/Cart
     """
@@ -38,7 +38,7 @@ class Order(BaseModel):
         verbose_name = _("Order")
         verbose_name_plural = _("Orders")
 
-    offcode = models.ForeignKey(Offcode, on_delete=models.CASCADE)
+    offcode = models.ForeignKey(OffCode, on_delete=models.CASCADE)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     final_price = models.PositiveIntegerField(default=0, verbose_name=_('Final Price'), help_text=_("Final Price"))
