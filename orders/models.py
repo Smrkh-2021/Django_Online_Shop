@@ -72,9 +72,15 @@ class OrderItem(BaseModel):
 
 
     def total_price(self):
+        """
+        Calculate Total Price of Order Item by Mutliply Count in Product Price
+        """
         return self.product.price * self.count
 
     def final_price(self):
+        """
+        Calculate Total Price of Order Item by Mutliply Count in Product Discounted Price
+        """
         return self.product.discounted_price() * self.count
 
 
