@@ -72,4 +72,4 @@ class BaseDiscount(BaseModel):
                 raw_profit = int((self.value/100) * price)
                 return int(min(raw_profit, int(self.max_price))) if self.max_price else raw_profit
         else:
-            return '0'
+            return 0
