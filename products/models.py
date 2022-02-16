@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.datetime_safe import datetime
+
 from core.models import BaseModel, BaseDiscount
 from django.utils.translation import gettext_lazy as _
 
@@ -69,6 +71,21 @@ class Product(BaseModel):
     discount = models.ForeignKey(Discount, on_delete=models.CASCADE, null=True, blank=True, default=None)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True, default=None)
+
+
+    def discounted_price(self):
+        if self.discount.expire_time >= datetime.now().date():
+            if self.discount.type == 'price':
+                res = self.price - self.discount.value
+                return res
+            elif self.discount.type == 'percent':
+                res = self.price - int(self.price * (self.discount.value / 100))
+                return res
+        return 0
+
+
+
+
 
     def __str__(self):
         return f'{self.name}'

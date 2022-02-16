@@ -71,3 +71,10 @@ class OrderItem(BaseModel):
         return f"Order no {self.order.id}: {self.product.name} | {self.count}"
 
 
+    def total_price(self):
+        return self.product.price * self.count
+
+    def final_price(self):
+        return self.product.discounted_price() * self.count
+
+
