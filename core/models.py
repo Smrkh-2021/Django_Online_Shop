@@ -62,10 +62,6 @@ class BaseDiscount(BaseModel):
         :param price: int (item value)
         :return: profit
         """
-        # print('datetime:', datetime.now().date())
-        # print('type datetime:', type(datetime.now().date()))
-        # print('expire_time:', self.expire_time)
-        # print('type expire_time:', type(self.expire_time))
         if self.expire_time >= datetime.now():
             if self.type == 'price':
                 return min(self.value, price)
