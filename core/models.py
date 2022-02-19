@@ -1,8 +1,8 @@
 from datetime import timedelta
-
-from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
-
+from .validators import Validation
 # Create your models here.
 from django.utils.datetime_safe import datetime
 
@@ -76,6 +76,23 @@ class BaseDiscount(BaseModel):
             return 0
 
 
+class MyUserManager(UserManager):
+    def create_superuser(self, username=None, email=None, password=None, **extra_fields):
+        username = extra_fields['phone']
+        return super().create_superuser(username, email, password, **extra_fields)
+
+
 
 class User(AbstractUser):
-    ...
+    """
+    User Model for Change Default User Name to Phone Number for Auth Pages
+    """
+
+    class Meta:
+        verbose_name = _("User")
+        verbose_name_plural = _("Users")
+
+    objects = MyUserManager()
+    phone = models.CharField(max_length=13, unique=True,
+                             verbose_name=_("phone number"), validators=[Validation.check_phone], help_text=_("Enter your phone number"))
+    USERNAME_FIELD = 'phone'
