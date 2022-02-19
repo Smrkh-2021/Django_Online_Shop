@@ -1,0 +1,43 @@
+body {
+    direction: rtl;
+    text-align: right !important;
+}
+
+.main_menu nav > ul > li > a i {
+    margin-right: 3px;
+    margin-left: 0;
+}
+
+.link_follow ul li:last-child {
+    margin-right: 7px;
+}
+
+.top_right > ul > li > a i.ion-ios-arrow-down {
+    margin-right: 6px;
+    margin-left: 0;
+}
+
+.follow_us ul li {
+    margin-right: 16px;
+    margin-left: 0;
+}
+
+.header_wishlist {
+    margin-left: 24px;
+    margin-right: 0;
+}
+
+.search-container {
+    margin-left: 82px;
+    margin-right: 0;
+}
+
+.main_menu nav > ul > li ul.sub_menu {
+    right: 0;
+    left: auto;
+    text-align: right;
+}
+
+.main_menu nav > ul > li .mega_menu {
+    text-align: right !important;
+}
