@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-19 23:41+0330\n"
+"POT-Creation-Date: 2022-02-19 23:54+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,39 +20,39 @@ msgstr ""
 
 #: core/models.py:88
 msgid "User"
-msgstr ""
+msgstr "کاربر"
 
 #: core/models.py:89
 msgid "Users"
-msgstr ""
+msgstr "کاربران"
 
 #: core/models.py:93
 msgid "phone number"
-msgstr ""
+msgstr "شماره تلفن"
 
 #: core/models.py:93
 msgid "Enter your phone number"
-msgstr ""
+msgstr "شماره تلفن خود را وارد کنید"
 
 #: core/validators.py:23
 msgid "Phone number must be in the true IR format"
-msgstr ""
+msgstr "شماره تلفن باید به فرمت ایران باشد"
 
 #: customers/models.py:14
 msgid "Customer"
-msgstr ""
+msgstr "مشتری"
 
 #: customers/models.py:15
 msgid "Customers"
-msgstr ""
+msgstr "مشتریان"
 
 #: customers/models.py:32
 msgid "Address"
-msgstr ""
+msgstr "آدرس"
 
 #: customers/models.py:33
 msgid "Addresses"
-msgstr ""
+msgstr "آدرس ها"
 
 #: customers/models.py:40
 msgid "Enter your extra description of your address"
@@ -64,41 +64,41 @@ msgstr ""
 
 #: orders/models.py:15
 msgid "Statuses"
-msgstr ""
+msgstr "وضعیت ها"
 
 #: orders/models.py:17
 msgid "Order Status"
-msgstr ""
+msgstr "وضعیت سفارش"
 
 #: orders/models.py:29
 msgid "Off Code"
-msgstr ""
+msgstr "کد تخفیف"
 
 #: orders/models.py:30
 msgid "Off Codes"
-msgstr ""
+msgstr "کدهای تخفیف"
 
 #: orders/models.py:32
 msgid "off code"
-msgstr ""
+msgstr "کد تخفیف"
 
 #: orders/models.py:44
 #: venv/lib/python3.10/site-packages/django/forms/formsets.py:420
 #: venv/lib/python3.10/site-packages/django/forms/formsets.py:427
 msgid "Order"
-msgstr ""
+msgstr "سفارش"
 
 #: orders/models.py:45
 msgid "Orders"
-msgstr ""
+msgstr "سفارش ها"
 
 #: orders/models.py:50
 msgid "Final Price"
-msgstr ""
+msgstr "هزینه نهایی"
 
 #: orders/models.py:51
 msgid "Total Price"
-msgstr ""
+msgstr "مجموع هزینه"
 
 #: orders/models.py:63
 msgid "Order Item"
@@ -110,7 +110,7 @@ msgstr ""
 
 #: orders/models.py:66
 msgid "Count"
-msgstr ""
+msgstr "تعداد"
 
 #: orders/models.py:66
 msgid "OrderItem Count"
@@ -118,35 +118,35 @@ msgstr ""
 
 #: products/models.py:13
 msgid "Discount"
-msgstr ""
+msgstr "تخفیف"
 
 #: products/models.py:14
 msgid "Discounts"
-msgstr ""
+msgstr "تخفیفات"
 
 #: products/models.py:27
 msgid "Category"
-msgstr ""
+msgstr "دسته بندی"
 
 #: products/models.py:28
 msgid "Categories"
-msgstr ""
+msgstr "دسته بندی ها"
 
 #: products/models.py:43
 msgid "Brand"
-msgstr ""
+msgstr "برند"
 
 #: products/models.py:44
 msgid "Brands"
-msgstr ""
+msgstr "برندها"
 
 #: products/models.py:59
 msgid "Product"
-msgstr ""
+msgstr "محصول"
 
 #: products/models.py:60
 msgid "Products"
-msgstr ""
+msgstr "محصولات"
 
 #: products/models.py:66
 msgid "Number of Products item in Repository"
@@ -158,11 +158,11 @@ msgstr ""
 
 #: products/models.py:100
 msgid "Comment"
-msgstr ""
+msgstr "نظر"
 
 #: products/models.py:101
 msgid "Comments"
-msgstr ""
+msgstr "نطرات"
 
 #: products/models.py:105
 msgid "Enter Text Demand"
@@ -170,7 +170,7 @@ msgstr ""
 
 #: venv/lib/python3.10/site-packages/django/contrib/messages/apps.py:7
 msgid "Messages"
-msgstr ""
+msgstr "پیام ها"
 
 #: venv/lib/python3.10/site-packages/django/contrib/sitemaps/apps.py:8
 msgid "Site Maps"
@@ -1139,13 +1139,13 @@ msgstr ""
 
 #: venv/lib/python3.10/site-packages/django/utils/text.py:242
 msgid "or"
-msgstr ""
+msgstr "یا"
 
 #. Translators: This string is used as a separator between list elements
 #: venv/lib/python3.10/site-packages/django/utils/text.py:261
 #: venv/lib/python3.10/site-packages/django/utils/timesince.py:94
 msgid ", "
-msgstr ""
+msgstr "، "
 
 #: venv/lib/python3.10/site-packages/django/utils/timesince.py:9
 #, python-format
