@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
@@ -61,10 +62,10 @@ class BaseDiscount(BaseModel):
         :param price: int (item value)
         :return: profit
         """
-        print('datetime:', datetime.now().date())
-        print('type datetime:', type(datetime.now().date()))
-        print('expire_time:', self.expire_time)
-        print('type expire_time:', type(self.expire_time))
+        # print('datetime:', datetime.now().date())
+        # print('type datetime:', type(datetime.now().date()))
+        # print('expire_time:', self.expire_time)
+        # print('type expire_time:', type(self.expire_time))
         if self.expire_time >= datetime.now():
             if self.type == 'price':
                 return min(self.value, price)
@@ -73,3 +74,8 @@ class BaseDiscount(BaseModel):
                 return int(min(raw_profit, int(self.max_price))) if self.max_price else raw_profit
         else:
             return 0
+
+
+
+class User(AbstractUser):
+    ...
