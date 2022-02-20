@@ -60,14 +60,14 @@ class Product(BaseModel):
         verbose_name_plural = _("Products")
 
 
-    name = models.CharField(max_length=50)
-    price = models.PositiveIntegerField()
-    image = models.FileField(upload_to='products')
-    count = models.PositiveIntegerField(help_text=_("Number of Products item in Repository"))
-    color = models.CharField(max_length=50, null=True, blank=True, default=None)
-    dimension = models.CharField(max_length=50, null=True, blank=True, default=None)
-    weight = models.CharField(max_length=20, null=True, blank=True, default=None)
-    properties = models.TextField(help_text=_("Enter Details of your products"), null=True, blank=True, default=None)
+    name = models.CharField(max_length=50, verbose_name=_('prodect name'))
+    price = models.PositiveIntegerField(verbose_name=_('price'))
+    image = models.FileField(upload_to='products', verbose_name=_('product image'))
+    count = models.PositiveIntegerField(help_text=_("Number of Products item in Repository"), verbose_name=_('product count'))
+    color = models.CharField(max_length=50, null=True, blank=True, default=None, verbose_name=_('product color'))
+    dimension = models.CharField(max_length=50, null=True, blank=True, default=None, verbose_name=_('product dimenssion'))
+    weight = models.CharField(max_length=20, null=True, blank=True, default=None, verbose_name=_('product weight'))
+    properties = models.TextField(help_text=_("Enter Details of your products"), null=True, blank=True, default=None, verbose_name=_('product properties'))
     discount = models.ForeignKey(Discount, on_delete=models.CASCADE, null=True, blank=True, default=None)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True, default=None)
@@ -81,10 +81,7 @@ class Product(BaseModel):
             elif self.discount.type == 'percent':
                 res = self.price - int(self.price * (self.discount.value / 100))
                 return res
-        return 0
-
-
-
+        return self.price
 
 
     def __str__(self):

@@ -14,11 +14,11 @@ class ProductView(ListView):
     template_name = 'products/home.html'
 
 
-class ProductListApi(generics.ListCreateAPIView):
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
-
-
-class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
+# class ProductListApi(generics.ListCreateAPIView):
+#     serializer_class = ProductSerializer
+#     queryset = Product.objects.all()
+#
+#
+# class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
+#     serializer_class = ProductSerializer
+#     queryset = Product.objects.all()
