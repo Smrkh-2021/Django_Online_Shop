@@ -1,10 +1,39 @@
 from django.db import models
 from django.utils.datetime_safe import datetime
-
-from core.models import BaseModel, BaseDiscount
+from datetime import timedelta
+from core.models import BaseModel
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
+
+
+class BaseDiscount(BaseModel):
+    def get_default_my_date(self):
+        return datetime.now() + timedelta(days=2)
+
+    expire_time = models.DateField(null=True, default=get_default_my_date)
+    max_price = models.PositiveIntegerField(null=True, blank=True)
+    value = models.PositiveIntegerField(null=False)
+    type = models.CharField(max_length=10, choices=[('price', 'Price'), ('percent', 'Percent')], null=False)
+    def profit_value(self, price: int):
+        """
+        Calculate and Return the profit of the discount
+        :param price: int (item value)
+        :return: profit
+        """
+        if self.expire_time >= datetime.now():
+            if self.type == 'price':
+                return min(self.value, price)
+            else:  # percent
+                raw_profit = int((self.value/100) * price)
+                return int(min(raw_profit, int(self.max_price))) if self.max_price else raw_profit
+        else:
+            return 0
+
+    class Meta:
+        abstract = True
+
+
 class Discount(BaseDiscount):
     """
      Discount Model: for Apply discount on Product Price
@@ -62,7 +91,8 @@ class Product(BaseModel):
 
     name = models.CharField(max_length=50, verbose_name=_('prodect name'))
     price = models.PositiveIntegerField(verbose_name=_('price'))
-    image = models.FileField(upload_to='products', verbose_name=_('product image'))
+    image_main = models.FileField(upload_to='products', verbose_name=_('product main image'), help_text='main image')
+    image_accessories = models.FileField(upload_to='products', verbose_name=_('product accessory image'), help_text='accessory image')
     count = models.PositiveIntegerField(help_text=_("Number of Products item in Repository"), verbose_name=_('product count'))
     color = models.CharField(max_length=50, null=True, blank=True, default=None, verbose_name=_('product color'))
     dimension = models.CharField(max_length=50, null=True, blank=True, default=None, verbose_name=_('product dimenssion'))
