@@ -1,4 +1,3 @@
-from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
@@ -79,28 +78,7 @@ class User(AbstractUser):
 
 
 
-class BaseDiscount(BaseModel):
-    def get_default_my_date(self):
-        return datetime.now() + timedelta(days=2)
 
-    expire_time = models.DateField(null=True, default=get_default_my_date)
-    max_price = models.PositiveIntegerField(null=True, blank=True)
-    value = models.PositiveIntegerField(null=False)
-    type = models.CharField(max_length=10, choices=[('price', 'Price'), ('percent', 'Percent')], null=False)
-    def profit_value(self, price: int):
-        """
-        Calculate and Return the profit of the discount
-        :param price: int (item value)
-        :return: profit
-        """
-        if self.expire_time >= datetime.now():
-            if self.type == 'price':
-                return min(self.value, price)
-            else:  # percent
-                raw_profit = int((self.value/100) * price)
-                return int(min(raw_profit, int(self.max_price))) if self.max_price else raw_profit
-        else:
-            return 0
 
 
 
