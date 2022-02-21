@@ -71,6 +71,12 @@ class User(AbstractUser):
         verbose_name = _("User")
         verbose_name_plural = _("Users")
 
+    def save(self, *args, **kwargs):
+        self.username = self.phone
+        if User.objects.filter(id=self.id):
+            self.set_password(self.password)
+        super().save(*args, **kwargs)
+
 
 
 class BaseDiscount(BaseModel):
