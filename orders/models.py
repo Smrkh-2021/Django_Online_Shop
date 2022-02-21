@@ -1,9 +1,9 @@
 from django.db import models
-from products.models import Product
-from customers.models import Customer
+from products.models import Product, BaseDiscount
+from customers.models import Customer, Address
 from django.utils.translation import gettext_lazy as _
 # Create your models here.
-from core.models import BaseModel, BaseDiscount
+from core.models import BaseModel
 
 
 class Status(BaseModel):
@@ -44,6 +44,7 @@ class Order(BaseModel):
         verbose_name = _("Order")
         verbose_name_plural = _("Orders")
 
+    address = models.ForeignKey(to=Address, on_delete=models.RESTRICT)
     offcode = models.ForeignKey(OffCode, on_delete=models.CASCADE, null=True, blank=True)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
