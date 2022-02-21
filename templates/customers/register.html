@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <ul>
-                            <li><a href="">home</a></li>
+                            <li><a href={% url 'products:product_list_view' %}>home</a></li>
                             <li>Register</li>
                         </ul>
                     </div>
@@ -19,44 +19,62 @@
 
 
     <!-- customer login start -->
-{#    <div class="customer_login mt-32">#}
-{#        <div class="container">#}
-{#            <div class="row">#}
-{#                <!--login area start-->#}
-{#                <div class="col-lg-6 col-md-6">#}
-{#                    <div class="account_form">#}
-{#                        <h2>login</h2>#}
-{#                        <form method="post">#}
-{#                            {% csrf_token %}#}
-{#                            <p>#}
-{#                                <label>Phone <span>*</span></label>#}
-                                {#                                <input type="text">#}
-{#                                {{ form.phone }}#}
-{#                            </p>#}
-{#                            <p>#}
-{#                                <label>Password <span>*</span></label>#}
-                                {#                                <input type="password">#}
-{#                                {{ form.password }}#}
-{#                            </p>#}
-{#                            <div class="login_submit">#}
-{#                                <a href="#">Forget your password?</a>#}
-{#                                <label for="remember">#}
-{#                                    <input id="remember" type="checkbox">#}
-{#                                    Remember me#}
-{#                                </label>#}
-{#                                <button type="submit">login</button>#}
-{##}
-{#                            </div>#}
-{##}
-{#                        </form>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <!--login area start-->#}
+    {#    <div class="customer_login mt-32">#}
+    {#        <div class="container">#}
+    {#            <div class="row">#}
+    {#                <!--login area start-->#}
+    {#                <div class="col-lg-6 col-md-6">#}
+    {#                    <div class="account_form">#}
+    {#                        <h2>login</h2>#}
+    {#                        <form method="post">#}
+    {#                            {% csrf_token %}#}
+    {#                            <p>#}
+    {#                                <label>Phone <span>*</span></label>#}
+    {#                                <input type="text">#}
+    {#                                {{ form.phone }}#}
+    {#                            </p>#}
+    {#                            <p>#}
+    {#                                <label>Password <span>*</span></label>#}
+    {#                                <input type="password">#}
+    {#                                {{ form.password }}#}
+    {#                            </p>#}
+    {#                            <div class="login_submit">#}
+    {#                                <a href="#">Forget your password?</a>#}
+    {#                                <label for="remember">#}
+    {#                                    <input id="remember" type="checkbox">#}
+    {#                                    Remember me#}
+    {#                                </label>#}
+    {#                                <button type="submit">login</button>#}
+    {##}
+    {#                            </div>#}
+    {##}
+    {#                        </form>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <!--login area start-->#}
 
+    <!--customer register start-->
+    <div class="customer_login mt-32">
+        <div class="container">
+            <div class="row">
                 <!--register area start-->
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form">
-                        <h2 class="ps-2">Register</h2>
+                        <div class="m-1 p-2" style="background-color: #ffd54c">
+                            {% for error in form.errors.values %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% if not status %}
+                            {% for msg in messages %}
+                                {{ msg }}
+                                function redirect() {
+                                window.location.href = "{% url "customers:register_view" %}";
+                                }
+                                setTimeout(redirect, 3000);
+                            {% endfor %}
+                        {% endif %}
+                        <h2>Register</h2>
                         <form method="post">
                             {% csrf_token %}
                             <div>
@@ -74,8 +92,14 @@
                                 {{ form.password2 }}
                             </div>
                             <div class="login_submit">
-                                <button type="submit">Register</button>
+                                <a href="#">Forget your password?</a>
+                                <label for="remember">
+                                    <input id="remember" type="checkbox">
+                                    Remember me
+                                </label>
+                                <button type="submit" style="margin-top: 20px">register</button>
                             </div>
+
                         </form>
                     </div>
                 </div>

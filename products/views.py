@@ -1,8 +1,9 @@
+import generics as generics
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-# from rest_framework import mixins, generics
-# from .serializers import ProductSerializer
+from rest_framework import mixins, generics
+from .serializers import ProductSerializer
 
 # Create your views here.
 from django.views.generic import ListView
@@ -13,11 +14,11 @@ class ProductView(ListView):
     template_name = 'products/home.html'
 
 
-# class ProductListApi(generics.ListCreateAPIView):
-#     serializer_class = ProductSerializer
-#     queryset = Product.objects.all()
-#
-#
-# class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
-#     serializer_class = ProductSerializer
-#     queryset = Product.objects.all()
+class ProductListApi(generics.ListCreateAPIView):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
+
+
+class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()

@@ -35,10 +35,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+
     'core',
     'customers',
     'products',
     'orders',
+
 ]
 
 MIDDLEWARE = [
@@ -101,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # LOGIN_URL = "/login-signup"
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -112,7 +115,7 @@ LANGUAGES = (
     ('fa', 'Farsi'),
 )
 
-LOCALE_PATHS = [BASE_DIR / 'locale',]
+LOCALE_PATHS = [BASE_DIR / 'locale', ]
 TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True

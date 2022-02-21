@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <ul>
-                            <li><a href="">home</a></li>
+                            <li><a href={% url 'products:product_list_view' %}>home</a></li>
                             <li>Login</li>
                         </ul>
                     </div>
@@ -30,18 +30,18 @@
                             {% csrf_token %}
                             <div>
                                 <label>Phone <span>*</span></label>
-                                {{ form.phone }}
+                                {{ form.username }}
                             </div>
                             <div>
                                 <label>Password <span>*</span></label>
-                                {{ form.password1 }}
+                                {{ form.password }}
                             </div>
-                            <div>
-                                <label>Confirm Password <span>*</span></label>
-                            </div>
-                            <div>
-                                {{ form.password2 }}
-                            </div>
+{#                            <div>#}
+{#                                <label>Confirm Password <span>*</span></label>#}
+{#                            </div>#}
+{#                            <div>#}
+{#                                {{ form.password2 }}#}
+{#                            </div>#}
                             <div class="login_submit">
                                 <a href="#">Forget your password?</a>
                                 <label for="remember">
