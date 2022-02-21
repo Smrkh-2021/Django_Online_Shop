@@ -9,9 +9,11 @@ from .serializers import ProductSerializer
 from django.views.generic import ListView
 from products.models import Product
 
+
 class ProductView(ListView):
     model = Product
     template_name = 'products/home.html'
+
 
 
 class ProductListApi(generics.ListCreateAPIView):
