@@ -28,18 +28,15 @@ class CustomerLoginView(FormView):
 
 #
 class CustomerSignupView(FormView):
-    print('ok')
     form_class = RegistrationForm
     template_name = 'customers/register.html'
     success_url = reverse_lazy('products:product_list_view')
 
     def form_valid(self, form):
-        print("valid")
         form.save()
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        print("invalid")
         return super().form_invalid(form)
 
 
