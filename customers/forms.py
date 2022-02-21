@@ -12,9 +12,17 @@ class LoginForm(AuthenticationForm):
     }
 
 
-# class RegistrationForm(UserCreationForm):
-#
-#     class Meta:
-#         model = User
-#         # fields = ['phone', 'password1', 'password2']
-#         fields = ['phone', 'password1', 'password2']
+class RegistrationForm(UserCreationForm):
+
+    class Meta:
+        model = User
+        fields = ['phone', 'password1', 'password2']
+
+        help_texts = {
+            'phone': _("Phone"),
+            'password1': _("Password"),
+            'password2': _("Confirm Password"),
+        }
+
+        def clean_phone(self):
+            ...

@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import FormView
@@ -18,6 +19,9 @@ class CustomerLoginView(FormView):
         return super().form_invalid(form)
 
     def form_valid(self, form):
+        login(self.request, form.get_user())
+        user = self.request.user
+        Customer.objects.get_or_create(user=user)
         return super().form_valid(form)
 
     # def get_context_data(self, **kwargs):

@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <ul>
-                            <li><a href="index.html">home</a></li>
+                            <li><a href="">home</a></li>
                             <li>Login</li>
                         </ul>
                     </div>
@@ -26,17 +26,20 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form">
                         <h2>login</h2>
-                        <form action="#">
+                        <form method="post">
+                            {% csrf_token %}
                             <p>
-                                <label>Username or email <span>*</span></label>
-                                <input type="text">
+                                <label>Phone <span>*</span></label>
+                                {#                                <input type="text">#}
+                                {{ form.phone }}
                             </p>
                             <p>
-                                <label>Passwords <span>*</span></label>
-                                <input type="password">
+                                <label>Password <span>*</span></label>
+                                {#                                <input type="password">#}
+                                {{ form.password }}
                             </p>
                             <div class="login_submit">
-                                <a href="#">Lost your password?</a>
+                                <a href="#">Forget your password?</a>
                                 <label for="remember">
                                     <input id="remember" type="checkbox">
                                     Remember me
@@ -54,15 +57,22 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form register">
                         <h2>Register</h2>
-                        <form action="#">
+                        <form method="post">
+                            {% csrf_token %}
                             <p>
-                                <label>Email address <span>*</span></label>
-                                <input type="text">
+                                <label>Phone <span>*</span></label>
+                                {{ form.phone }}
                             </p>
                             <p>
-                                <label>Passwords <span>*</span></label>
-                                <input type="password">
+                                <label>Password <span>*</span></label>
+                                {{ form.password1 }}
                             </p>
+                            <p>
+                                <label>Confirm Password <span>*</span></label>
+                            </p>
+                            <div>
+                                {{ form.password2 }}
+                            </div>
                             <div class="login_submit">
                                 <button type="submit">Register</button>
                             </div>
