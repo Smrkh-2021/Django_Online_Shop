@@ -1,5 +1,5 @@
 from django.db import models
-from core.models import BaseModel
+from core.models import BaseModel, User
 from django.utils.translation import gettext_lazy as _
 
 
@@ -14,7 +14,7 @@ class Customer(BaseModel):
         verbose_name = _("Customer")
         verbose_name_plural = _("Customers")
 
-    # user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     fname = models.CharField(max_length=50)
     lname = models.CharField(max_length=50)
     username = models.CharField(max_length=50)
