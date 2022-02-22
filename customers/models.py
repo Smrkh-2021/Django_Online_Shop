@@ -15,11 +15,11 @@ class Customer(BaseModel):
         verbose_name_plural = _("Customers")
 
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
-    fname = models.CharField(max_length=50)
-    lname = models.CharField(max_length=50)
-    username = models.CharField(max_length=50)
-    email = models.EmailField()
-    phone = models.CharField(max_length=15)
+    fname = models.CharField(max_length=50, null=True, blank=True)
+    lname = models.CharField(max_length=50, null=True, blank=True)
+    username = models.CharField(max_length=50, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    phone = models.CharField(max_length=15, null=True, blank=True)
 
     def __str__(self):
         return f'{self.username}'

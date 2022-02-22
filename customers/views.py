@@ -14,8 +14,8 @@ from .models import Customer
 class CustomerLoginView(FormView):
     form_class = LoginForm
     template_name = 'customers/login.html'
-    success_url = reverse_lazy('customers:login_view')
-    success_message = _("Wellcome") + " %(username)s !"
+    success_url = reverse_lazy('products:product_list_view')
+    success_message = _("Wellcome")
 
     def form_invalid(self, form):
         return super().form_invalid(form)
