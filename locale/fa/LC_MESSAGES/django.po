@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-22 12:52+0330\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2022-02-22 13:19+0330\n"
+"Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
 
 #: core/models.py:66
 msgid "phone number"
@@ -40,15 +41,15 @@ msgstr "شماره تلفن باید به فرمت ایران باشد"
 
 #: customers/forms.py:10 customers/forms.py:22
 msgid "Phone"
-msgstr ""
+msgstr "تلفن"
 
 #: customers/forms.py:11 customers/forms.py:23
 msgid "Password"
-msgstr ""
+msgstr "رمز عبور"
 
 #: customers/forms.py:24
 msgid "Confirm Password"
-msgstr ""
+msgstr "تایید رمز عبور"
 
 #: customers/models.py:14
 msgid "Customer"
@@ -68,19 +69,19 @@ msgstr "آدرس ها"
 
 #: customers/models.py:36
 msgid "province"
-msgstr ""
+msgstr "استان"
 
 #: customers/models.py:37
 msgid "city"
-msgstr ""
+msgstr "شهر"
 
 #: customers/models.py:38
 msgid "street"
-msgstr ""
+msgstr "خیابان"
 
 #: customers/models.py:39
 msgid "alley"
-msgstr ""
+msgstr "کوچه"
 
 #: customers/models.py:40
 #, fuzzy
@@ -90,11 +91,11 @@ msgstr "شماره تلفن"
 
 #: customers/models.py:41
 msgid "Enter your extra description of your address"
-msgstr ""
+msgstr "جزئیات بیشتری از آدرس خودتان اضافه نمایید"
 
 #: customers/models.py:41
 msgid "description"
-msgstr ""
+msgstr "توضیحات"
 
 #: customers/models.py:42
 #, fuzzy
