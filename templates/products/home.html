@@ -17,13 +17,13 @@
                         {% for product in object_list %}
                             <div class="single_product">
                                 <div class="product_name">
-                                    <h3><a href="product-details.html">{{ product.name }}</a></h3>
+                                    <h3><a href="http://127.0.0.1:8000/product/${product.name}">{{ product.name }}</a></h3>
                                     <p class="manufacture_product"><a href="#">Accessories</a></p>
                                 </div>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img
+                                    <a class="primary_img" href=""><img
                                             src="{{ product.image_main.url }}" alt=""></a>
-                                    <a class="secondary_img" href="product-details.html"><img
+                                    <a class="secondary_img" href=""><img
                                             src="{{ product.image_accessories.url }}" alt=""></a>
                                     <div class="label_product">
                                         <span class="label_sale">{{ product.discount.value }}%</span>
