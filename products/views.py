@@ -7,13 +7,16 @@ from .serializers import ProductSerializer
 
 # Create your views here.
 from django.views.generic import ListView
-from products.models import Product
+from products.models import Product, Category
 
 
 class ProductView(ListView):
     model = Product
     template_name = 'products/home.html'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        kwargs['root_categories'] = Category.objects.filter(parent=None)
+        return super().get_context_data(object_list=object_list, **kwargs)
 
 
 class ProductListApi(generics.ListCreateAPIView):
