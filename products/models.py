@@ -6,11 +6,10 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
+def get_default_my_date():
+    return datetime.now() + timedelta(days=2)
 
 class BaseDiscount(BaseModel):
-    def get_default_my_date(self):
-        return datetime.now() + timedelta(days=2)
-
     expire_time = models.DateField(null=True, default=get_default_my_date)
     max_price = models.PositiveIntegerField(null=True, blank=True)
     value = models.PositiveIntegerField(null=False)
@@ -59,6 +58,7 @@ class Category(BaseModel):
     name = models.CharField(max_length=50)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, default=None)
     discount = models.ForeignKey(Discount, on_delete=models.CASCADE, null=True, blank=True, default=None)
+    image = models.FileField(upload_to='category', verbose_name=_('category image'))
 
     def __str__(self):
         return f'{self.name}'
