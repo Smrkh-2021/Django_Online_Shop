@@ -1,6 +1,8 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import FormView
 from .forms import LoginForm, RegistrationForm
 from django.utils.translation import gettext_lazy as _
@@ -41,6 +43,9 @@ class CustomerSignupView(FormView):
 
 
 
-
+class CustomerLogoutView(View):
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect(reverse_lazy('products:product_list_view'))
 
 
