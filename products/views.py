@@ -6,7 +6,7 @@ from rest_framework import mixins, generics
 from .serializers import ProductSerializer
 
 # Create your views here.
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from products.models import Product, Category
 
 
@@ -17,6 +17,14 @@ class ProductView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         kwargs['root_categories'] = Category.objects.filter(parent=None)
         return super().get_context_data(object_list=object_list, **kwargs)
+
+
+
+class ProductDetailView(DetailView):
+    ...
+
+
+
 
 
 class ProductListApi(generics.ListCreateAPIView):
