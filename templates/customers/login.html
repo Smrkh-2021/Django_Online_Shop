@@ -25,6 +25,20 @@
                 <!--login area start-->
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form">
+                        <div class="m-1 p-2" style="background-color: #ffd54c">
+                            {% for error in form.errors.values %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% if not status %}
+                            {% for msg in messages %}
+                                {{ msg }}
+                                function redirect() {
+                                window.location.href = "{% url "customers:register_view" %}";
+                                }
+                                setTimeout(redirect, 3000);
+                            {% endfor %}
+                        {% endif %}
                         <h2>login</h2>
                         <form method="post">
                             {% csrf_token %}
@@ -36,12 +50,12 @@
                                 <label>Password <span>*</span></label>
                                 {{ form.password }}
                             </div>
-{#                            <div>#}
-{#                                <label>Confirm Password <span>*</span></label>#}
-{#                            </div>#}
-{#                            <div>#}
-{#                                {{ form.password2 }}#}
-{#                            </div>#}
+                            {#                            <div>#}
+                            {#                                <label>Confirm Password <span>*</span></label>#}
+                            {#                            </div>#}
+                            {#                            <div>#}
+                            {#                                {{ form.password2 }}#}
+                            {#                            </div>#}
                             <div class="login_submit">
                                 <a href="#">Forget your password?</a>
                                 <label for="remember">
@@ -58,32 +72,32 @@
                 <!--login area start-->
 
                 <!--register area start-->
-{#                <div class="col-lg-6 col-md-6">#}
-{#                    <div class="account_form register">#}
-{#                        <h2>Register</h2>#}
-{#                        <form method="post">#}
-{#                            {% csrf_token %}#}
-{#                            <p>#}
-{#                                <label>Phone <span>*</span></label>#}
-{#                                {{ form.phone }}#}
-{#                            </p>#}
-{#                            <p>#}
-{#                                <label>Password <span>*</span></label>#}
-{#                                {{ form.password1 }}#}
-{#                            </p>#}
-{#                            <p>#}
-{#                                <label>Confirm Password <span>*</span></label>#}
-{#                            </p>#}
-{#                            <div>#}
-{#                                {{ form.password2 }}#}
-{#                            </div>#}
-{#                            <div class="login_submit">#}
-{#                                <button type="submit">Register</button>#}
-{#                            </div>#}
-{#                        </form>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <!--register area end-->#}
+                {#                <div class="col-lg-6 col-md-6">#}
+                {#                    <div class="account_form register">#}
+                {#                        <h2>Register</h2>#}
+                {#                        <form method="post">#}
+                {#                            {% csrf_token %}#}
+                {#                            <p>#}
+                {#                                <label>Phone <span>*</span></label>#}
+                {#                                {{ form.phone }}#}
+                {#                            </p>#}
+                {#                            <p>#}
+                {#                                <label>Password <span>*</span></label>#}
+                {#                                {{ form.password1 }}#}
+                {#                            </p>#}
+                {#                            <p>#}
+                {#                                <label>Confirm Password <span>*</span></label>#}
+                {#                            </p>#}
+                {#                            <div>#}
+                {#                                {{ form.password2 }}#}
+                {#                            </div>#}
+                {#                            <div class="login_submit">#}
+                {#                                <button type="submit">Register</button>#}
+                {#                            </div>#}
+                {#                        </form>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {#                <!--register area end-->#}
             </div>
         </div>
     </div>
