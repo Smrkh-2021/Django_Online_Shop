@@ -28,13 +28,14 @@ class CustomerLoginView(FormView):
 
 
 
-#
+
 class CustomerSignupView(FormView):
     form_class = RegistrationForm
     template_name = 'customers/register.html'
     success_url = reverse_lazy('products:product_list_view')
 
     def form_valid(self, form):
+        form.clean_phone()
         form.save()
         return super().form_valid(form)
 
