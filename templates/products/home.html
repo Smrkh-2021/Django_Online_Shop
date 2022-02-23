@@ -17,7 +17,7 @@
                         {% for product in object_list %}
                             <div class="single_product">
                                 <div class="product_name">
-                                    <h3><a href="http://127.0.0.1:8000/product/${product.name}">{{ product.name }}</a></h3>
+{#                                    <h3><a href="{% url 'products:product_Detail_view' %}">{{ product.name }}</a></h3>#}
                                     <p class="manufacture_product"><a href="#">Accessories</a></p>
                                 </div>
                                 <div class="product_thumb">
