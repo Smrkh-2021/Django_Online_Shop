@@ -65,15 +65,15 @@
                                 {{ error }}
                             {% endfor %}
                         </div>
-                        {% if not status %}
-                            {% for msg in messages %}
-                                {{ msg }}
-                                function redirect() {
-                                window.location.href = "{% url "customers:register_view" %}";
-                                }
-                                setTimeout(redirect, 3000);
-                            {% endfor %}
-                        {% endif %}
+{#                        {% if not status %}#}
+{#                            {% for msg in messages %}#}
+{#                                {{ msg }}#}
+{#                                function redirect() {#}
+{#                                window.location.href = "{% url "customers:register_view" %}";#}
+{#                                }#}
+{#                                setTimeout(redirect, 3000);#}
+{#                            {% endfor %}#}
+{#                        {% endif %}#}
                         <h2>Register</h2>
                         <form method="post">
                             {% csrf_token %}
