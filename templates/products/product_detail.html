@@ -1,3 +1,6 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block body %}
 <!--breadcrumbs area start-->
     <div class="breadcrumbs_area">
         <div class="container">
@@ -5,9 +8,7 @@
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <ul>
-                            <li><a href="index.html">home</a></li>
-                            <li><a href="shop.html">shop</a></li>
-                            <li><a href="shop.html">Clothing</a></li>
+                            <li><a href="{% url 'products:product_list_view' %}">home</a></li>
                             <li>product details</li>
                         </ul>
                     </div>
@@ -26,7 +27,7 @@
 
                         <div id="img-1" class="zoomWrapper single-zoom">
                             <a href="#">
-                                <img id="zoom1" src="assets/img/product/product15.jpg" data-zoom-image="assets/img/product/product15.jpg" alt="big-1">
+                                <img id="zoom1" src="{{ product.image_main.url }}" data-zoom-image="{{ product.image_main.url }}" alt="big-1">
                             </a>
                         </div>
 
@@ -34,25 +35,25 @@
                             <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
                                 <li>
                                     <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product8.jpg" data-zoom-image="assets/img/product/product8.jpg">
-                                        <img src="assets/img/product/product8.jpg" alt="zo-th-1" />
+                                        <img src="{{ product.image_main.url }}" alt="zo-th-1" />
                                     </a>
 
                                 </li>
                                 <li>
                                     <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product9.jpg" data-zoom-image="assets/img/product/product9.jpg">
-                                        <img src="assets/img/product/product9.jpg" alt="zo-th-1" />
+                                        <img src="{{ product.image_main.url }}" alt="zo-th-1" />
                                     </a>
 
                                 </li>
                                 <li>
                                     <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product10.jpg" data-zoom-image="assets/img/product/product10.jpg">
-                                        <img src="assets/img/product/product10.jpg" alt="zo-th-1" />
+                                        <img src="{{ product.image_main.url }}" alt="zo-th-1" />
                                     </a>
 
                                 </li>
                                 <li>
                                     <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product13.jpg" data-zoom-image="assets/img/product/product13.jpg">
-                                        <img src="assets/img/product/product13.jpg" alt="zo-th-1" />
+                                        <img src="{{ product.image_main.url }}" alt="zo-th-1" />
                                     </a>
 
                                 </li>
@@ -64,13 +65,13 @@
                     <div class="product_d_right">
                         <form action="#">
 
-                            <h1>Nonstick Dishwasher PFOA</h1>
-                            <div class="product_nav">
-                                <ul>
-                                    <li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a></li>
-                                    <li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>
-                                </ul>
-                            </div>
+                            <h1>{{ product.name }}</h1>
+{#                            <div class="product_nav">#}
+{#                                <ul>#}
+{#                                    <li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a></li>#}
+{#                                    <li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>#}
+{#                                </ul>#}
+{#                            </div>#}
                             <div class=" product_ratting">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -78,17 +79,14 @@
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li class="review"><a href="#"> (customer review ) </a></li>
                                 </ul>
-
                             </div>
                             <div class="price_box">
-                                <span class="current_price">$70.00</span>
-                                <span class="old_price">$80.00</span>
-
+                                <span class="current_price">${{ product.discounted_price }}</span>
+                                <span class="old_price">${{ product.price }}</span>
                             </div>
                             <div class="product_desc">
-                                <p>eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in </p>
+                                <p>{{ product.properties }}</p>
                             </div>
                             <div class="product_variant color">
                                 <h3>Available Options</h3>
@@ -108,12 +106,12 @@
                             </div>
                             <div class=" product_d_action">
                                 <ul>
-                                    <li><a href="#" title="Add to wishlist">+ Add to Wishlist</a></li>
-                                    <li><a href="#" title="Add to wishlist">+ Compare</a></li>
+                                    <li><p>Count: {{ product.count }}</p></li>
+                                    <li><p>Brand: {{ product.brand }}</p></li>
                                 </ul>
                             </div>
                             <div class="product_meta">
-                                <span>Category: <a href="#">Clothing</a></span>
+                                <span>Category: <a href="#">{{ product.category.name }}</a></span>
                             </div>
 
                         </form>
@@ -133,3 +131,5 @@
         </div>
     </div>
     <!--product details end-->
+
+{% endblock %}
