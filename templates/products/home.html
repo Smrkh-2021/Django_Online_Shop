@@ -17,16 +17,22 @@
                         {% for product in object_list %}
                             <div class="single_product">
                                 <div class="product_name">
-{#                                    <h3><a href="{% url 'products:product_Detail_view' %}">{{ product.name }}</a></h3>#}
+                                    <h3><a href="{% url 'products:product_Detail_view' product.id %}">{{ product.name }}</a></h3>
                                     <p class="manufacture_product"><a href="#">Accessories</a></p>
                                 </div>
                                 <div class="product_thumb">
-                                    <a class="primary_img" href=""><img
+                                    <a class="primary_img" href="{% url 'products:product_Detail_view' product.id %}"><img
                                             src="{{ product.image_main.url }}" alt=""></a>
-                                    <a class="secondary_img" href=""><img
+                                    <a class="secondary_img" href="{% url 'products:product_Detail_view' product.id %}"><img
                                             src="{{ product.image_accessories.url }}" alt=""></a>
                                     <div class="label_product">
-                                        <span class="label_sale">{{ product.discount.value }}%</span>
+                                        {% if product.discount.type == 'percent' %}
+                                            <span class="label_sale">{{ product.discount.value }}%</span>
+                                        {% elif product.discount.type == 'price' %}
+                                            <span class="label_sale">{{ product.discount.value }}$</span>
+                                        {% else %}
+                                            <span class="label_sale">0$ - 0%</span>
+                                        {% endif %}
                                     </div>
                                     {#                                    <div class="action_links">#}
                                     {#                                        <ul>#}
@@ -57,7 +63,7 @@
                                             <span class="regular_price">${{ product.price }}</span>
                                         </div>
                                         <div class="add_to_cart">
-                                            <a href="cart.html" title="add to cart"><span
+                                            <a href="" title="add to cart"><span
                                                     class="lnr lnr-cart"></span></a>
                                         </div>
                                     </div>
@@ -66,7 +72,6 @@
                                         <p class="product_available">Availabe: <span>{{ product.count }}</span></p>
                                     </div>
                                     <div class="bar_percent">
-
                                     </div>
                                 </div>
                             </div>
