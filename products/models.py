@@ -7,12 +7,12 @@ from django.utils.translation import gettext_lazy as _
 # Create your models here.
 
 def get_default_my_date():
-    return datetime.now() + timedelta(days=2)
+    return datetime.now() + timedelta(days=10)
 
 class BaseDiscount(BaseModel):
     expire_time = models.DateField(null=True, default=get_default_my_date)
     max_price = models.PositiveIntegerField(null=True, blank=True)
-    value = models.PositiveIntegerField(null=False)
+    value = models.PositiveIntegerField(null=False, default=0)
     type = models.CharField(max_length=10, choices=[('price', 'Price'), ('percent', 'Percent')], null=False)
     def profit_value(self, price: int):
         """
@@ -98,7 +98,7 @@ class Product(BaseModel):
     dimension = models.CharField(max_length=50, null=True, blank=True, default=None, verbose_name=_('product dimenssion'))
     weight = models.CharField(max_length=20, null=True, blank=True, default=None, verbose_name=_('product weight'))
     properties = models.TextField(help_text=_("Enter Details of your products"), null=True, blank=True, default=None, verbose_name=_('product properties'))
-    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, null=True, blank=True, default=None)
+    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True, default=None)
 
@@ -130,3 +130,6 @@ class Comment(BaseModel):
 
     title = models.CharField(max_length=50, null=True, blank=True)
     content = models.TextField(help_text=_("Enter Text Demand"))
+
+
+
