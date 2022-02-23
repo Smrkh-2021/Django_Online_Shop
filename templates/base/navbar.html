@@ -90,7 +90,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="top_right text-right">
                             <ul>
-                                <li class="top_links"><a href=""><i class="ion-android-person"></i> Log in/Register</a>
+                                <li class="top_links"><a href=""><i class="ion-android-person"></i>My Account<i class="ion-ios-arrow-down"></i></a>
                                     <ul class="dropdown_links">
                                         <li><a href="{% url 'customers:login_view' %}" style="display:{% if request.user.is_authenticated %}none{% else %}flex{% endif %}">Login </a></li>
                                         <li><a href="{% url 'customers:register_view' %}" style="display:{% if request.user.is_authenticated %}none{% else %}flex{% endif %}">Register </a></li>
