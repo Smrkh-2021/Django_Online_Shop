@@ -7,7 +7,7 @@ class AddressInLine(admin.StackedInline):
 
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['fname', 'lname', 'phone', 'email']
+    list_display = ['fname', 'lname', 'phone', 'email', 'user']
     inlines = [AddressInLine, ]
 
 
