@@ -117,13 +117,6 @@ JAZZMIN_UI_TWEAKS = {
     "actions_sticky_top": True
 }
 
-
-
-
-
-
-
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -147,6 +140,7 @@ INSTALLED_APPS = [
     # installed modules
     'jazzmin',
     'rosetta',
+    'crispy_forms',
 
     # django default apps
     'django.contrib.admin',
