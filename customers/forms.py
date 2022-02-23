@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django import forms
+from .validators import phone_validator
 from django.utils.translation import gettext_lazy as _
 from core.models import User
 
@@ -10,6 +10,11 @@ class LoginForm(AuthenticationForm):
         'username': _("Phone"),
         'password': _("Password"),
     }
+
+    def clean_username(self):
+        phone = self.cleaned_data['username']
+        valid_phone = phone_validator(phone)
+        return valid_phone
 
 
 class RegistrationForm(UserCreationForm):
@@ -24,5 +29,7 @@ class RegistrationForm(UserCreationForm):
             'password2': _("Confirm Password"),
         }
 
-        def clean_phone(self):
-            ...
+    def clean_phone(self):
+        phone = self.cleaned_data['phone']
+        valid_phone = phone_validator(phone)
+        return valid_phone
