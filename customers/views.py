@@ -4,11 +4,13 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView
+from rest_framework import generics, authentication
 from .forms import LoginForm, RegistrationForm
 from django.utils.translation import gettext_lazy as _
 from .models import Customer
 # Create your views here.
-
+from .permissions import IsOwner, IsSuperUser
+from .serializers import *
 
 
 class CustomerLoginView(FormView):
@@ -49,4 +51,40 @@ class CustomerLogoutView(View):
         logout(request)
         return HttpResponseRedirect(reverse_lazy('products:product_list_view'))
 
+
+
+
+
+class UserListApi(generics.ListCreateAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = [IsSuperUser]
+    authentication_classes = [authentication.BasicAuthentication]
+
+
+
+class UserDetailApi(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = [IsOwner]
+    authentication_classes = [authentication.BasicAuthentication]
+
+
+
+class AddressListApi(generics.ListCreateAPIView):
+    serializer_class = AddressSerializer
+    queryset = Address.objects.all()
+    permission_classes = [IsSuperUser]
+    authentication_classes = [authentication.BasicAuthentication]
+
+    def get_queryset(self):
+        customer = Customer.objects.get(user=self.request.user)
+        return Address.objects.filter(customer=customer)
+
+
+class AddressDetailApi(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = AddressSerializer
+    queryset = Address.objects.all()
+
+    authentication_classes = [authentication.BasicAuthentication]
 
