@@ -30,15 +30,15 @@
                                 {{ error }}
                             {% endfor %}
                         </div>
-                        {% if not status %}
-                            {% for msg in messages %}
-                                {{ msg }}
-                                function redirect() {
-                                window.location.href = "{% url "customers:register_view" %}";
-                                }
-                                setTimeout(redirect, 3000);
-                            {% endfor %}
-                        {% endif %}
+{#                        {% if not status %}#}
+{#                            {% for msg in messages %}#}
+{#                                {{ msg }}#}
+{#                                function redirect() {#}
+{#                                window.location.href = "{% url "customers:register_view" %}";#}
+{#                                }#}
+{#                                setTimeout(redirect, 3000);#}
+{#                            {% endfor %}#}
+{#                        {% endif %}#}
                         <h2>login</h2>
                         <form method="post">
                             {% csrf_token %}
@@ -62,10 +62,8 @@
                                     <input id="remember" type="checkbox">
                                     Remember me
                                 </label>
-                                <button type="submit">login</button>
-
+                                <button type="submit" style="margin-top: 20px">login</button>
                             </div>
-
                         </form>
                     </div>
                 </div>
