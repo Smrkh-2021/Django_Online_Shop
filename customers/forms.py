@@ -21,6 +21,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
+        # fields = '__all__'
         fields = ['phone', 'password1', 'password2']
 
         help_texts = {
@@ -33,3 +34,4 @@ class RegistrationForm(UserCreationForm):
         phone = self.cleaned_data['phone']
         valid_phone = phone_validator(phone)
         return valid_phone
+
