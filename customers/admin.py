@@ -8,6 +8,8 @@ class AddressInLine(admin.StackedInline):
 
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ['fname', 'lname', 'phone', 'email', 'user']
+    list_display_links = ['phone', 'fname']
+    list_filter = ['phone']
     inlines = [AddressInLine, ]
 
 
