@@ -252,3 +252,53 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.User'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'short-formatter': {
+            'format': '{levelname} ({asctime}): "{message}"',
+            'style': '{'
+        },
+        'verbose-formatter': {
+            'format': '{levelname} ({asctime}): "{message}" at {module} (process: {process:d}, thread: {thread:d})',
+            'style': '{'
+        },
+    },
+    'filters': {
+        'length_limit': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': lambda record: len(record.getMessage()) < 20
+        }
+    },
+    'handlers': {
+        'my-console-handler': {
+            'class': 'logging.StreamHandler',  # Console print!
+            'formatter': 'short-formatter',
+            'filters': ['length_limit',]
+        },
+        'my-file-handler': {
+            'class': 'logging.FileHandler',  # Write file!
+            'filename': BASE_DIR / 'a-test.log',
+            'formatter': 'verbose-formatter',
+            'level': 'ERROR'
+        },
+    },
+    'root': {
+        'handlers': ['my-console-handler'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'project': {
+            'handlers': ['my-file-handler'],
+            'level': 'ERROR',
+            'propagate': True,  # Default: True
+        },
+        'project.developers': {
+            'handlers': ['my-file-handler'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    }
+}
