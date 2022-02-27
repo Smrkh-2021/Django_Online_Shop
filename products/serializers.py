@@ -10,6 +10,11 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
 # class ProductSerializer(serializers.Serializer):
 #     id = serializers.IntegerField(read_only=True)
 #     discount = serializers.PrimaryKeyRelatedField(queryset=Discount.objects.all())
