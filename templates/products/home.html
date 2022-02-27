@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block title %}Home{% endblock %}
-{% block body %}
+{% block content %}
 
     {#    {% include 'base/slider.html' %}#}
 
@@ -79,7 +79,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
     <!--product area end-->
@@ -103,7 +102,7 @@
                                     <div class="sub_featured">
                                         <ul>
                                             {% for sub_category in category.category_set.all %}
-                                                <li><a href="#">{{ sub_category.name }}</a></li>
+                                                <li><a href="{% url 'products:product_list' %}?category__name={{ sub_category.name }}">{{ sub_category.name }}</a></li>
                                             {% endfor %}
                                         </ul>
                                     </div>
