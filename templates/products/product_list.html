@@ -1,16 +1,16 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% block body %}
+{% block content %}
 
-   <!--breadcrumbs area start-->
+    <!--breadcrumbs area start-->
     <div class="breadcrumbs_area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <ul>
-                            <li><a href="{%  %}">home</a></li>
-                            <li>{%  %} </li>
+                            <li><a href="{% url 'products:product_list_view' %}">home</a></li>
+                            <li>{{ '' }}</li>
                         </ul>
                     </div>
                 </div>
@@ -27,16 +27,19 @@
                     <!--shop wrapper start-->
                     <!--shop toolbar start-->
                     <div class="shop_title">
-                        <h1>Category</h1>
+                        <h1>Products</h1>
                     </div>
                     <div class="shop_toolbar_wrapper">
                         <div class="shop_toolbar_btn">
 
-                            <button data-role="grid_3" type="button" class=" btn-grid-3" data-toggle="tooltip" title="3 item"></button>
+                            <button data-role="grid_3" type="button" class=" btn-grid-3" data-toggle="tooltip"
+                                    title="3 item"></button>
 
-                            <button data-role="grid_4" type="button" class=" btn-grid-4" data-toggle="tooltip" title="4 item"></button>
+                            <button data-role="grid_4" type="button" class=" btn-grid-4" data-toggle="tooltip"
+                                    title="4 item"></button>
 
-                            <button data-role="grid_list" type="button" class="active btn-list" data-toggle="tooltip" title="List"></button>
+                            <button data-role="grid_list" type="button" class="active btn-list" data-toggle="tooltip"
+                                    title="List"></button>
                         </div>
                         <div class=" niceselect_option">
 
@@ -59,92 +62,114 @@
                         </div>
                     </div>
                     <!--shop toolbar end-->
-
-                    <div class="row shop_wrapper grid_list">
-                        <div class="col-12 ">
-                            <div class="single_product">
-                                <div class="product_name grid_name">
-                                    <h3><a href="product-details.html">JBL Flip 3 Splasroof Portable Bluetooth 2</a></h3>
-                                    <p class="manufacture_product"><a href="#">Accessories</a></p>
-                                </div>
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="product-details.html"><img src="assets/img/product/product10.jpg" alt=""></a>
-                                    <a class="secondary_img" href="product-details.html"><img src="assets/img/product/product11.jpg" alt=""></a>
-                                    <div class="label_product">
-                                        <span class="label_sale">-47%</span>
+                    {% for product in product_list %}
+                        <div class="row shop_wrapper grid_list">
+                            <div class="col-12 ">
+                                <div class="single_product">
+                                    <div class="product_name grid_name">
+                                        <h3><a href="product-details.html">{{ product.name }}</a></h3>
+                                        <p class="manufacture_product"><a href="#">Accessories</a></p>
                                     </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            <li class="quick_button"><a href="#" data-bs-toggle="modal" data-bs-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
-                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>
-                                            <li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product_content grid_content">
-                                    <div class="content_inner">
-                                        <div class="product_ratings">
+                                    <div class="product_thumb">
+                                        <a class="primary_img" href=""><img src="{{ product.image_main.url }}"
+                                                                            alt=""></a>
+                                        <a class="secondary_img" href=""><img src="{{ product.image_accessories.url }}"
+                                                                              alt=""></a>
+                                        <div class="label_product">
+                                            {% if product.discount.type == 'percent' %}
+                                                <span class="label_sale">%{{ product.discount.value }}</span>
+                                            {% elif product.discount.type == 'price' %}
+                                            <span class="label_sale">{{ product.discount.value }}$</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="action_links">
                                             <ul>
-                                                <li><a href="#"><i class="ion-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-star"></i></a></li>
+                                                <li class="quick_button"><a href="#" data-bs-toggle="modal"
+                                                                            data-bs-target="#modal_box"
+                                                                            title="quick view"> <span
+                                                        class="lnr lnr-magnifier"></span></a></li>
+                                                <li class="wishlist"><a href="wishlist.html"
+                                                                        title="Add to Wishlist"><span
+                                                        class="lnr lnr-heart"></span></a></li>
+                                                <li class="compare"><a href="compare.html" title="compare"><span
+                                                        class="lnr lnr-sync"></span></a></li>
                                             </ul>
                                         </div>
-                                        <div class="product_footer d-flex align-items-center">
+                                    </div>
+                                    <div class="product_content grid_content">
+                                        <div class="content_inner">
+                                            <div class="product_ratings">
+                                                <ul>
+                                                    <li><a href="#"><i class="ion-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="product_footer d-flex align-items-center">
+                                                <div class="price_box">
+                                                        <span class="current_price">${{ product.discounted_price }}</span>
+                                                        <span class="old_price">${{ product.price }}</span>
+                                                </div>
+                                                <div class="add_to_cart">
+                                                    <a href="" title="add to cart"><span
+                                                            class="lnr lnr-cart"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product_content list_content">
+                                        <div class="left_caption">
+                                            <div class="product_name">
+                                                <h3><a href="">{{ product.properties }}</a></h3>
+                                            </div>
+                                            <div class="product_ratings">
+                                                <ul>
+                                                    <li><a href="#"><i class="ion-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-star"></i></a></li>
+                                                    <li><a href="#"><i class="ion-star"></i></a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="product_desc">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad,
+                                                    iure incidunt. Ab consequatur temporibus non eveniet inventore
+                                                    doloremque necessitatibus sed, ducimus quisquam, ad asperiores </p>
+                                            </div>
+                                        </div>
+                                        <div class="right_caption">
+                                            <div class="text_available">
+                                                <p>availabe: <span>{{ product.count }} in stock</span></p>
+                                            </div>
                                             <div class="price_box">
-                                                <span class="current_price">$160.00</span>
-                                                <span class="old_price">$3200.00</span>
+                                                <span class="current_price">${{ product.discounted_price }}</span>
+                                                <span class="old_price">${{ product.price }}</span>
                                             </div>
-                                            <div class="add_to_cart">
-                                                <a href="cart.html" title="add to cart"><span class="lnr lnr-cart"></span></a>
+                                            <div class="cart_links_btn">
+                                                <a href="#" title="add to cart">add to cart</a>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product_content list_content">
-                                    <div class="left_caption">
-                                        <div class="product_name">
-                                            <h3><a href="product-details.html">Cas Meque Metus Shoes Core i7 3.4GHz, 16GB DDR3</a></h3>
-                                        </div>
-                                        <div class="product_ratings">
-                                            <ul>
-                                                <li><a href="#"><i class="ion-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-star"></i></a></li>
-                                                <li><a href="#"><i class="ion-star"></i></a></li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="product_desc">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores </p>
-                                        </div>
-                                    </div>
-                                    <div class="right_caption">
-                                        <div class="text_available">
-                                            <p>availabe: <span>99 in stock</span></p>
-                                        </div>
-                                        <div class="price_box">
-                                            <span class="current_price">$160.00</span>
-                                            <span class="old_price">$420.00</span>
-                                        </div>
-                                        <div class="cart_links_btn">
-                                            <a href="#" title="add to cart">add to cart</a>
-                                        </div>
-                                        <div class="action_links_btn">
-                                            <ul>
-                                                <li class="quick_button"><a href="#" data-bs-toggle="modal" data-bs-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
-                                                <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>
-                                                <li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>
-                                            </ul>
+                                            <div class="action_links_btn">
+                                                <ul>
+                                                    <li class="quick_button"><a href="#" data-bs-toggle="modal"
+                                                                                data-bs-target="#modal_box"
+                                                                                title="quick view"> <span
+                                                            class="lnr lnr-magnifier"></span></a></li>
+                                                    <li class="wishlist"><a href="wishlist.html"
+                                                                            title="Add to Wishlist"><span
+                                                            class="lnr lnr-heart"></span></a></li>
+                                                    <li class="compare"><a href="compare.html" title="compare"><span
+                                                            class="lnr lnr-sync"></span></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
 
                     <div class="shop_toolbar t_bottom">
                         <div class="pagination">
@@ -164,34 +189,5 @@
         </div>
     </div>
     <!--shop  area end-->
-
-    <!--call to action start-->
-    <section class="call_to_action">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="call_action_inner">
-                        <div class="call_text">
-                            <h3>We Have <span>Recommendations</span> for You</h3>
-                            <p>Take 30% off when you spend $150 or more with code Autima11</p>
-                        </div>
-                        <div class="discover_now">
-                            <a href="#">discover now</a>
-                        </div>
-                        <div class="link_follow">
-                            <ul>
-                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
-                                <li><a href="#"><i class="ion-social-youtube"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--call to action end-->
-
 
 {% endblock %}
