@@ -6,9 +6,13 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    {% include 'base/navbar.html' %}
-{% block body %}{% endblock %}
-{% include 'base/footer.html' %}
-{% include 'base/scripts.html' %}
+{% block body %}
+
+    {% block navbar %}{% include 'base/navbar.html' %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% include 'base/footer.html' %}{% endblock %}
+    {% block script %}{% include 'base/scripts.html' %}{% endblock %}
+
+{% endblock %}
 </body>
 </html>
