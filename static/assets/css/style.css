@@ -6225,7 +6225,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .product_d_action {
-  margin-bottom: 14px;
+  margin-bottom: 0px;
 }
 .product_d_action ul li a {
   font-size: 14px;
