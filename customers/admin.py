@@ -11,6 +11,7 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display_links = ['phone', 'fname']
     list_filter = ['phone']
     inlines = [AddressInLine, ]
+    search_fields = ['fname', 'lname']
 
 
 
