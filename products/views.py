@@ -19,14 +19,12 @@ class ProductView(ListView):
         return super().get_context_data(object_list=object_list, **kwargs)
 
 
-
 class ProductDetailView(DetailView):
     """
     class view for display detail of a product
     """
     model = Product
     template_name = 'products/product_detail.html'
-
 
 
 class ProductListView(ListView):
@@ -37,18 +35,23 @@ class ProductListView(ListView):
     template_name = 'products/product_list.html'
 
     def get_queryset(self):
+        print('dict', dict(self.request.GET))
         filters = dict(self.request.GET)
         try:
             for key, value in filters.items():
-                filters[key] = ''.join(value)
-            return Product.objects.filter(**filters)
-        except Exception:
+                filters[key] = int(''.join(value))
+                print('filters', filters)
+            print('filtersss', filters)
+            print('return', Product.objects.filter(**filters))
+            return Product.objects.filter(filters)
+        except Exception as e:
+            print(e)
             return super().get_queryset()
 
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     # print('llll',self.request.GET.get(object_list))
-    #     kwargs['category_products'] = Product.objects.filter(category_id=category_id)
-    #     return super().get_context_data(object_list=object_list, **kwargs)
+# def get_context_data(self, *, object_list=None, **kwargs):
+#     # print('llll',self.request.GET.get(object_list))
+#     kwargs['category_products'] = Product.objects.filter(category_id=category_id)
+#     return super().get_context_data(object_list=object_list, **kwargs)
 
 ##################################### API View ######################################
 
@@ -62,11 +65,20 @@ class ProductListApi(generics.ListAPIView):
         return Product.objects.filter(category_id=cat_id)
 
 
-
-
-
 class ProductDetailApi(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
 
 
+# class ProductListCreateApi(generics.ListCreateAPIView):
+#     serializer_class = ProductSerializer
+#     queryset = Product.objects.all()
+#
+#     def get_queryset(self):
+#         filters = dict(self.request.GET)
+#         try:
+#             for key, value in filters.items():
+#                 filters[key] = ''.join(value)
+#             return Product.objects.filter(**filters)
+#         except Exception:
+#             return super().get_queryset()
