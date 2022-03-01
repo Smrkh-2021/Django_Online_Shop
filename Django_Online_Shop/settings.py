@@ -10,11 +10,119 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+JAZZMIN_SETTINGS = {
+
+    "site_logo": "assets/img/featured/featured4.jpg",
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "The Maktab-64 Admin",
+
+    # Title on the brand, and login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "Maktab-64",
+
+    # Welcome text on the login screen
+    "welcome_sign": "Welcome to the Maktab-64 admin panel! :)",
+
+    # Copyright on the footer
+    "copyright": "Maktab-64",
+
+    # The model admin to search from the search bar, search bar omitted if excluded
+    "search_model": "user.User",
+
+    # Field name on user model that contains avatar image
+    "user_avatar": None,
+
+    # Links to put along the top menu
+    "topmenu_links": [
+
+        # Url that gets reversed (Permissions can be added)
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+
+        # model admin to link to (Permissions checked against model)
+        {"model": "user.User"},
+    ],
+
+    #############
+    # User Menu #
+    #############
+
+    # Additional links to include in the user menu on the top right ("app" url type is not allowed)
+    "usermenu_links": [
+        {"name": "Support", "url": "", "new_window": True},
+        {"model": "user.User"}
+    ],
+
+    # Whether to display the side menu
+    "show_sidebar": True,
+
+    # Whether to aut expand the menu
+    "navigation_expanded": True,
+
+    # Hide these apps when generating side menu e.g (auth)
+    "hide_apps": [],
+
+    # Hide these models when generating side menu (e.g auth.user)
+    "hide_models": [],
+
+    # for the full list of 5.13.0 free icon classes
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "user.User": "fas fa-user",
+        "user.Mentor": "fas fa-chalkboard-teacher",
+        "user.Candidate": "fas fa-user-tie",
+        "voice.Voice": "fas fa-music",
+        "team.Team": "fas fa-users",
+        "score.ScoreItem": "fas fa-star-half-alt",
+        "auth.Group": "fas fa-users-cog",
+    },
+    # Icons that are used when one is not manually specified
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+
+    "related_modal_active": False,
+
+    "show_ui_builder": True,
+
+    "changeform_format": "horizontal_tabs",
+    "changeform_format_overrides": {"user.User": "collapsible"},
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": True,
+    "brand_small_text": False,
+    "brand_colour": "navbar-warning",
+    "accent": "accent-warning",
+    "navbar": "navbar-warning navbar-light",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-warning",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "slate",
+    "dark_mode_theme": "darkly",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    },
+    "actions_sticky_top": True
+}
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -27,25 +135,37 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
+
+    # installed modules
+    'jazzmin',
+    'rosetta',
+    'crispy_forms',
+
+    # django default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # created apps
+    'core',
     'customers',
     'products',
     'orders',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -73,7 +193,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Django_Online_Shop.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -83,7 +202,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -103,25 +221,86 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+# LOGIN_URL = "/login-signup"
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+LANGUAGES = (
+    ('en', 'English'),
+    ('fa', 'Farsi'),
+)
 
-TIME_ZONE = 'UTC'
+LOCALE_PATHS = [BASE_DIR / 'locale', ]
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+# STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [BASE_DIR / "static", 'static/', ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
+# Media
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'core.User'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'short-formatter': {
+            'format': '{levelname} ({asctime}): "{message}"',
+            'style': '{'
+        },
+        'verbose-formatter': {
+            'format': '{levelname} ({asctime}): "{message}" at {module} (process: {process:d}, thread: {thread:d})',
+            'style': '{'
+        },
+    },
+    'filters': {
+        'length_limit': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': lambda record: len(record.getMessage()) < 20
+        }
+    },
+    'handlers': {
+        'my-console-handler': {
+            'class': 'logging.StreamHandler',  # Console print!
+            'formatter': 'short-formatter',
+            'filters': ['length_limit',]
+        },
+        'my-file-handler': {
+            'class': 'logging.FileHandler',  # Write file!
+            'filename': BASE_DIR / 'a-test.log',
+            'formatter': 'verbose-formatter',
+            'level': 'ERROR'
+        },
+    },
+    'root': {
+        'handlers': ['my-console-handler'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'project': {
+            'handlers': ['my-file-handler'],
+            'level': 'ERROR',
+            'propagate': True,  # Default: True
+        },
+        'project.developers': {
+            'handlers': ['my-file-handler'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    }
+}

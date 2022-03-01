@@ -1,0 +1,271 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-22 12:52+0330\n"
+"PO-Revision-Date: 2022-02-22 13:19+0330\n"
+"Last-Translator:   <>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: core/models.py:66
+msgid "phone number"
+msgstr "شماره تلفن"
+
+#: core/models.py:66
+msgid "Enter your phone number"
+msgstr "شماره تلفن خود را وارد کنید"
+
+#: core/models.py:70
+msgid "User"
+msgstr "کاربر"
+
+#: core/models.py:71
+msgid "Users"
+msgstr "کاربران"
+
+#: core/validators.py:23
+msgid "Phone number must be in the true IR format"
+msgstr "شماره تلفن باید به فرمت ایران باشد"
+
+#: customers/forms.py:10 customers/forms.py:22
+msgid "Phone"
+msgstr "تلفن"
+
+#: customers/forms.py:11 customers/forms.py:23
+msgid "Password"
+msgstr "رمز عبور"
+
+#: customers/forms.py:24
+msgid "Confirm Password"
+msgstr "تایید رمز عبور"
+
+#: customers/models.py:14
+msgid "Customer"
+msgstr "مشتری"
+
+#: customers/models.py:15
+msgid "Customers"
+msgstr "مشتریان"
+
+#: customers/models.py:33
+msgid "Address"
+msgstr "آدرس"
+
+#: customers/models.py:34
+msgid "Addresses"
+msgstr "آدرس ها"
+
+#: customers/models.py:36
+msgid "province"
+msgstr "استان"
+
+#: customers/models.py:37
+msgid "city"
+msgstr "شهر"
+
+#: customers/models.py:38
+msgid "street"
+msgstr "خیابان"
+
+#: customers/models.py:39
+msgid "alley"
+msgstr "کوچه"
+
+#: customers/models.py:40
+#, fuzzy
+#| msgid "phone number"
+msgid "number"
+msgstr "شماره تلفن"
+
+#: customers/models.py:41
+msgid "Enter your extra description of your address"
+msgstr "جزئیات بیشتری از آدرس خودتان اضافه نمایید"
+
+#: customers/models.py:41
+msgid "description"
+msgstr "توضیحات"
+
+#: customers/models.py:42
+#, fuzzy
+#| msgid "Customer"
+msgid "customer"
+msgstr "مشتری"
+
+#: customers/views.py:16
+msgid "Wellcome"
+msgstr ""
+
+#: orders/models.py:14
+msgid "Status"
+msgstr ""
+
+#: orders/models.py:15
+msgid "Statuses"
+msgstr "وضعیت ها"
+
+#: orders/models.py:17
+msgid "Order Status"
+msgstr "وضعیت سفارش"
+
+#: orders/models.py:29
+msgid "Off Code"
+msgstr "کد تخفیف"
+
+#: orders/models.py:30
+msgid "Off Codes"
+msgstr "کدهای تخفیف"
+
+#: orders/models.py:32
+msgid "off code"
+msgstr "کد تخفیف"
+
+#: orders/models.py:44
+msgid "Order"
+msgstr "سفارش"
+
+#: orders/models.py:45
+msgid "Orders"
+msgstr "سفارش ها"
+
+#: orders/models.py:51
+msgid "Final Price"
+msgstr "هزینه نهایی"
+
+#: orders/models.py:52
+msgid "Total Price"
+msgstr "مجموع هزینه"
+
+#: orders/models.py:64
+msgid "Order Item"
+msgstr ""
+
+#: orders/models.py:65
+msgid "Order Items"
+msgstr ""
+
+#: orders/models.py:67
+msgid "Count"
+msgstr "تعداد"
+
+#: orders/models.py:67
+msgid "OrderItem Count"
+msgstr ""
+
+#: products/models.py:41
+msgid "Discount"
+msgstr "تخفیف"
+
+#: products/models.py:42
+msgid "Discounts"
+msgstr "تخفیفات"
+
+#: products/models.py:55
+msgid "Category"
+msgstr "دسته بندی"
+
+#: products/models.py:56
+msgid "Categories"
+msgstr "دسته بندی ها"
+
+#: products/models.py:61
+#, fuzzy
+#| msgid "Categories"
+msgid "category image"
+msgstr "دسته بندی ها"
+
+#: products/models.py:72
+msgid "Brand"
+msgstr "برند"
+
+#: products/models.py:73
+msgid "Brands"
+msgstr "برندها"
+
+#: products/models.py:88
+msgid "Product"
+msgstr "محصول"
+
+#: products/models.py:89
+msgid "Products"
+msgstr "محصولات"
+
+#: products/models.py:92
+msgid "prodect name"
+msgstr ""
+
+#: products/models.py:93
+msgid "price"
+msgstr ""
+
+#: products/models.py:94
+msgid "product main image"
+msgstr ""
+
+#: products/models.py:95
+msgid "product accessory image"
+msgstr ""
+
+#: products/models.py:96
+msgid "Number of Products item in Repository"
+msgstr ""
+
+#: products/models.py:96
+#, fuzzy
+#| msgid "Product"
+msgid "product count"
+msgstr "محصول"
+
+#: products/models.py:97
+#, fuzzy
+#| msgid "Product"
+msgid "product color"
+msgstr "محصول"
+
+#: products/models.py:98
+msgid "product dimenssion"
+msgstr ""
+
+#: products/models.py:99
+msgid "product weight"
+msgstr ""
+
+#: products/models.py:100
+msgid "Enter Details of your products"
+msgstr ""
+
+#: products/models.py:100
+msgid "product properties"
+msgstr ""
+
+#: products/models.py:127
+msgid "Comment"
+msgstr "نظر"
+
+#: products/models.py:128
+msgid "Comments"
+msgstr "نطرات"
+
+#: products/models.py:132
+msgid "Enter Text Demand"
+msgstr ""
+
+#~ msgid "Messages"
+#~ msgstr "پیام ها"
+
+#~ msgid "or"
+#~ msgstr "یا"
+
+#~ msgid ", "
+#~ msgstr "، "

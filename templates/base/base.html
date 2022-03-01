@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'base/links.html' %}
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% block body %}
+
+    {% block navbar %}{% include 'base/navbar.html' %}{% endblock %}
+    {% block slider %}{% include 'base/slider.html' %}{% endblock %}
+    {% block banner %}{% include 'base/banner.html' %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% include 'base/footer.html' %}{% endblock %}
+    {% block script %}{% include 'base/scripts.html' %}{% endblock %}
+
+{% endblock %}
+</body>
+</html>
