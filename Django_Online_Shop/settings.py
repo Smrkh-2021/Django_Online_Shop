@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 JAZZMIN_SETTINGS = {
+
+    "site_logo": "assets/img/featured/featured4.jpg",
     # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "The Maktab-64 Admin",
 
