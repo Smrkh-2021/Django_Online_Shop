@@ -90,7 +90,7 @@ class Product(BaseModel):
 
 
     name = models.CharField(max_length=50, verbose_name=_('prodect name'))
-    price = models.PositiveIntegerField(verbose_name=_('price'))
+    price = models.IntegerField(verbose_name=_('price'))
     image_main = models.FileField(upload_to='products', verbose_name=_('product main image'), help_text='main image')
     image_accessories = models.FileField(upload_to='products', verbose_name=_('product accessory image'), help_text='accessory image')
     count = models.PositiveIntegerField(help_text=_("Number of Products item in Repository"), verbose_name=_('product count'))
