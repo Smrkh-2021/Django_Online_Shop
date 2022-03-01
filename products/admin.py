@@ -27,7 +27,11 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['name', 'parent']
 
 class BrandAdmin(admin.ModelAdmin):
-    ...
+    list_display = ['name', 'country']
+    list_display_links = ['name', 'country']
+    list_filter = ['name', 'country']
+    # inlines = [AddressInLine, ]
+    search_fields = ['name', 'country']
 
 class CommentAdmin(admin.ModelAdmin):
     ...
