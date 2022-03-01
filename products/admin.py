@@ -5,19 +5,31 @@ from .models import *
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'price', 'discount', 'count', 'brand', 'category']
-    # list_display_links = ['phone', 'fname']
-    # list_filter = ['phone']
+    list_display_links = ['name', 'price', 'discount']
+    list_filter = ['name', 'price', 'discount']
     # inlines = [AddressInLine, ]
-    # search_fields = ['fname', 'lname']
+    search_fields = ['name', 'price', 'discount']
 
 
+class DiscountAdmin(admin.ModelAdmin):
+    list_display = ['value', 'type', 'max_price', 'count', 'expire_time']
+    list_display_links = ['value', 'type', 'max_price']
+    list_filter = ['value', 'type', 'expire_time']
+    # inlines = [AddressInLine, ]
+    search_fields = ['value', 'type', 'expire_time']
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    ...
 
+class BrandAdmin(admin.ModelAdmin):
+    ...
 
+class CommentAdmin(admin.ModelAdmin):
+    ...
 
-admin.site.register(Discount)
-admin.site.register(Category)
-admin.site.register(Brand)
+admin.site.register(Discount, DiscountAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Brand, BrandAdmin)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Comment)
+admin.site.register(Comment, CommentAdmin)
