@@ -1,40 +1,41 @@
 from django.contrib import admin
 from .models import *
+from core.admin import LogicalAdminModel
 # Register your models here.
 
 
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price', 'discount', 'count', 'brand', 'category']
-    list_display_links = ['name', 'price', 'discount']
-    list_filter = ['name', 'price', 'discount']
-    # inlines = [AddressInLine, ]
-    search_fields = ['name', 'price', 'discount']
-
-
-class DiscountAdmin(admin.ModelAdmin):
-    list_display = ['value', 'type', 'max_price', 'count', 'expire_time']
+class DiscountAdmin(LogicalAdminModel):
+    list_display = ['value', 'type', 'max_price', 'expire_time']
     list_display_links = ['value', 'type', 'max_price']
     list_filter = ['value', 'type', 'expire_time']
-    # inlines = [AddressInLine, ]
     search_fields = ['value', 'type', 'expire_time']
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(LogicalAdminModel):
     list_display = ['name', 'parent', 'discount', 'image']
     list_display_links = ['name', 'parent']
     list_filter = ['name', 'parent']
-    # inlines = [AddressInLine, ]
     search_fields = ['name', 'parent']
 
-class BrandAdmin(admin.ModelAdmin):
+class BrandAdmin(LogicalAdminModel):
     list_display = ['name', 'country']
     list_display_links = ['name', 'country']
     list_filter = ['name', 'country']
-    # inlines = [AddressInLine, ]
     search_fields = ['name', 'country']
 
-class CommentAdmin(admin.ModelAdmin):
-    ...
+class CommentAdmin(LogicalAdminModel):
+    list_display = ['title', 'content']
+    list_display_links = ['title', 'content']
+    list_filter = ['title', 'content']
+    search_fields = ['title', 'content']
+
+
+class ProductAdmin(LogicalAdminModel):
+    list_display = ['name', 'price', 'discount', 'count', 'brand', 'category']
+    list_display_links = ['name', 'price', 'discount']
+    list_filter = ['name', 'price', 'discount']
+    search_fields = ['name', 'price', 'discount']
+
 
 admin.site.register(Discount, DiscountAdmin)
 admin.site.register(Category, CategoryAdmin)
