@@ -39,11 +39,11 @@ class ProductListView(ListView):
         filters = dict(self.request.GET)
         try:
             for key, value in filters.items():
-                filters[key] = int(''.join(value))
-                print('filters', filters)
-            print('filtersss', filters)
-            print('return', Product.objects.filter(**filters))
-            return Product.objects.filter(filters)
+                filters[key] = ''.join(value)
+                # print('filters', filters)
+            # print('filtersss', filters)
+            # print('return', Product.objects.filter(category__name='Engine', price__lte=5800, price__gte=4800))
+            return Product.objects.filter(**filters)
         except Exception as e:
             print(e)
             return super().get_queryset()
