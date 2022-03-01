@@ -20,7 +20,11 @@ class DiscountAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    ...
+    list_display = ['name', 'parent', 'discount', 'image']
+    list_display_links = ['name', 'parent']
+    list_filter = ['name', 'parent']
+    # inlines = [AddressInLine, ]
+    search_fields = ['name', 'parent']
 
 class BrandAdmin(admin.ModelAdmin):
     ...
