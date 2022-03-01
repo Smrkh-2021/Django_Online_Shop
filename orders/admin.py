@@ -1,29 +1,30 @@
 from django.contrib import admin
 from .models import *
+from core.admin import LogicalAdminModel
 # Register your models here.
 
 
 
-class StatusAdmin(admin.ModelAdmin):
+class StatusAdmin(LogicalAdminModel):
     list_display = ['title']
     list_filter = ['title']
     search_fields = ['title']
 
 
-class OffCodeAdmin(admin.ModelAdmin):
+class OffCodeAdmin(LogicalAdminModel):
     list_display = ['code']
     list_filter = ['code']
     search_fields = ['code']
 
 
-class OrderAdmin(admin.ModelAdmin):
+class OrderAdmin(LogicalAdminModel):
     list_display = ['address', 'offcode', 'status', 'customer', 'final_price', 'total_price']
     list_display_links = ['address', 'offcode', 'customer']
     list_filter = ['customer', 'address']
     search_fields = ['address', 'customer']
 
 
-class OrderItemAdmin(admin.ModelAdmin):
+class OrderItemAdmin(LogicalAdminModel):
     list_display = ['count', 'product', 'order']
     list_display_links = ['count', 'product', 'order']
     list_filter = ['product', 'order']
