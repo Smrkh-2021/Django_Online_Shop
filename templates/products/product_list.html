@@ -10,9 +10,9 @@
                     <div class="breadcrumb_content">
                         <ul>
                             <li><a href="{% url 'products:product_list_view' %}">home</a></li>
-{#                            {% for pr in product_list %}#}
-{#                                <li>{{ pr.category.name }}</li>#}
-{#                            {% endfor %}#}
+                            {% for pr in product_list|slice:':1' %}
+                                <li>{{ pr.category.name }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -45,91 +45,91 @@
                                 {#                                    <input type="text" name="text" id="amount"/>#}
                                 {#                                </form>#}
                             </div>
-                            <div class="widget_list widget_categories">
-                                <h2>categories</h2>
-                                <ul>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Categories1 (6)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Categories2(10)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Categories3 (4)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Categories4(10)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Categories5(8)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
+{#                            <div class="widget_list widget_categories">#}
+{#                                <h2>categories</h2>#}
+{#                                <ul>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#">Categories1 (6)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{#                                    </li>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#">Categories2(10)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{#                                    </li>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#">Categories3 (4)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{#                                    </li>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#">Categories4(10)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{#                                    </li>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#">Categories5(8)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{#                                    </li>#}
+{##}
+{#                                </ul>#}
+{#                            </div>#}
 
-                                </ul>
-                            </div>
-
-                            <div class="widget_list widget_categories">
-                                <h2>Manufacturer</h2>
-                                <ul>
-                                    {% for pr in product_list %}
-                                        <li>
-                                            <input type="checkbox">
-                                            <a href="#">{{ pr.brand.name }}</a>
-                                            <span class="checkmark"></span>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="widget_list widget_categories">
-                                <h2>Select By Color</h2>
-                                <ul>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Black (6)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#"> Blue (8)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Brown (10)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#"> Green (6)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Pink (4)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">White (2)</a>
-                                        <span class="checkmark"></span>
-
-                                    </li>
-                                    <li>
-                                        <input type="checkbox">
-                                        <a href="#">Yellow (3)</a>
-                                        <span class="checkmark"></span>
-                                    </li>
-                                </ul>
-                            </div>
+{#                            <div class="widget_list widget_categories">#}
+{#                                <h2>Manufacturer</h2>#}
+{#                                <ul>#}
+{#                                    {% for pr in product_list %}#}
+{#                                        <li>#}
+{#                                            <input type="checkbox">#}
+{#                                            <a href="#">{{ pr.brand.name }}</a>#}
+{#                                            <span class="checkmark"></span>#}
+{#                                        </li>#}
+{#                                    {% endfor %}#}
+{#                                </ul>#}
+{#                            </div>#}
+{#                            <div class="widget_list widget_categories">#}
+{#                                <h2>Select By Color</h2>#}
+{#                                <ul>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#">Black (6)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{#                                    </li>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#"> Blue (8)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{#                                    </li>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#">Brown (10)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{#                                    </li>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#"> Green (6)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{#                                    </li>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#">Pink (4)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{#                                    </li>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#">White (2)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{##}
+{#                                    </li>#}
+{#                                    <li>#}
+{#                                        <input type="checkbox">#}
+{#                                        <a href="#">Yellow (3)</a>#}
+{#                                        <span class="checkmark"></span>#}
+{#                                    </li>#}
+{#                                </ul>#}
+{#                            </div>#}
                         </div>
                         {#                        <div class="shop_sidebar_banner">#}
                         {#                            <a href="#"><img src="{% static 'assets/img/bg/banner9.jpg' %}" alt=""></a>#}
