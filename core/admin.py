@@ -12,6 +12,9 @@ class LogicalAdminModel(admin.ModelAdmin):
     def logical_delete(self, request, queryset):
         queryset.update(is_delete=True)
 
+    def restore(self, request, queryset):
+        queryset.update(is_delete=False)
+
 
     def deactivate(self, request, queryset):
         queryset.update(is_active=False)
@@ -21,7 +24,7 @@ class LogicalAdminModel(admin.ModelAdmin):
         queryset.update(is_delete=False, is_active=True)
 
 
-    actions = ['logical_delete', 'activate', 'deactivate']
+    actions = ['logical_delete', 'restore', 'activate', 'deactivate']
 
 
 # admin.site.register(Group, GroupAdmin)
