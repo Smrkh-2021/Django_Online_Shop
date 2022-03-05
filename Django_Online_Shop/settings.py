@@ -15,6 +15,7 @@ JAZZMIN_SETTINGS = {
     "site_logo": "assets/img/featured/featured4.jpg",
     # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "The Maktab-64 Admin",
+    "site_brand": "Maktab64 Shop",
 
     # Title on the brand, and login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_header": "Maktab-64",
