@@ -7,6 +7,5 @@ app_name = 'orders'
 
 urlpatterns = [
     # path('', CartView.as_view(), name='cart_view'),
-
 ]
 
