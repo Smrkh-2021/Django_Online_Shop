@@ -144,6 +144,7 @@ INSTALLED_APPS = [
     'jazzmin',
     'rosetta',
     'crispy_forms',
+    'django_extensions',
 
     # django default apps
     'django.contrib.admin',
@@ -187,6 +188,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'orders.context_processors.cart_item',
             ],
         },
     },
