@@ -24,10 +24,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('products.urls')),
     path('api/products', include('products.api_urls')),
-    path('cart/', include('orders.urls')),
+    path('oders/', include('orders.urls')),
     path('customers/', include('customers.urls')),
     path('rosetta/', include('rosetta.urls')),
     # path('customers/', include('customers.urls')),
-    path('orders/', include('orders.api_urls')),
+    path('orders_api/', include('orders.api_urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
