@@ -25,8 +25,8 @@ class OrderAdmin(LogicalAdminModel):
 
 
 class OrderItemAdmin(LogicalAdminModel):
-    list_display = ['count', 'product', 'order']
-    list_display_links = ['count', 'product', 'order']
+    list_display = ['product', 'order', 'count']
+    list_display_links = ['product', 'order', 'count']
     list_filter = ['product', 'order']
     search_fields = ['product', 'order']
 
