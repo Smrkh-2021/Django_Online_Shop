@@ -6,11 +6,11 @@ from .views import *
 
 
 router = DefaultRouter()
-router.register('order_item', OrderItemViewSet)
+router.register('orderitem', OrderItemViewSet)
 
 
 urlpatterns = [
-    path("", include(router.urls))
+    path("", include(router.urls)),
     # path('product_list_api/', ProductListCreateApi.as_view(), name='product_list_api'),
     # path('order_api/<int:pk>', OrderDetailApi.as_view(), name='order_detail_api'),
 ]
