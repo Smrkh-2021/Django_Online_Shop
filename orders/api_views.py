@@ -10,6 +10,11 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
 
+    def update(self, request, *args, **kwargs):
+        coupon = request.data['coupon']
+        print(coupon)
+        return super().update(request, *args, **kwargs)
+
 
 class OrderItemViewSet(viewsets.ModelViewSet):
     serializer_class = OrderItemSerializer
