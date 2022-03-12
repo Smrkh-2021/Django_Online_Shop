@@ -12,26 +12,35 @@
                             <div class="cart_page table-responsive">
                                 <table>
                                     <thead>
-                                        <tr>
-                                            <th class="product_remove">Delete</th>
-                                            <th class="product_thumb">Image</th>
-                                            <th class="product_name">Product</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product_quantity">Quantity</th>
-                                            <th class="product_total">Total</th>
-                                        </tr>
+                                    <tr>
+                                        <th class="product_remove">Delete</th>
+                                        <th class="product_thumb">Image</th>
+                                        <th class="product_name">Product</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product_quantity">Quantity</th>
+                                        <th class="product_total">Total</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
                                     {% for orderitem in items %}
                                         <tr>
-                                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img src="{{ orderitem.product.image_main.url }}" alt=""></a></td>
+                                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a>
+                                            </td>
+                                            <td class="product_thumb"><a href="#"><img
+                                                    src="{{ orderitem.product.image_main.url }}" alt=""></a></td>
                                             <td class="product_name"><a href="#">{{ orderitem.product.name }}</a></td>
-                                            <td class="product_price" price="{{ orderitem.product.price }}">${{ orderitem.product.price }}</td>
-                                            <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
+                                            <td class="product_price" price="{{ orderitem.product.price }}">
+                                                ${{ orderitem.product.price }}</td>
+                                            <td class="product_quantity"><label>Quantity</label> <input min="1"
+                                                                                                        max="100"
+                                                                                                        value="1"
+                                                                                                        type="number">
+                                            </td>
                                             <td class="product_total">${{ orderitem.product.price }}</td>
                                         </tr>
-                                    </tbody>
+                                        </tbody>
+                                        <div class="order_id" style="display: none"
+                                             order_id="{{ orderitem.order.id }}"></div>
                                     {% endfor %}
                                 </table>
                             </div>
@@ -49,8 +58,8 @@
                                 <h3>Coupon</h3>
                                 <div class="coupon_inner">
                                     <p>Enter your coupon code if you have one.</p>
-                                    <input placeholder="Coupon code" type="text">
-                                    <button type="submit">Apply coupon</button>
+                                    <input placeholder="Coupon code" type="text" id="coupon_id">
+                                    <button type="submit" id="coupon_btn">Apply coupon</button>
                                 </div>
                             </div>
                         </div>
@@ -87,87 +96,103 @@
     <!--shopping cart area end -->
     <script>
 
-    $('.product_quantity input').change(function () {
-        let quantity = $(this).val()
-        let price = $(this).parent().parent().children('td.product_price').attr('price')
-        let product_total_price = quantity * price
-        $(this).parent().parent().children('td.product_total').html(`${product_total_price}$`)
-    })
+        $('.product_quantity input').change(function () {
+            let quantity = $(this).val()
+            let price = $(this).parent().parent().children('td.product_price').attr('price')
+            let product_total_price = quantity * price
+            $(this).parent().parent().children('td.product_total').html(`${product_total_price}$`)
+        })
 
 
+        $('#coupon_btn').on('click', function () {
+            let coupon = $('#coupon_id').val()
+            let order_id = $('.order_id').attr('order_id')
+            JsonData = {'coupon': coupon}
+            $.ajax({
+                type: 'PUT',
+                url:'{% url '' 0 %}'.replace('0', order_id),
+                data: JsonData,
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success: function (response) {
+                    console.log('okk')
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+
+            })
+        })
 
 
+        {#    /* Set rates + misc */#}
+        {#var taxRate = 0.05;#}
+        {#var shippingRate = 15.0;#}
+        {#var fadeTime = 300;#}
+        {##}
+        {#/* Assign actions */#}
+        {#$(".product_quantity input").change(function () {#}
+        {#  updateQuantity(this);#}
 
+        {##}
+        {#$(".product-removal button").click(function () {#}
+        {#  removeItem(this);#}
 
-{#    /* Set rates + misc */#}
-{#var taxRate = 0.05;#}
-{#var shippingRate = 15.0;#}
-{#var fadeTime = 300;#}
-{##}
-{#/* Assign actions */#}
-{#$(".product_quantity input").change(function () {#}
-{#  updateQuantity(this);#}
+        {##}
+        {#/* Recalculate cart */#}
+        {#function recalculateCart() {#}
+        {#  var subtotal = 0;#}
+        {##}
+        {#  /* Sum up row totals */#}
+        {#  $(".product").each(function () {#}
+        {#    subtotal += parseFloat($(this).children(".product-line-price").text());#}
+        {#  });#}
+        {##}
+        {#  /* Calculate totals */#}
+        {#  var tax = subtotal * taxRate;#}
+        {#  var shipping = subtotal > 0 ? shippingRate : 0;#}
+        {#  var total = subtotal + tax + shipping;#}
+        {##}
+        {#  /* Update totals display */#}
+        {#  $(".totals-value").fadeOut(fadeTime, function () {#}
+        {#    $("#cart-subtotal").html(subtotal.toFixed(2));#}
+        {#    $("#cart-tax").html(tax.toFixed(2));#}
+        {#    $("#cart-shipping").html(shipping.toFixed(2));#}
+        {#    $("#cart-total").html(total.toFixed(2));#}
+        {#    if (total == 0) {#}
+        {#      $(".checkout").fadeOut(fadeTime);#}
+        {#    } else {#}
+        {#      $(".checkout").fadeIn(fadeTime);#}
+        {#    }#}
+        {#    $(".totals-value").fadeIn(fadeTime);#}
+        {#  });#}
 
-{##}
-{#$(".product-removal button").click(function () {#}
-{#  removeItem(this);#}
+        {##}
+        {#/* Update quantity */#}
+        {#function updateQuantity(quantityInput) {#}
+        {#  /* Calculate line price */#}
+        {#  var productRow = $(quantityInput).parent().parent();#}
+        {#  var price = parseFloat(productRow.children(".product-price").text());#}
+        {#  var quantity = $(quantityInput).val();#}
+        {#  var linePrice = price * quantity;#}
+        {##}
+        {#  /* Update line price display and recalc cart totals */#}
+        {#  productRow.children(".product-line-price").each(function () {#}
+        {#    $(this).fadeOut(fadeTime, function () {#}
+        {#      $(this).text(linePrice.toFixed(2));#}
+        {#      recalculateCart();#}
+        {#      $(this).fadeIn(fadeTime);#}
+        {#    });#}
+        {#  });#}
 
-{##}
-{#/* Recalculate cart */#}
-{#function recalculateCart() {#}
-{#  var subtotal = 0;#}
-{##}
-{#  /* Sum up row totals */#}
-{#  $(".product").each(function () {#}
-{#    subtotal += parseFloat($(this).children(".product-line-price").text());#}
-{#  });#}
-{##}
-{#  /* Calculate totals */#}
-{#  var tax = subtotal * taxRate;#}
-{#  var shipping = subtotal > 0 ? shippingRate : 0;#}
-{#  var total = subtotal + tax + shipping;#}
-{##}
-{#  /* Update totals display */#}
-{#  $(".totals-value").fadeOut(fadeTime, function () {#}
-{#    $("#cart-subtotal").html(subtotal.toFixed(2));#}
-{#    $("#cart-tax").html(tax.toFixed(2));#}
-{#    $("#cart-shipping").html(shipping.toFixed(2));#}
-{#    $("#cart-total").html(total.toFixed(2));#}
-{#    if (total == 0) {#}
-{#      $(".checkout").fadeOut(fadeTime);#}
-{#    } else {#}
-{#      $(".checkout").fadeIn(fadeTime);#}
-{#    }#}
-{#    $(".totals-value").fadeIn(fadeTime);#}
-{#  });#}
-
-{##}
-{#/* Update quantity */#}
-{#function updateQuantity(quantityInput) {#}
-{#  /* Calculate line price */#}
-{#  var productRow = $(quantityInput).parent().parent();#}
-{#  var price = parseFloat(productRow.children(".product-price").text());#}
-{#  var quantity = $(quantityInput).val();#}
-{#  var linePrice = price * quantity;#}
-{##}
-{#  /* Update line price display and recalc cart totals */#}
-{#  productRow.children(".product-line-price").each(function () {#}
-{#    $(this).fadeOut(fadeTime, function () {#}
-{#      $(this).text(linePrice.toFixed(2));#}
-{#      recalculateCart();#}
-{#      $(this).fadeIn(fadeTime);#}
-{#    });#}
-{#  });#}
-
-{##}
-{#/* Remove item from cart */#}
-{#function removeItem(removeButton) {#}
-{#  /* Remove row from DOM and recalc cart total */#}
-{#  var productRow = $(removeButton).parent().parent();#}
-{#  productRow.slideUp(fadeTime, function () {#}
-{#    productRow.remove();#}
-{#    recalculateCart();#}
-{#  });#}
+        {##}
+        {#/* Remove item from cart */#}
+        {#function removeItem(removeButton) {#}
+        {#  /* Remove row from DOM and recalc cart total */#}
+        {#  var productRow = $(removeButton).parent().parent();#}
+        {#  productRow.slideUp(fadeTime, function () {#}
+        {#    productRow.remove();#}
+        {#    recalculateCart();#}
+        {#  });#}
 
     </script>
 {% endblock %}
