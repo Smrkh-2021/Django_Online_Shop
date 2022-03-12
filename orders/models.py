@@ -44,7 +44,7 @@ class Order(BaseModel):
         verbose_name = _("Order")
         verbose_name_plural = _("Orders")
 
-    address = models.ForeignKey(to=Address, on_delete=models.RESTRICT)
+    address = models.ForeignKey(to=Address, on_delete=models.RESTRICT, null=True, blank=True)
     offcode = models.ForeignKey(OffCode, on_delete=models.CASCADE, null=True, blank=True)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -52,7 +52,7 @@ class Order(BaseModel):
     total_price = models.PositiveIntegerField(default=0, verbose_name=_('Total Price'), help_text=_("Total Price"))
 
     def __str__(self):
-        return f'Order for Customer: {self.customer.username}'
+        return f'Order for Customer: {self.customer.user}'
 
 
 class OrderItem(BaseModel):
