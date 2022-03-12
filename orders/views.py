@@ -9,12 +9,20 @@ from .models import Order, OrderItem
 # Create your views here.
 
 
-# class CartListView(ListView):
-#     """
-#     class view for display order items
-#     """
-#     model = OrderItem
-#     template = 'cart.html'
+class OrderItemListView(ListView):
+    """
+    class view for display order items in cart
+    """
+    model = OrderItem
+    template_name = 'orders/cart.html'
+    context_object_name = 'items'
+
+    def get_queryset(self):
+        return super().get_queryset()
+
+    # def get_queryset(self):
+    #     return OrderItem.objects.filter(order__customer__user=self.request.user)
+
 
 
 
