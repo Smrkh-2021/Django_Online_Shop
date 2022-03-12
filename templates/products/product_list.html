@@ -187,28 +187,27 @@
             let filter_max = $('#maximum').attr('filter-value-max') + $('#maximum').val()
             let link = $('#filter').attr('href')
             $('#filter').attr('href', link + filter_min + filter_max)
-        }).
+        })
 
 
-
-
-        $('.cart_btn').click(function () {
+        $('.cart_btn').on('click', function() {
                 let product_id = $(this).attr('pr-id')
                 console.log('product_id', product_id)
                 {#let count = $('.count').val()#}
-                let PostJson = {"product_id": product_id, "count": 1}
+                let data = {"product": product_id, "count": 1}
                 $.ajax({
                     type: "POST",
-                    url: `{% url 'orderitem-list' %}`,
+                    url: '{% url 'orderitem-list' %}',
+                    data: data,
+                    headers: {'X-CSRFToken': '{{ csrf_token }}'},
                     success: function (response) {
                         console.log('okk')
                     },
-                    error: function () {
-                        'error'
+                    error: function (error) {
+                        console.log(error)
                     }
                 })
-            }
-        )
+            })
     </script>
 
 {% endblock %}
