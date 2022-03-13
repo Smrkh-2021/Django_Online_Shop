@@ -27,10 +27,7 @@ class OrderItemListView(ListView):
     context_object_name = 'items'
 
     def get_queryset(self):
-        return super().get_queryset()
-
-    # def get_queryset(self):
-    #     return OrderItem.objects.filter(order__customer__user=self.request.user)
+        return OrderItem.objects.filter(order__customer__user=self.request.user)
 
 
 
