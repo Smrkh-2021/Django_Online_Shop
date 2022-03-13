@@ -9,6 +9,15 @@ from .models import Order, OrderItem
 # Create your views here.
 
 
+
+class OrderItemDeleteView(generics.DestroyAPIView):
+    serializer_class = OrderItemSerializer
+    queryset = OrderItem.objects.all()
+
+
+
+
+
 class OrderItemListView(ListView):
     """
     class view for display order items in cart
