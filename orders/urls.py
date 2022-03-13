@@ -6,6 +6,7 @@ from .api_views import OrderItemViewSet
 app_name = 'orders'
 
 urlpatterns = [
-    path('', OrderItemListView.as_view(), name='orderitem_list')
+    path('', OrderItemListView.as_view(), name='orderitem_list'),
+    path('delitem/<int:pk>', OrderItemDeleteView.as_view(), name='orderitem_delete')
 ]
 
