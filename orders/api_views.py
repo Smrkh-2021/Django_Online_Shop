@@ -9,8 +9,9 @@ from .serializers import OrderItemSerializer, OrderSerializer
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
-
+    print(1)
     def update(self, request, *args, **kwargs):
+        print(2)
         coupon = request.data['coupon']
         print(coupon)
         return super().update(request, *args, **kwargs)
@@ -21,9 +22,7 @@ class OrderItemViewSet(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()
 
     def create(self, request, *args, **kwargs):
-        print('1')
         if self.request.user.is_authenticated:
-            print('2')
             user = request.user
             customer = Customer.objects.get_or_create(user=user)[0]
             order = Order.objects.get_or_create(customer=customer, status_id=4)[0]
