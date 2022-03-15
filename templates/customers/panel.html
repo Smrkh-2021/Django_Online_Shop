@@ -28,57 +28,17 @@
                         <!-- Nav tabs -->
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list" id="nav-tab">
-                                <li><a href="#" data-toggle="tab" class="nav-link active">Dashboard</a></li>
                                 <li><a href="#orders" data-toggle="tab" class="nav-link" id="orders">Orders</a></li>
-                                <li><a href="#" data-toggle="tab" class="nav-link">Downloads</a></li>
-                                <li><a href="#" data-toggle="tab" class="nav-link">Addresses</a></li>
-                                <li><a href="#" data-toggle="tab" class="nav-link">Account details</a></li>
-                                <li><a href="login.html" class="nav-link">logout</a></li>
+                                <li><a href="#address" data-toggle="tab" class="nav-link">Addresses</a></li>
+                                <li><a href="#account-details" data-toggle="tab" class="nav-link">Account details</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-9 col-lg-9"  id="to_fill">
+                    <div class="col-sm-12 col-md-9 col-lg-9" id="to_fill">
                         <!-- Tab panes -->
-                        <div class="tab-content dashboard_content">
-                            <div class="tab-pane fade show active" id="dashboard">
-                                <h3>Dashboard </h3>
-                                <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">Edit your password and account details.</a></p>
-                            </div>
-                            <div class="tab-pane fade">
-                                <h3>Orders</h3>
-                                <div class="table-responsive">
+{#                        <div class="tab-content dashboard_content">#}
 
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="downloads">
-                                <h3>Downloads</h3>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Downloads</th>
-                                                <th>Expires</th>
-                                                <th>Download</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Shopnovilla - Free Real Estate PSD Template</td>
-                                                <td>May 10, 2018</td>
-                                                <td><span class="danger">Expired</span></td>
-                                                <td><a href="#" class="view">Click Here To Download Your File</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Organic - ecommerce html template</td>
-                                                <td>Sep 11, 2018</td>
-                                                <td>Never</td>
-                                                <td><a href="#" class="view">Click Here To Download Your File</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+
                             <div class="tab-pane" id="address">
                                 <p>The following addresses will be used on the checkout page by default.</p>
                                 <h4 class="billing-address">Billing address</h4>
@@ -136,7 +96,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+{#                        </div>#}
                     </div>
                 </div>
             </div>
@@ -166,3 +126,4 @@
 
     </script>
 {% endblock %}
+{% block footer %}{% endblock %}
