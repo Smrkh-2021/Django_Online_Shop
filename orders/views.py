@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.views.generic import ListView
 from rest_framework import generics
 from rest_framework.renderers import TemplateHTMLRenderer
@@ -35,23 +36,14 @@ class OrderItemListView(ListView):
 
 
 
+class OrderListView(ListView):
+    model = Order
 
-# class OrderItemDetailApi(generics.RetrieveUpdateDestroyAPIView):
-#     serializer_class = OrderItemSerializer
-#     queryset = Order.objects.all()
-#     # template_name = 'profile_list.html'
-#
-#
-# class OrderDetailApi(generics.RetrieveUpdateDestroyAPIView):
-#     serializer_class = OrderSerializer
-#     queryset = Order.objects.all()
-#     renderer_classes = [TemplateHTMLRenderer]
-#
-#     def put(self, request, *args, **kwargs):
-#         return super().put(request, *args, **kwargs)
-#
-#
-#
-#     def get(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-#         return Response({'user': self.object}, template_name='orders/cart.html')
+    def get(self, request, *args, **kwargs):
+        orders = Order.objects.filter(customer__user=self.request.user)
+        context = {
+            'orders': orders
+        }
+        template_string = render_to_string(template_name='customers/panel_order.html')
+        return JsonResponse({'order':template_string})
+
