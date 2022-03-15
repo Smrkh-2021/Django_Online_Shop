@@ -1,12 +1,15 @@
 from django.http import HttpResponse
 from rest_framework import viewsets, generics
-
+from django.template.loader import render_to_string
 from customers.models import Customer
-from .models import OrderItem, Order
+from .models import OrderItem, Order, Status
 from .serializers import OrderItemSerializer, OrderSerializer
 
 
 class OrderViewSet(viewsets.ModelViewSet):
+    """
+    class for use coupon in cart
+    """
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
     print(1)
@@ -18,6 +21,9 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 
 class OrderItemViewSet(viewsets.ModelViewSet):
+    """
+    class for create orderitems and order in cart
+    """
     serializer_class = OrderItemSerializer
     queryset = OrderItem.objects.all()
 
@@ -25,7 +31,7 @@ class OrderItemViewSet(viewsets.ModelViewSet):
         if self.request.user.is_authenticated:
             user = request.user
             customer = Customer.objects.get_or_create(user=user)[0]
-            order = Order.objects.get_or_create(customer=customer, status_id=4)[0]
+            order = Order.objects.get_or_create(customer=customer, status_id=3)[0]
             request.data._mutable = True
             request.data['order'] = order.id
             return super().create(request, *args, **kwargs)
@@ -37,5 +43,34 @@ class OrderItemViewSet(viewsets.ModelViewSet):
     #         resp.set_cookie()
 
 
-class Test(generics.ListCreateAPIView):
-    ...
+class OrderListView(generics.ListAPIView):
+    """
+    class base view for show orders in customer panel
+    """
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
+
+
+    def get_queryset(self):
+        queryset = Order.objects.filter(customer__user=self.request.user)
+        return queryset
+
+
+class OrderUpdateView(generics.UpdateAPIView):
+    """
+    class for update status of order after checkout
+    """
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
+
+    def perform_update(self, serializer):
+        user = self.request.user
+        customer = Customer.objects.get(user=user)
+        order = Order.objects.get(customer=customer, status_id=3)
+        serializer.validated_data['status'] = Status.objects.get(id=2)
+        print(serializer.validated_data['status'])
+        super().perform_update(serializer)
+
+
+
+

@@ -18,7 +18,7 @@
                                         <th class="product_name">Product</th>
                                         <th class="product-price">Price</th>
                                         <th class="product_quantity">Quantity</th>
-                                        <th class="product_total">Total</th>
+                                        <th class="">Total</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -26,9 +26,9 @@
                                         <tr>
                                             <td class="product_remove" orderitem_id="{{ orderitem.id }}"><a
                                                     href=""><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img
-                                                    src="{{ orderitem.product.image_main.url }}" alt=""></a></td>
-                                            <td class="product_name"><a href="#">{{ orderitem.product.name }}</a></td>
+                                            <td class="product_thumb"><img
+                                                    src="{{ orderitem.product.image_main.url }}" alt=""></td>
+                                            <td class="product_name">{{ orderitem.product.name }}</td>
                                             <td class="product_price" price="{{ orderitem.product.price }}">
                                                 ${{ orderitem.product.price }}</td>
                                             <td class="product_quantity"><label>Quantity</label> <input min="1"
@@ -36,7 +36,7 @@
                                                                                                         value="1"
                                                                                                         type="number">
                                             </td>
-                                            <td class="product_total">${{ orderitem.product.price }}</td>
+                                            <td class="product_total">{{ orderitem.product.price }}$</td>
                                         </tr>
                                         </tbody>
                                         <div class="order_id" style="display: none"
@@ -45,7 +45,7 @@
                                 </table>
                             </div>
                             <div class="cart_submit">
-                                <button type="submit">update cart</button>
+                                <button type="" id="update_btn">update cart</button>
                             </div>
                         </div>
                     </div>
@@ -69,20 +69,20 @@
                                 <div class="coupon_inner">
                                     <div class="cart_subtotal">
                                         <p>Subtotal</p>
-                                        <p class="cart_amount">£215.00</p>
+                                        <p class="cart_amount" id="subtotal"></p>
                                     </div>
                                     <div class="cart_subtotal ">
-                                        <p>Shipping</p>
-                                        <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
+                                        <p>Discount(Coupon)</p>
+                                        <p class="cart_amount" id="coupon_disc"></p>
                                     </div>
-                                    <a href="#">Calculate shipping</a>
+                                    {#                                    <a href="#">Calculate shipping</a>#}
 
                                     <div class="cart_subtotal">
                                         <p>Total</p>
-                                        <p class="cart_amount">£215.00</p>
+                                        <p class="cart_amount" id="total"></p>
                                     </div>
                                     <div class="checkout_btn">
-                                        <a href="#">Proceed to Checkout</a>
+                                        <input type="button" id="checkout_id" style="cursor: pointer;background-color: #e17009" value="Proceed to Checkout">
                                     </div>
                                 </div>
                             </div>
@@ -101,6 +101,7 @@
             let price = $(this).parent().parent().children('td.product_price').attr('price')
             let product_total_price = quantity * price
             $(this).parent().parent().children('td.product_total').html(`${product_total_price}$`)
+            $(this).parent().parent().children('td.product_total').attr('total', product_total_price)
         })
 
 
@@ -115,7 +116,6 @@
                 data: JsonData,
                 headers: {'X-CSRFToken': '{{ csrf_token }}'},
                 success: function (response) {
-                    console.log('okk')
                 },
                 error: function (error) {
                     console.log(error)
@@ -144,75 +144,49 @@
         })
 
 
-        {#    /* Set rates + misc */#}
-        {#var taxRate = 0.05;#}
-        {#var shippingRate = 15.0;#}
-        {#var fadeTime = 300;#}
-        {##}
-        {#/* Assign actions */#}
-        {#$(".product_quantity input").change(function () {#}
-        {#  updateQuantity(this);#}
+        $('#update_btn').on('click', function () {
+            let sub_total = 0
+            $('.product_total').each(function () {
+                sub_total += parseFloat($(this).text())
+                console.log('this:', parseFloat($(this).text()))
+                console.log(sub_total)
+                $('#subtotal').html(`${sub_total}$`)
+                $('#total').html(`${sub_total}$`)
+            })
+        })
 
-        {##}
-        {#$(".product-removal button").click(function () {#}
-        {#  removeItem(this);#}
 
-        {##}
-        {#/* Recalculate cart */#}
-        {#function recalculateCart() {#}
-        {#  var subtotal = 0;#}
-        {##}
-        {#  /* Sum up row totals */#}
-        {#  $(".product").each(function () {#}
-        {#    subtotal += parseFloat($(this).children(".product-line-price").text());#}
-        {#  });#}
-        {##}
-        {#  /* Calculate totals */#}
-        {#  var tax = subtotal * taxRate;#}
-        {#  var shipping = subtotal > 0 ? shippingRate : 0;#}
-        {#  var total = subtotal + tax + shipping;#}
-        {##}
-        {#  /* Update totals display */#}
-        {#  $(".totals-value").fadeOut(fadeTime, function () {#}
-        {#    $("#cart-subtotal").html(subtotal.toFixed(2));#}
-        {#    $("#cart-tax").html(tax.toFixed(2));#}
-        {#    $("#cart-shipping").html(shipping.toFixed(2));#}
-        {#    $("#cart-total").html(total.toFixed(2));#}
-        {#    if (total == 0) {#}
-        {#      $(".checkout").fadeOut(fadeTime);#}
-        {#    } else {#}
-        {#      $(".checkout").fadeIn(fadeTime);#}
-        {#    }#}
-        {#    $(".totals-value").fadeIn(fadeTime);#}
-        {#  });#}
+        $(document).ready(function () {
+            let sub_total = 0
+            $('.product_total').each(function () {
+                sub_total += parseFloat($(this).text())
+                $('#subtotal').html(`${sub_total}$`)
+                $('#total').html(`${sub_total}$`)
+            })
+        })
 
-        {##}
-        {#/* Update quantity */#}
-        {#function updateQuantity(quantityInput) {#}
-        {#  /* Calculate line price */#}
-        {#  var productRow = $(quantityInput).parent().parent();#}
-        {#  var price = parseFloat(productRow.children(".product-price").text());#}
-        {#  var quantity = $(quantityInput).val();#}
-        {#  var linePrice = price * quantity;#}
-        {##}
-        {#  /* Update line price display and recalc cart totals */#}
-        {#  productRow.children(".product-line-price").each(function () {#}
-        {#    $(this).fadeOut(fadeTime, function () {#}
-        {#      $(this).text(linePrice.toFixed(2));#}
-        {#      recalculateCart();#}
-        {#      $(this).fadeIn(fadeTime);#}
-        {#    });#}
-        {#  });#}
 
-        {##}
-        {#/* Remove item from cart */#}
-        {#function removeItem(removeButton) {#}
-        {#  /* Remove row from DOM and recalc cart total */#}
-        {#  var productRow = $(removeButton).parent().parent();#}
-        {#  productRow.slideUp(fadeTime, function () {#}
-        {#    productRow.remove();#}
-        {#    recalculateCart();#}
-        {#  });#}
+        $('#checkout_id').on('click', function () {
+            let total_price = parseFloat($('#subtotal').text())
+            let final_price = parseFloat($('#total').text())
+            let order_id = $('.order_id').attr('order_id')
+            console.log(order_id)
+            let status = 'paid'
+            $.ajax({
+                type: 'PATCH',
+                url: '{% url 'order_update' 0 %}'.replace('0', order_id),
+                data:{'final_price':final_price, 'total_price':total_price},
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success: function (response) {
+
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+
+            })
+        })
+
 
     </script>
 {% endblock %}

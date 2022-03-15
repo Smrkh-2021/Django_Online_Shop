@@ -1,9 +1,10 @@
 from django.contrib.auth import login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import FormView
+from django.views.generic import FormView, ListView
 from rest_framework import generics, authentication
 from .forms import LoginForm, RegistrationForm
 from django.utils.translation import gettext_lazy as _
@@ -16,7 +17,7 @@ from .serializers import *
 class CustomerLoginView(FormView):
     form_class = LoginForm
     template_name = 'customers/login.html'
-    success_url = reverse_lazy('products:product_list_view')
+    success_url = reverse_lazy('customers:panel_view')
     success_message = _("Wellcome")
 
     def form_invalid(self, form):
@@ -88,3 +89,8 @@ class AddressDetailApi(generics.RetrieveUpdateDestroyAPIView):
 
     authentication_classes = [authentication.BasicAuthentication]
 
+
+class CustomerPanelView(LoginRequiredMixin, ListView):
+    template_name = 'customers/panel.html'
+    queryset = Customer.objects.all()
+    login_url = '/customers/login'
