@@ -44,6 +44,6 @@ class OrderListView(ListView):
         context = {
             'orders': orders
         }
-        template_string = render_to_string(template_name='customers/panel_order.html')
+        template_string = render_to_string(template_name='customers/panel_order.html', context=context)
         return JsonResponse({'order':template_string})
 
