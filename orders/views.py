@@ -16,7 +16,7 @@ from .models import Order, OrderItem
 
 class OrderItemDeleteView(generics.DestroyAPIView):
     """
-    class view for delete order item in cart
+    class view for delete a order item in cart
     """
     serializer_class = OrderItemSerializer
     queryset = OrderItem.objects.all()
