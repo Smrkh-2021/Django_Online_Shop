@@ -27,7 +27,7 @@ class OrderItemDeleteView(generics.DestroyAPIView):
 
 class OrderItemListView(ListView):
     """
-    class view for display order items in cart
+    class view for display order items in cart in two mode: authenticated(from database) or anonymous(from coookie)
     """
     model = OrderItem
     template_name = 'orders/cart.html'
