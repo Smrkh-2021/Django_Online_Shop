@@ -53,6 +53,9 @@ class OrderItemListView(ListView):
 
 
 class OrderListView(ListView):
+    """
+    class for show orders list in customer panel
+    """
     model = Order
 
     def get(self, request, *args, **kwargs):
