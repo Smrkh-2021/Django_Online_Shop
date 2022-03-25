@@ -34,7 +34,21 @@ class OrderItemListView(ListView):
     context_object_name = 'items'
 
     def get_queryset(self):
-        return OrderItem.objects.filter(order__customer__user=self.request.user)
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            print('user', user)
+            customer = Customer.objects.get(user=user)
+            print('customer', customer)
+            order = Order.objects.get_or_create(customer=customer, status_id=3)[0]
+            return order.orderitem_set.all()
+        else:
+            try:
+                list_orderitem = list_of_orderitems_from_cookie(self.request)
+                return list_orderitem
+                # return OrderItem.objects.filter(order__customer__user=self.request.user)
+            except:
+                return []
+
 
 
 
