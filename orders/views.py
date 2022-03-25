@@ -5,12 +5,14 @@ from django.views.generic import ListView
 from rest_framework import generics
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
-
+from .utils import list_of_orderitems_from_cookie
+from customers.models import Customer
 from .serializers import OrderSerializer, OrderItemSerializer
 from .models import Order, OrderItem
 # Create your views here.
 
 
+########### wrong Position #####################3
 
 class OrderItemDeleteView(generics.DestroyAPIView):
     """
