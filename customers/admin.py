@@ -15,11 +15,11 @@ class AddressAdmin(LogicalAdminModel):
 
 
 class CustomerAdmin(LogicalAdminModel):
-    list_display = ['fname', 'lname', 'phone', 'email', 'user']
-    list_display_links = ['phone', 'fname', 'email']
+    list_display = ['phone', 'user']
+    list_display_links = ['phone']
     list_filter = ['user']
     inlines = [AddressInLine, ]
-    search_fields = ['fname', 'lname']
+    search_fields = ['phone', 'user']
 
 
 
