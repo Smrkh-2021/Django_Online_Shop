@@ -45,6 +45,22 @@ class OrderItemViewSet(viewsets.ModelViewSet):
             request.data._mutable = True
             request.data['order'] = order.id
             return super().create(request, *args, **kwargs)
+        else:
+            cookie = set_cart_cookie(request)
+            response = Response(status=201)
+            response.set_cookie('cookie_product', cookie)
+            return response
+
+    # def get_queryset(self):
+    #     # cookie = self.request.COOKIES.get('cookie_product')
+    #     if self.request.user.is_authenticated():
+    #         user = self.request.user
+    #         customer = Customer.objects.get_or_create(user=user)[0]
+    #         order = Order.objects.get(customer=customer, status_id=3)
+    #         return order.orderitem_set.all()
+    #     else:
+    #         orderitem_list = list_of_cookie_to_orderitem(self.request)
+    #         return orderitem_list
 
     # def set_cookie(self, request):
     #     user = request.user
