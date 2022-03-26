@@ -1,9 +1,13 @@
 from django.http import HttpResponse
+
 from rest_framework import viewsets, generics
 from django.template.loader import render_to_string
+from rest_framework.response import Response
+
 from customers.models import Customer
 from .models import OrderItem, Order, Status
 from .serializers import OrderItemSerializer, OrderSerializer
+from .utils import set_cart_cookie
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -32,6 +36,12 @@ class OrderItemViewSet(viewsets.ModelViewSet):
             user = request.user
             customer = Customer.objects.get_or_create(user=user)[0]
             order = Order.objects.get_or_create(customer=customer, status_id=3)[0]
+            same_orderitems = OrderItem.objects.filter(order=order, product_id=request.data['product'])
+            if same_orderitems:
+                orderitem = same_orderitems[0]
+                orderitem.count += 1
+                orderitem.save()
+                return Response(status=201)
             request.data._mutable = True
             request.data['order'] = order.id
             return super().create(request, *args, **kwargs)
