@@ -31,7 +31,7 @@ class CommentAdmin(LogicalAdminModel):
 
 
 class ProductAdmin(LogicalAdminModel):
-    list_display = ['name', 'price', 'discount', 'count', 'brand', 'category']
+    list_display = ['name', 'price', 'discount', 'stock', 'brand', 'category']
     list_display_links = ['name', 'price', 'discount']
     list_filter = ['name', 'price', 'discount']
     search_fields = ['name', 'price', 'discount']
