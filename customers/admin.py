@@ -10,7 +10,7 @@ class AddressInLine(admin.StackedInline):
 class AddressAdmin(LogicalAdminModel):
     list_display = ['province', 'city', 'street', 'alley', 'number', 'description', 'customer']
     list_display_links = ['province', 'city', 'description']
-    list_filter = ['province', 'city', 'street']
+    list_filter = ['province', 'city', 'street', 'customer']
     search_fields = ['province', 'city']
 
 
