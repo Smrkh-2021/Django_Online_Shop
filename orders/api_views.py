@@ -5,9 +5,10 @@ from django.template.loader import render_to_string
 from rest_framework.response import Response
 
 from customers.models import Customer
-from .models import OrderItem, Order, Status
+from products.models import Product
+from .models import OrderItem, Order, Status, OffCode
 from .serializers import OrderItemSerializer, OrderSerializer
-from .utils import set_cart_cookie
+from .utils import set_cart_cookie, list_of_orderitems_from_cookie, number_of_orderitems_in_cookie
 
 
 class OrderViewSet(viewsets.ModelViewSet):
