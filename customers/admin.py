@@ -16,7 +16,7 @@ class AddressAdmin(LogicalAdminModel):
 
 class CustomerAdmin(LogicalAdminModel):
     list_display = ['phone', 'user']
-    list_display_links = ['phone']
+    list_display_links = ['phone', 'user']
     list_filter = ['user']
     inlines = [AddressInLine, ]
     search_fields = ['phone', 'user']
