@@ -13,7 +13,7 @@ from .utils import set_cart_cookie, list_of_orderitems_from_cookie, number_of_or
 
 class OrderViewSet(viewsets.ModelViewSet):
     """
-    class for use coupon in cart
+    class for calculate coupon discount in cart and return final price
     """
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
