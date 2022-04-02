@@ -49,6 +49,7 @@ class OrderListView(ListView):
     class for show orders list in customer panel
     """
     model = Order
+    paginate_by = 3
 
     def get(self, request, *args, **kwargs):
         orders = Order.objects.filter(customer__user=self.request.user)
