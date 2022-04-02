@@ -71,30 +71,43 @@ class CustomerLogoutView(View):
         return response
 
 
-class UserDetailApi(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    permission_classes = [IsOwner]
-    authentication_classes = [authentication.BasicAuthentication]
 
 
 
-class AddressListApi(generics.ListCreateAPIView):
-    serializer_class = AddressSerializer
-    queryset = Address.objects.all()
-    permission_classes = [IsSuperUser]
-    authentication_classes = [authentication.BasicAuthentication]
-
-    def get_queryset(self):
-        customer = Customer.objects.get(user=self.request.user)
-        return Address.objects.filter(customer=customer)
-
-
-class AddressDetailApi(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = AddressSerializer
-    queryset = Address.objects.all()
-
-    authentication_classes = [authentication.BasicAuthentication]
+# class UserListApi(generics.ListCreateAPIView):
+#     serializer_class = UserSerializer
+#     queryset = User.objects.all()
+#     permission_classes = [IsSuperUser]
+#     authentication_classes = [authentication.BasicAuthentication]
+#
+#
+#
+# class UserDetailApi(generics.RetrieveUpdateDestroyAPIView):
+#     serializer_class = UserSerializer
+#     queryset = User.objects.all()
+#     permission_classes = [IsOwner]
+#     authentication_classes = [authentication.BasicAuthentication]
+#
+#
+#
+# class AddressListApi(generics.ListCreateAPIView):
+#     serializer_class = AddressSerializer
+#     queryset = Address.objects.all()
+#     permission_classes = [IsSuperUser]
+#     authentication_classes = [authentication.BasicAuthentication]
+#
+#     def get_queryset(self):
+#         customer = Customer.objects.get(user=self.request.user)
+#         return Address.objects.filter(customer=customer)
+#
+#
+#
+#
+# class AddressDetailApi(generics.RetrieveUpdateDestroyAPIView):
+#     serializer_class = AddressSerializer
+#     queryset = Address.objects.all()
+#
+#     authentication_classes = [authentication.BasicAuthentication]
 
 
 class CustomerPanelView(LoginRequiredMixin, ListView):
