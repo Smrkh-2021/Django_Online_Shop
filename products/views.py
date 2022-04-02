@@ -11,6 +11,9 @@ from products.models import Product, Category
 
 
 class ProductView(ListView):
+    """
+    class for show products in home page
+    """
     model = Product
     template_name = 'products/home.html'
 
