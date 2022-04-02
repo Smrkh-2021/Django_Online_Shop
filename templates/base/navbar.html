@@ -23,7 +23,8 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="top_right text-right">
                             <ul>
-                                <li class="top_links"><a href="{% url 'customers:panel_view' %}"><i class="ion-android-person"></i>My Account<i class="ion-ios-arrow-down"></i></a>
+                                <li class="top_links"><a href=""><i
+                                        class="ion-android-person"></i>My Account<i class="ion-ios-arrow-down"></i></a>
                                     <ul class="dropdown_links">
                                         <li><p style="display:{% if request.user.is_authenticated %}flex{% else %}none{% endif %}">"{{ user.phone }}" loged in !</p></li>
                                         <li><a href="{% url 'customers:login_view' %}" style="display:{% if request.user.is_authenticated %}none{% else %}flex{% endif %}">Login </a></li>
