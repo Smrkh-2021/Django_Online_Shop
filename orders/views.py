@@ -35,7 +35,13 @@ class OrderItemListView(ListView):
             except:
                 return []
 
-
+    def get_context_data(self, *, object_list=None, **kwargs):
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            customer = Customer.objects.get(user=user)
+            order = Order.objects.get(customer=customer, status_id=3)
+            kwargs['order'] = order
+        return super().get_context_data(object_list=object_list, **kwargs)
 
 
 class OrderListView(ListView):
