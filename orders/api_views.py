@@ -87,12 +87,16 @@ class OrderItemViewSet(viewsets.ModelViewSet):
                 return Response(status=201)
             request.data._mutable = True
             request.data['order'] = order.id
-            return super().create(request, *args, **kwargs)
-        else:
-            cookie = set_cart_cookie(request)
-            response = Response(status=201)
-            response.set_cookie('cookie_product', cookie)
-            return response
+            # resp.data['test'] = 2
+            resp = super().create(request, *args, **kwargs)
+            orderitem_count = OrderItem.objects.filter(order=order).count()
+            resp.data['orderitem_count'] = orderitem_count
+            return resp
+        cookie = set_cart_cookie(request)
+        orderitems_count = number_of_orderitems_in_cookie(request)
+        response = Response({'orderitem_count':orderitems_count},status=201)
+        response.set_cookie('cookie_product', cookie)
+        return response
 
     def get_serializer(self, *args, **kwargs):
         return super().get_serializer(*args, **kwargs)
