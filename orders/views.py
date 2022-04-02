@@ -12,18 +12,6 @@ from .models import Order, OrderItem
 # Create your views here.
 
 
-########### wrong Position #####################3
-
-class OrderItemDeleteView(generics.DestroyAPIView):
-    """
-    class view for delete a order item in cart
-    """
-    serializer_class = OrderItemSerializer
-    queryset = OrderItem.objects.all()
-
-
-
-
 
 class OrderItemListView(ListView):
     """
