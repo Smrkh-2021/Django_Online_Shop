@@ -53,6 +53,27 @@ class OrderItemViewSet(viewsets.ModelViewSet):
     serializer_class = OrderItemSerializer
     queryset = OrderItem.objects.all()
 
+    def destroy(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            user = request.user
+            customer = Customer.objects.get(user=user)
+            order = Order.objects.get(customer=customer, status_id=3)
+            super().destroy(request, *args, **kwargs)
+            orderitem_count = OrderItem.objects.filter(order=order).count()
+            resp = Response({'orderitem_count': orderitem_count}, status=200)
+            return resp
+        cookie_str = request.COOKIES.get('cookie_product')
+        cookie_dict = json.loads(cookie_str)
+        product_id = request.data['product_id']
+        if cookie_dict.get(product_id):
+            del cookie_dict[product_id]
+        orderitem_count = len(cookie_dict)
+        cookie_json = json.dumps(cookie_dict)
+        response = Response({'orderitem_count': orderitem_count}, status=200)
+        response.set_cookie('cookie_product', cookie_json)
+        return response
+
+
     def create(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
             user = request.user
