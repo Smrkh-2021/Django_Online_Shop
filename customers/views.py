@@ -54,23 +54,11 @@ class CustomerLoginView(FormView):
         login(self.request, form.get_user())
         user = self.request.user
         Customer.objects.get_or_create(user=user)
-        return super().form_valid(form)
-
-
-
-
-class CustomerSignupView(FormView):
-    form_class = RegistrationForm
-    template_name = 'customers/register.html'
-    success_url = reverse_lazy('products:product_list_view')
-
-    def form_valid(self, form):
-        form.clean_phone()
-        form.save()
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        return super().form_invalid(form)
+        response = super().form_valid(form)
+        if self.request.COOKIES.get('cookie_product'):
+            save_orderitems_from_cookie_to_db(self.request)
+            response.delete_cookie('cookie_product')
+        return response
 
 
 
