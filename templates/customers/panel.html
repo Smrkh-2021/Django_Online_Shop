@@ -68,6 +68,35 @@
         })
 
 
+        $('#address').on('click', function () {
+            $.ajax({
+                type: 'GET',
+                url: '{% url 'address-list' %}',
+                success: function (response) {
+                    console.log(response['address'])
+                    $('#to_fill').html(response['address'])
+                },
+                error: function (error) {
+
+                },
+            })
+        })
+
+
+        $('#profile').on('click', function () {
+            $.ajax({
+                type: 'GET',
+                url: '{% url 'user-list' %}',
+                success: function (response) {
+                    console.log(response['user'])
+                    $('#to_fill').html(response['user'])
+                },
+                error: function (error) {
+
+                },
+            })
+        })
+
 
     </script>
 {% endblock %}
