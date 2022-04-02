@@ -94,22 +94,24 @@ class OrderItemViewSet(viewsets.ModelViewSet):
             response.set_cookie('cookie_product', cookie)
             return response
 
-    # def get_queryset(self):
-    #     # cookie = self.request.COOKIES.get('cookie_product')
-    #     if self.request.user.is_authenticated():
-    #         user = self.request.user
-    #         customer = Customer.objects.get_or_create(user=user)[0]
-    #         order = Order.objects.get(customer=customer, status_id=3)
-    #         return order.orderitem_set.all()
-    #     else:
-    #         orderitem_list = list_of_cookie_to_orderitem(self.request)
-    #         return orderitem_list
+    def get_serializer(self, *args, **kwargs):
+        return super().get_serializer(*args, **kwargs)
 
-    # def set_cookie(self, request):
-    #     user = request.user
-    #     if not user.is_authenticated:
-    #         resp = HttpResponse()
-    #         resp.set_cookie()
+    def partial_update(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return super().partial_update(request, *args, **kwargs)
+        count = request.data['count']
+        product_id = request.data['product']
+        cookie_str = request.COOKIES.get('cookie_product')
+        cookie_dict = json.loads(cookie_str)
+        if cookie_dict.get(product_id):
+            cookie_dict[product_id] = count
+        response = Response(status=200)
+        cookie_json = json.dumps(cookie_dict)
+        response.set_cookie('cookie_product', cookie_json)
+        return response
+
+
 
 
 class OrderListView(generics.ListAPIView):
