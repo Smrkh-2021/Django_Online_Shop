@@ -24,9 +24,7 @@ class OrderItemListView(ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             user = self.request.user
-            print('user', user)
             customer = Customer.objects.get(user=user)
-            print('customer', customer)
             order = Order.objects.get_or_create(customer=customer, status_id=3)[0]
             return order.orderitem_set.all()
         else:
