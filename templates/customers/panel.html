@@ -52,16 +52,16 @@
 
     <script>
 
-    $('#orders').on('click', function () {
-        console.log('heyyy!')
-        $.ajax({
-            type:'GET',
-            url:'{% url 'orders:panel_orders_list' %}',
-            success:function (response) {
-                console.log(response['order'])
-                $('#to_fill').html(response['order'])
-            },
-            error:function (error) {
+        $('#orders').on('click', function () {
+            console.log('heyyy!')
+            $.ajax({
+                type: 'GET',
+                url: '{% url 'orders:panel_orders_list' %}',
+                success: function (response) {
+                    console.log(response['order'])
+                    $('#to_fill').html(response['order'])
+                },
+                error: function (error) {
 
             },
         })
