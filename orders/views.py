@@ -59,3 +59,4 @@ class OrderListView(ListView):
         template_string = render_to_string(template_name='customers/panel_order.html', context=context)
         return JsonResponse({'order':template_string})
 
+
