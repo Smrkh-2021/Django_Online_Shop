@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 12:52+0330\n"
+"POT-Creation-Date: 2022-03-19 23:47+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,15 +38,15 @@ msgstr ""
 msgid "Phone number must be in the true IR format"
 msgstr ""
 
-#: customers/forms.py:10 customers/forms.py:22
+#: customers/forms.py:10 customers/forms.py:28
 msgid "Phone"
 msgstr ""
 
-#: customers/forms.py:11 customers/forms.py:23
+#: customers/forms.py:11 customers/forms.py:29
 msgid "Password"
 msgstr ""
 
-#: customers/forms.py:24
+#: customers/forms.py:30
 msgid "Confirm Password"
 msgstr ""
 
@@ -98,7 +98,7 @@ msgstr ""
 msgid "customer"
 msgstr ""
 
-#: customers/views.py:16
+#: customers/views.py:21
 msgid "Wellcome"
 msgstr ""
 
