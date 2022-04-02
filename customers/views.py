@@ -36,6 +36,9 @@ class CustomerSignupView(FormView):
 
 
 class CustomerLoginView(FormView):
+    """
+    class view for login user after signup
+    """
     form_class = LoginForm
     template_name = 'customers/login.html'
     success_url = reverse_lazy('customers:panel_view')
