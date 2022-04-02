@@ -1,10 +1,11 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView, ListView
+from requests import Response
 from rest_framework import generics, authentication
 from .forms import LoginForm, RegistrationForm
 from django.utils.translation import gettext_lazy as _
@@ -12,6 +13,26 @@ from .models import Customer
 # Create your views here.
 from .permissions import IsOwner, IsSuperUser
 from .serializers import *
+from .utils import save_orderitems_from_cookie_to_db
+
+class CustomerSignupView(FormView):
+    """
+    class view for signup anonymous user
+    """
+
+    form_class = RegistrationForm
+    template_name = 'customers/register.html'
+    success_url = reverse_lazy('products:product_list_view')
+
+    def form_valid(self, form):
+        form.clean_phone()
+        form.save()
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+
+
 
 
 class CustomerLoginView(FormView):
