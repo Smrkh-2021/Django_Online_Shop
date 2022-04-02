@@ -65,18 +65,10 @@ class CustomerLoginView(FormView):
 class CustomerLogoutView(View):
     def get(self, request):
         logout(request)
-        return HttpResponseRedirect(reverse_lazy('products:product_list_view'))
-
-
-
-
-
-class UserListApi(generics.ListCreateAPIView):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    permission_classes = [IsSuperUser]
-    authentication_classes = [authentication.BasicAuthentication]
-
+        response = HttpResponseRedirect(reverse_lazy('products:product_list_view'))
+        # if self.request.COOKIES.get('cookie_product'):
+        #     response.delete_cookie('cookie_product')
+        return response
 
 
 class UserDetailApi(generics.RetrieveUpdateDestroyAPIView):
