@@ -111,6 +111,9 @@ class CustomerLogoutView(View):
 
 
 class CustomerPanelView(LoginRequiredMixin, ListView):
+    """
+    class for just customer can see customer panel after loginned
+    """
     template_name = 'customers/panel.html'
     queryset = Customer.objects.all()
     login_url = '/customers/login'
