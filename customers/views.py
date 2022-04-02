@@ -41,13 +41,16 @@ class CustomerLoginView(FormView):
     """
     form_class = LoginForm
     template_name = 'customers/login.html'
-    success_url = reverse_lazy('customers:panel_view')
+    success_url = reverse_lazy('products:product_list_view')
     success_message = _("Wellcome")
 
     def form_invalid(self, form):
         return super().form_invalid(form)
 
     def form_valid(self, form):
+        url = self.request.GET.get('next', None)
+        if url:
+            self.success_url = url
         login(self.request, form.get_user())
         user = self.request.user
         Customer.objects.get_or_create(user=user)
