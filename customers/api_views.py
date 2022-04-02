@@ -6,6 +6,9 @@ from customers.serializers import *
 
 
 class AddressViewSet(viewsets.ModelViewSet):
+    """
+    class view for addresses in customer panel
+    """
     serializer_class = AddressSerializer
     queryset = Address.objects.all()
 
