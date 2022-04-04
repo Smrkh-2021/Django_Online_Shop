@@ -20,3 +20,8 @@ class AddressSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     # customer_set = serializers.HyperlinkedModelSerializer(viewname='',queryset=Customer.objects.all(), many=True)
+
+class CustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = '__all__'
