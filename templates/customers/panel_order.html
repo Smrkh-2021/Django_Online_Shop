@@ -15,7 +15,7 @@
         <tbody>
         {% for order in orders %}
             <tr>
-                <td>{{ order.id }}</td>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ order.offcode }}</td>
                 <td>{{ order.status }}</td>
                 <td>{{ order.total_price }}</td>
