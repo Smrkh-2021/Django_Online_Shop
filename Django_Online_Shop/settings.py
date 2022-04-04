@@ -133,9 +133,9 @@ SECRET_KEY = 'django-insecure-slkv$uda$z1$%+n-ux3u)2k37_w-km(x^@ai=a4_^9tl=gseh3
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+# APPEND_SLASH = False
 ALLOWED_HOSTS = []
-
+# DATE_INPUT_FORMATS = ['%Y-%m-%d']
 # Application definition
 
 INSTALLED_APPS = [
@@ -159,6 +159,7 @@ INSTALLED_APPS = [
     'customers',
     'products',
     'orders',
+    'landing',
     'rest_framework',
 
 ]
@@ -176,6 +177,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Django_Online_Shop.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -188,7 +191,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # 'orders.context_processors.cart_item',
+                'products.context_processor.categories',
+                'orders.context_processors.orderitem_num',
             ],
         },
     },
