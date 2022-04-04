@@ -149,6 +149,20 @@
             $(this).parent().parent().children('td.product_total').attr('total', product_total_price)
         })
 
+        $(document).ready(function () {
+            $('.product_quantity input').each(function () {
+                let quantity = $(this).val()
+                let price = $(this).parent().parent().children('td.product_price').attr('price')
+                let product_total_price = quantity * price
+                $(this).parent().parent().children('td.product_total').html(`${product_total_price}$`)
+            })
+            let sub_total = 0
+            $('.product_total').each(function () {
+                sub_total += parseFloat($(this).text())
+                $('#subtotal').html(`${sub_total}$`)
+                $('#final_total').html(`${sub_total}$`)
+            })
+        })
 
         $('#coupon_btn').on('click', function () {
             let coupon = $('#coupon_id').val()
