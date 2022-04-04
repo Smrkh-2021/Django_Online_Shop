@@ -243,13 +243,10 @@
                 success: function (response) {
                     console.log('miad')
 
-
-        $(document).ready(function () {
-            let sub_total = 0
-            $('.product_total').each(function () {
-                sub_total += parseFloat($(this).text())
-                $('#subtotal').html(`${sub_total}$`)
-                $('#total').html(`${sub_total}$`)
+                },
+                error: function (error) {
+                    console.log(error)
+                }
             })
         })
 
