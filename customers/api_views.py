@@ -30,6 +30,9 @@ class AddressViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    """
+    view for user profile in customer panel
+    """
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
