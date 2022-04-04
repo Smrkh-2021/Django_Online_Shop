@@ -220,9 +220,14 @@
             })
         })
 
-
-        $('#update_btn').on('click', function () {
+        $('.update_item').on('click', function () {
+            let orderitem_id = $(this).attr('orderitem_id')
+            let orderitem_product_id = $(this).attr('orderitem_product_id')
+            let quantity = $(this).parent().parent().parent().children('.product_quantity').children('input').val()
+            console.log('orderitem_id', orderitem_id)
+            console.log('orderitem_product_id', orderitem_product_id)
             let sub_total = 0
+            {#console.log('coupon', coupon)#}
             $('.product_total').each(function () {
                 sub_total += parseFloat($(this).text())
                 console.log('this:', parseFloat($(this).text()))
