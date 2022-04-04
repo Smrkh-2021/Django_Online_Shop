@@ -1,32 +1,87 @@
+{% load static %}
+<h3>profile </h3>
+<div class="login">
+    <div class="login_form_container">
+        <div class="account_login_form">
+            <form action="#">
+                <div class="input-radio">
+                    <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mr.</span>
+                    <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mrs.</span>
+                </div>
+                <br>
+                <label>First Name</label>
+                <input type="text" id="first_name" name="first-name" value="{{ user.first_name }}">
+                <label>Last Name</label>
+                <input type="text" name="last_name" id="last_name" value="{{ user.last_name }}">
+                <label>Email</label>
+                <input type="text" name="email" id="email" value="{{ user.email }}">
+                <label>Phone</label>
+                <input type="text" name="phone" id="phone" value="{{ user.phone }}">
+                {#                <label>Birthdate</label>#}
+                {#                <input type="text"  name="birthdate" placeholder="YYYY-MM-DD" id="birthdate" value="{{ user.birthdate }}">#}
+                {#                <span class="example">(E.g.: 1970-05-31)</span>#}
+                <br>
+            </form>
+            <div class="cart_submit">
+                <button type="" class="" id="update_profile">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <h3>profile </h3>
-    <div class="login">
-        <div class="login_form_container">
-            <div class="account_login_form">
-                <form action="#">
-{#                    {% for user in user %}#}
-                    <div class="input-radio">
-                        <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mr.</span>
-                        <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mrs.</span>
+
+<div class="cart_submit">
+    <button type="" class="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Change Password
+    </button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#ffd54c">
+                <h4 class="modal-title" id="staticBackdropLabel" style="text-align:center;">Change
+                    Password</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"
+                                      style="background-color: #ffd54c">Old Password</span>
+                                <input type="text" class="form-control" id="old_password" placeholder=""
+                                       aria-label="Province"
+                                       aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"
+                                      style="background-color: #ffd54c">New Password</span>
+                                <input type="text" class="form-control" id="new_password" placeholder=""
+                                       aria-label="number"
+                                       aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"
+                                      style="background-color: #ffd54c">Confirm New Password</span>
+                                <input type="text" class="form-control" id="confirm_password" placeholder=""
+                                       aria-label="number"
+                                       aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <img src="{% static 'assets/img/bg/banner2.jpg' %}" alt="" width="600"
+                                 height="600">
+                        </div>
                     </div>
-                    <br>
-                    <label>First Name</label>
-                    <input type="text" name="first-name" value="{{ user.first_name }}">
-                    <label>Last Name</label>
-                    <input type="text" name="last-name" value="{{ user.last_name }}">
-                    <label>Email</label>
-                    <input type="text" name="email-name" value="{{ user.email }}">
-                    <label>Password</label>
-                    <input type="password" name="user-password" value="{{ user.password }}">
-                    <label>Birthdate</label>
-                    <input type="text" placeholder="MM/DD/YYYY" value="" name="birthday">
-                    <span class="example">(E.g.: 05/31/1970)</span>
-                    <br>
-                    <div class="save_button primary_btn default_button">
-                        <button type="submit">Save</button>
-                    </div>
-{#                    {% endfor %}#}
-                </form>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="cart_submit">
+                    <button type="" class="" id="update_password">Save</button>
+                </div>
             </div>
         </div>
     </div>
