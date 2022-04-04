@@ -106,8 +106,23 @@
                                         <p>Total</p>
                                         <p class="cart_amount" id="final_total"></p>
                                     </div>
-                                    <div class="checkout_btn">
-                                        <input type="button" id="checkout_id" style="cursor: pointer;background-color: #ffd54c" value="Proceed to Checkout">
+                                    <div class="cart_subtotal" id="address_opt">
+                                        <label for="">Address</label>
+                                        <select name="" id="address_id" class="form-control"
+                                                style="margin-left: 20px">
+                                            {% for address in order.customer.address_set.all %}
+                                                <option value="{{ address.id }}">{{ address }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="checkout_btn" style="margin-top: 20px">
+                                        <input type="button" id="checkout_id"
+                                               style="background-color:#ffd54c;border: none;height: 40px; border-radius: 3px; color: white"
+                                               value="Checkout">
+
+                                        {#                                        <input type="button" id="checkout_id"#}
+                                        {#                                               style="cursor: pointer;background-color: #ffd54c"#}
+                                        {#                                               value="Checkout">#}
                                     </div>
                                 </div>
                             </div>
