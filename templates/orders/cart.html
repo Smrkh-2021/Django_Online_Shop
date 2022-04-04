@@ -250,13 +250,14 @@
             })
         })
 
-
         $('#checkout_id').on('click', function () {
             let total_price = parseFloat($('#subtotal').text())
-            let final_price = parseFloat($('#total').text())
+            let final_price = parseFloat($('#final_total').text())
             let order_id = $('.order_id').attr('order_id')
-            console.log(order_id)
-            let status = 'paid'
+            let address_id = $('#address_id').val()
+            console.log('order_id', order_id)
+            console.log('address_id', address_id)
+            console.log('final_price', final_price)
             $.ajax({
                 type: 'PATCH',
                 url: '{% url 'order_update' 0 %}'.replace('0', order_id),
