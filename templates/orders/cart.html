@@ -197,7 +197,6 @@
             })
         })
 
-
         $('.product_remove').on('click', function () {
             console.log('delete')
             let parent = $(this).parent()
@@ -206,8 +205,9 @@
             console.log('orderitem_product_id', orderitem_product_id)
             console.log('orderitem_id', orderitem_id)
             $.ajax({
-                type: 'DELETE',
-                url: '{% url 'orders:orderitem_delete' 0 %}'.replace('0', orderitem_id),
+                method: 'DELETE',
+                url: '{% url 'orderitem-list' %}' + `${orderitem_id}`,
+                data: {'product_id': orderitem_product_id},
                 headers: {'X-CSRFToken': '{{ csrf_token }}'},
                 success: function () {
                     console.log('miad')
