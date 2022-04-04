@@ -13,4 +13,5 @@ class TestView(View):
 
 
 def handler_404(request, *args):
-    return render(request, 'pages/404.html')
+    # return render(request, 'pages/404.html')
+    return render(request, 'pages/404.html', {}, status=404)
