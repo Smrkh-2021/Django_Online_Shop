@@ -48,7 +48,7 @@ class CustomerLoginView(FormView):
         return super().form_invalid(form)
 
     def form_valid(self, form):
-        url = self.request.GET.get('next', None)
+        url = self.request.GET.get('next_page', None)
         if url:
             self.success_url = url
         login(self.request, form.get_user())
