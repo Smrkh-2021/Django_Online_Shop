@@ -26,23 +26,41 @@
                                     <tbody id="tbody_id">
                                     {% for orderitem in items %}
                                         <tr>
-                                            <td class="product_remove" orderitem_id="{{ orderitem.id }}"><a
-                                                    href=""><i class="fa fa-trash-o"></i></a></td>
+                                            <td class="product_remove" orderitem_id="{{ orderitem.id }}"
+                                                orderitem_product_id="{{ orderitem.product.id }}"><a
+                                                    href="#"><i class="fa fa-trash-o"></i></a></td>
                                             <td class="product_thumb"><img
                                                     src="{{ orderitem.product.image_main.url }}" alt=""></td>
                                             <td class="product_name">{{ orderitem.product.name }}</td>
-                                            <td class="product_price" price="{{ orderitem.product.price }}">
-                                                ${{ orderitem.product.price }}</td>
-                                            <td class="product_quantity"><label>Quantity</label> <input min="1"
-                                                                                                        max="{{ orderitem.product.count }}"
-                                                                                                        value="1"
-                                                                                                        type="number">
+                                            <td class="product_price" price="{{ orderitem.product.discounted_price }}">
+                                                ${{ orderitem.product.discounted_price }}</td>
+                                            <td>
+                                                {% if orderitem.product.discount.type == 'percent' %}
+                                                    {{ orderitem.product.discount.value }}%
+                                                {% else %}
+                                                    {{ orderitem.product.discount.value }}$
+                                                {% endif %}
                                             </td>
-                                            <td class="product_total">{{ orderitem.product.price }}$</td>
+                                            <td class="product_quantity">
+                                                <label>Quantity</label>
+                                                <input class="product_quantity" min="1" max="1000"
+                                                       value="{{ orderitem.count }}" type="number">
+                                            </td>
+                                            <td class="product_total">{{ orderitem.product.discounted_price }}$</td>
+                                            <td>
+                                                <div class="cart_submit" style="width: 104%">
+                                                    <input style="background-color:#ffd54c;border: none;height: 40px; border-radius: 3px; color: white"
+                                                           type="button" class="update_item"
+                                                           orderitem_id="{{ orderitem.id }}"
+                                                           orderitem_product_id="{{ orderitem.product.id }}"
+                                                           value="update item">
+                                                </div>
+                                            </td>
                                         </tr>
-                                        </tbody>
-                                        <div class="order_id" style="display: none"
-                                             order_id="{{ orderitem.order.id }}"></div>
+                                    </tbody>
+                                    <div class="order_id" style="display: none"
+                                         order_id="{{ orderitem.order.id }}">
+                                    </div>
                                     {% endfor %}
                                 </table>
                             </div>
