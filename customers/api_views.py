@@ -21,15 +21,12 @@ class AddressViewSet(viewsets.ModelViewSet):
         template_string = render_to_string(template_name='customers/panel_address.html', context=context)
         return JsonResponse({'address':template_string})
 
-    def destroy(self, request, *args, **kwargs):
-        print("delete")
-        return super().destroy(request, *args, **kwargs)
-
-    def update(self, request, *args, **kwargs):
-        print('update')
-        return super().update(request, *args, **kwargs)
-
-
+    def create(self, request, *args, **kwargs):
+        user = self.request.user
+        customer = Customer.objects.get(user=user)
+        request.data._mutable = True
+        request.data['customer'] = customer.id
+        return super().create(request, *args, **kwargs)
 
 
 class UserViewSet(viewsets.ModelViewSet):
