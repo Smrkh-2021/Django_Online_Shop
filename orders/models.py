@@ -47,7 +47,7 @@ class OffCode(BaseDiscount):
 
 class Order(BaseModel):
     """
-     Order Model: This is Order/Cart that have mane Order Items
+     Order Model: This is Order/Cart that have many Order Items
     """
 
     class Meta:
