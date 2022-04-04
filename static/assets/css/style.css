@@ -6901,7 +6901,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .cart_submit {
-  text-align: right;
+  text-align: center;
   padding: 12px;
 }
 .cart_submit button {

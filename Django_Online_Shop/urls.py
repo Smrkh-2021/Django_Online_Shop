@@ -36,3 +36,4 @@ urlpatterns = i18n_patterns(
 
 handler404 = 'core.views.handler_404'
 
+
