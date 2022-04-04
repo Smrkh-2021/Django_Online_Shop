@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.datetime_safe import datetime
 from products.models import Product, BaseDiscount
 from customers.models import Customer, Address
 from django.utils.translation import gettext_lazy as _
@@ -29,7 +30,16 @@ class OffCode(BaseDiscount):
         verbose_name = _("Off Code")
         verbose_name_plural = _("Off Codes")
 
-    code = models.PositiveIntegerField(verbose_name=_('off code'))
+    code = models.CharField(verbose_name=_('off code'), max_length=50)
+
+    def offcode_finalprice(self, price):
+        if self.expire_time >= datetime.now().date():
+            if self.type == 'price':
+                final_price = price - self.value
+                return final_price if final_price > 0 else 0
+            elif self.type == 'percent':
+                return price - int(price * (self.value / 100))
+        return price
 
     def __str__(self):
         return f'Off Code: {self.value} {self.type}'
