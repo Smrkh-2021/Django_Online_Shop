@@ -107,7 +107,7 @@ class Product(BaseModel):
         if self.discount.expire_time >= datetime.now().date():
             if self.discount.type == 'price':
                 res = self.price - self.discount.value
-                return res
+                return res if res > 0 else 0
             elif self.discount.type == 'percent':
                 res = self.price - int(self.price * (self.discount.value / 100))
                 return res
