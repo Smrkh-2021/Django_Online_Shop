@@ -261,10 +261,16 @@
             $.ajax({
                 type: 'PATCH',
                 url: '{% url 'order_update' 0 %}'.replace('0', order_id),
-                data:{'final_price':final_price, 'total_price':total_price},
+                data: {'final_price': final_price, 'total_price': total_price, 'address': address_id},
                 headers: {'X-CSRFToken': '{{ csrf_token }}'},
                 success: function (response) {
-
+                    $('#tbody_id').empty()
+                    $('#cart_num').html('0')
+                    Swal.fire(
+                        'Done!',
+                        'Check Out Done',
+                        'success'
+                    )
                 },
                 error: function (error) {
                     console.log(error)
