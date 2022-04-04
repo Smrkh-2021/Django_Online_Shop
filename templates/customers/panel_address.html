@@ -190,7 +190,7 @@
     })
 
 
-    $('#save_address').on('click', function () {
+    $('#create_address').on('click', function () {
         console.log('Create')
         let province = $('#province_id').val()
         let city = $('#city_id').val()
@@ -201,12 +201,16 @@
         console.log('province', province)
         $.ajax({
             method: 'POST',
-            url: '{% url 'address-list' %}' + `${address_id}`,
+            url: '{% url 'address-list' %}',
             headers: {'X-CSRFToken': my_csrf},
-            data: {'province': province, 'city': city, 'street': street, 'alley': alley, 'number': number}
+            data: {'province': province, 'city': city, 'street': street, 'alley': alley, 'number': number},
             success: function (response) {
                 console.log('miad')
-                parent.remove()
+                Swal.fire(
+                    'Ok!',
+                    'Address Created',
+                    'success'
+                )
             },
             error: function (error) {
                 console.log(error)
