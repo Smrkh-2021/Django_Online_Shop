@@ -79,7 +79,7 @@ class OrderItem(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Order no {self.order.id}: {self.product.name} | {self.count}"
+        return f"Order id: {self.order.id}, {self.product.name}, quntity:{self.count}"
 
 
     def total_price(self):
