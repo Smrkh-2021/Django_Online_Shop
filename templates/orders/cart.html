@@ -209,7 +209,8 @@
                 url: '{% url 'orderitem-list' %}' + `${orderitem_id}`,
                 data: {'product_id': orderitem_product_id},
                 headers: {'X-CSRFToken': '{{ csrf_token }}'},
-                success: function () {
+                success: function (response) {
+                    $('#cart_num').html(response['orderitem_count'])
                     console.log('miad')
                     parent.remove()
                 },
