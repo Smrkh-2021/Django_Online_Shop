@@ -21,17 +21,14 @@ class OrderViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         coupon = request.data['coupon']
         sub_total_str = request.data['sub_total'][:-1]
-        sub_total = int(sub_total_str)
-        print('coupon is:', coupon)
-        print('sub_total is:', sub_total)
         try:
+            sub_total = int(sub_total_str)
             offcode = OffCode.objects.get(code=coupon)
             offcode_id = offcode.id
             request.data._mutable = True
             request.data['offcode'] = offcode_id
             final_price = offcode.offcode_finalprice(sub_total)
             final_price = str(final_price) + '$'
-            print('final_price:', final_price)
             value = str(offcode.value)
             type = offcode.type
             if type=='price':
@@ -39,11 +36,10 @@ class OrderViewSet(viewsets.ModelViewSet):
             else:
                 discount_coupon = value + '%'
             super().update(request, *args, **kwargs)
-            print('discount_coupon:', discount_coupon)
             resp = Response({'final_price': final_price, 'discount_coupon': discount_coupon}, status=200)
             return resp
         except:
-            return Response(status=400)
+            return Response(status=404)
 
 
 class OrderItemViewSet(viewsets.ModelViewSet):
