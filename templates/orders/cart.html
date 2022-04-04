@@ -165,19 +165,34 @@
         })
 
         $('#coupon_btn').on('click', function () {
-            let coupon = $('#coupon_id').val()
-            let order_id = $('.order_id').attr('order_id')
+            let coupon = $(this).parent().children('input').val()
+            let order_id = $(this).attr('coupon_order_id')
+            let sub_total = $('#subtotal').html()
+            console.log('sub_total', sub_total)
             console.log(order_id)
-            JsonData = {'offcode': coupon,}
+            console.log(coupon)
             $.ajax({
                 type: 'PATCH',
                 url: '{% url 'order-detail' 0 %}'.replace('0', order_id),
-                data: JsonData,
+                data: {'coupon': coupon, 'sub_total': sub_total},
                 headers: {'X-CSRFToken': '{{ csrf_token }}'},
                 success: function (response) {
+                    console.log('final_price:', response['final_price'])
+                    console.log('discount_coupon:', response['discount_coupon'])
+                    $('#final_total').html(response['final_price'])
+                    $('#coupon_disc').html(response['discount_coupon'])
+                    Swal.fire(
+                        'Accept!',
+                        'Coupon applied',
+                        'success'
+                    )
                 },
                 error: function (error) {
-                    console.log(error)
+                    Swal.fire(
+                        'Oops!',
+                        'Something is Wrong',
+                        'Error'
+                    )
                 }
             })
         })
