@@ -233,9 +233,15 @@
                 console.log('this:', parseFloat($(this).text()))
                 console.log(sub_total)
                 $('#subtotal').html(`${sub_total}$`)
-                $('#total').html(`${sub_total}$`)
+                $('#final_total').html(`${sub_total}$`)
             })
-        })
+            $.ajax({
+                method: 'PATCH',
+                url: '{% url 'orderitem-list' %}' + `${orderitem_id}/`,
+                data: {'product': orderitem_product_id, 'count': quantity},
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success: function (response) {
+                    console.log('miad')
 
 
         $(document).ready(function () {
