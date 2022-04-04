@@ -29,7 +29,7 @@
                                         <li>
                                             <p style="display:{% if request.user.is_authenticated %}flex{% else %}none{% endif %}">
                                                 "{{ user.phone }}" logged in !</p></li>
-                                        <li><a href="{% url 'customers:login_view' %}"
+                                        <li><a href="{% url 'customers:login_view' %}?next_page={{ request.get_full_path }}"
                                                style="display:{% if request.user.is_authenticated %}none{% else %}flex{% endif %}">Login </a>
                                         </li>
                                         <li><a href="{% url 'customers:register_view' %}"
