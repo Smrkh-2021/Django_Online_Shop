@@ -202,6 +202,8 @@
             console.log('delete')
             let parent = $(this).parent()
             let orderitem_id = $(this).attr('orderitem_id')
+            let orderitem_product_id = $(this).attr('orderitem_product_id')
+            console.log('orderitem_product_id', orderitem_product_id)
             console.log('orderitem_id', orderitem_id)
             $.ajax({
                 type: 'DELETE',
