@@ -135,12 +135,27 @@ class OrderUpdateView(generics.UpdateAPIView):
     queryset = Order.objects.all()
 
     def perform_update(self, serializer):
-        user = self.request.user
-        customer = Customer.objects.get(user=user)
-        order = Order.objects.get(customer=customer, status_id=3)
-        serializer.validated_data['status'] = Status.objects.get(id=2)
-        print(serializer.validated_data['status'])
-        super().perform_update(serializer)
+        try:
+            final_price_front = int(self.request.data['final_price'])
+            print('final_price_front', final_price_front)
+            user = self.request.user
+            customer = Customer.objects.get(user=user)
+            order = Order.objects.get(customer=customer, status_id=3)
+            orderitems = OrderItem.objects.filter(order=order)
+            print('orderitems:', orderitems)
+            final_price_bk = 0
+            for orderitem in orderitems:
+                final_price_bk += orderitem.product.discounted_price() * orderitem.count
+                print('final_price_bk', final_price_bk)
+            if order.offcode:
+                final_price_bk = order.offcode.offcode_finalprice(final_price_bk)
+                print('final_price_bk_offcode', final_price_bk)
+            if final_price_bk == final_price_front:
+                serializer.validated_data['status'] = Status.objects.get(id=2)
+                print(serializer.validated_data['status'])
+                super().perform_update(serializer)
+        except:
+            return Response(status=404)
 
 
 
