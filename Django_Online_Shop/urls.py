@@ -30,6 +30,7 @@ urlpatterns = i18n_patterns(
     # path('customers/', include('customers.urls')),
     path('orders_api/', include('orders.api_urls')),
     path('customers_api/', include('customers.api_urls')),
+    path('', include('landing.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
