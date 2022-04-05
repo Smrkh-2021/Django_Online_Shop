@@ -64,7 +64,10 @@ class User(AbstractUser):
     Custome User Model for Change Default User Name to Phone Number
     """
     USERNAME_FIELD = 'phone'
-    phone = models.CharField(max_length=13, unique=True, verbose_name=_("phone number"), help_text=_("Enter your phone number"))
+    phone = models.CharField(max_length=13, unique=True,validators=[check_phone] , verbose_name=_("phone number"), help_text=_("Enter your phone number"))
+    # birthdate = models.DateField(default=None, null=True, blank=True, verbose_name=_("Birth Date"))
+    gender = models.CharField(max_length=7, default=None, null=True, blank=True,
+                              choices=[('male', 'MALE'), ('female', 'FEMALE')], verbose_name=_("Gender"))
     objects = MyUserManager()
 
     class Meta:
