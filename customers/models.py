@@ -19,7 +19,7 @@ class Customer(BaseModel):
 
 
     def __str__(self):
-        return f'{self.phone}'
+        return f'customer {self.user}'
 
 
 class Address(BaseModel):
