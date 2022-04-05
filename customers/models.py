@@ -39,6 +39,6 @@ class Address(BaseModel):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_('customer'))
 
     def __str__(self):
-        return f'Address Customer: {self.customer} is: {self.province}'
+        return f'Address: {self.customer} is: {self.province}- {self.city}- {self.street}'
 
 
