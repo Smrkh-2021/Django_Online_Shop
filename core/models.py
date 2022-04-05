@@ -61,7 +61,7 @@ class MyUserManager(UserManager):
 class User(AbstractUser):
 
     """
-    User Model for Change Default User Name to Phone Number for Auth Pages
+    Custome User Model for Change Default User Name to Phone Number
     """
     USERNAME_FIELD = 'phone'
     phone = models.CharField(max_length=13, unique=True, verbose_name=_("phone number"), help_text=_("Enter your phone number"))
