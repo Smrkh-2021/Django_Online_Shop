@@ -35,7 +35,7 @@ class Address(BaseModel):
     street = models.CharField(max_length=50, verbose_name=_('street'), null=True, blank=True)
     alley = models.CharField(max_length=50, verbose_name=_('alley'), null=True, blank=True)
     number = models.PositiveIntegerField(verbose_name=_('number'), null=True, blank=True)
-    description = models.TextField(help_text=_("Enter your extra description of your address"), null=True, blank=True, verbose_name=_('description'))
+    # description = models.TextField(help_text=_("Enter your extra description of your address"), null=True, blank=True, verbose_name=_('description'))
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_('customer'))
 
     def __str__(self):
