@@ -1,7 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
-from .validators import Validation
+from .validators import check_phone
 # Create your models here.
 from django.utils.datetime_safe import datetime
 
