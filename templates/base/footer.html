@@ -1,15 +1,21 @@
 {% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
 
-
+{% if LANGUAGE_CODE == 'fa' %}
+{% endif %}
 <!--call to action start-->
 <section class="call_to_action">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="call_action_inner">
-                    <div class="call_text">
+                    <div class="call_text" style="{% if LANGUAGE_CODE == 'fa' %}direction:rtl{% endif %}">
+                        {% trans  'We Have' %}{% trans  'Recommendations' %}
                         <h3>We Have <span>Recommendations</span> for You</h3>
-                        <p>Take 30% off when you spend $150 or more with code Autima11</p>
+{#                        <p>Take 30% off when you spend $150 or more with code Coupon</p>#}
                     </div>
 {#                    <div class="discover_now">#}
 {#                        <a href="#">discover now</a>#}
