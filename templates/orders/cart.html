@@ -57,10 +57,10 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    </tbody>
-                                    <div class="order_id" style="display: none"
-                                         order_id="{{ orderitem.order.id }}">
-                                    </div>
+                                        </tbody>
+                                        <div class="order_id" style="display: none"
+                                             order_id="{{ orderitem.order.id }}">
+                                        </div>
                                     {% endfor %}
                                 </table>
                             </div>
@@ -242,6 +242,11 @@
                 headers: {'X-CSRFToken': '{{ csrf_token }}'},
                 success: function (response) {
                     console.log('miad')
+                    Swal.fire(
+                        'Done!',
+                        'Updated',
+                        'success'
+                    )
 
                 },
                 error: function (error) {
