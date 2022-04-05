@@ -173,6 +173,17 @@
             },
             error: function (error) {
                 console.log(error)
+                let errors = ''
+                for (error of error['responseJSON']['error']) {
+                    errors += error
+                }
+                console.log('omad to error')
+                Swal.fire({
+                    text:errors,
+                    icon: 'errors',
+                    title: 'error'
+                })
+
             }
         })
     })
