@@ -55,13 +55,13 @@ class UserViewSet(viewsets.ModelViewSet):
             print('old_password:', old_password)
             new_password = self.request.data['new_password1']
             confirm_password = self.request.data['new_password2']
-            form = PasswordChangeForm(self, {'old_password': old_password, 'new_password1': new_password,
+            form = PasswordChangeForm(request.user, {'old_password': old_password, 'new_password1': new_password,
                                              'new_password2': confirm_password})
             if form.is_valid():
                 form.save()
                 return Response(status=200)
             else:
-                return Response({'errors': form.errors.values()}, status=400)
+                return Response({'error': form.errors.values()}, status=400)
         return super().update(request, *args, **kwargs)
 
 
