@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Customer(BaseModel):
     """
-    Customer class for whoes to see products and categories and create new Orders
+    Customer model for somebody to see products and categories and create new Orders
     """
     class Meta:
         verbose_name = _("Customer")
