@@ -46,6 +46,7 @@ class BaseModel(models.Model):
 
     def deactivate(self):
         self.is_active = False
+        self.save()
 
 
 class MyUserManager(UserManager):
