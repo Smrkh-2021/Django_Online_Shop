@@ -1,7 +1,11 @@
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
 from django.views.generic import FormView
 from django.views.generic import TemplateView
 from landing.forms import ContactUsForm
+from django.utils.translation import gettext_lazy as _
+from django.urls import reverse_lazy
 from django.shortcuts import render
 
 
