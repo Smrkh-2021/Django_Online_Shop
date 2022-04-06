@@ -29,23 +29,62 @@
                         <!-- Nav tabs -->
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list" id="nav-tab">
-                                <li><a href="#orders" data-toggle="tab" class="nav-link" id="orders">Orders</a></li>
-                                <li><a href="#address" data-toggle="tab" class="nav-link" id="address">Addresses</a>
+                                <li><a href="#dashboard" data-toggle="tab" class="nav-link active">Dashboard</a>
                                 </li>
-                                <li><a href="#account-details" data-toggle="tab" class="nav-link"
-                                       id="profile">Profile</a></li>
+                                <li><a href="#orders" data-toggle="tab" class="nav-link" id="orders_btn">Orders</a></li>
+                                <li><a href="#address" data-toggle="tab" class="nav-link" id="address_btn">Addresses</a>
+                                </li>
+                                <li><a href="#profile" data-toggle="tab" class="nav-link"
+                                       id="profile_btn">Profile</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-9 col-lg-9" id="to_fill">
+                    <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
-                        {#                        <div class="tab-content dashboard_content">#}
-
-
-                        {#                        </div>#}
+                        <div class="tab-content dashboard_content">
+                            <div class="tab-pane fade show active" id="dashboard">
+                                <div style="display:flex;flex-direction:row;justify-content:space-around;flex-wrap:wrap;">
+                                    <div class="card" style="width:300px">
+                                        <img class="card-img-top" src="{% static 'assets/img/blog/blog3.jpg' %}" alt="">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Total of your Orders</h4>
+                                            <p class="card-text" style="font-weight: bold; font-size: 16px">{{ order_num }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="width:300px">
+                                        <img class="card-img-top" src="{% static 'assets/img/blog/blog4.jpg' %}" alt="">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Total of your Canceled Orders</h4>
+                                            <p class="card-text" style="font-weight: bold; font-size: 16px">{{ canceled_order_num }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="width:300px">
+                                        <img class="card-img-top" src="{% static 'assets/img/blog/blog5.jpg' %}" alt="">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Total of your In Process Orders</h4>
+                                            <p class="card-text" style="font-weight: bold; font-size: 16px">{{ paid_order_num }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card" style="width:300px">
+                                        <img class="card-img-top" src="{% static 'assets/img/blog/blog7.jpg' %}" alt="">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Total of your Delivered Orders</h4>
+                                            <p class="card-text" style="font-weight: bold; font-size: 16px">{{ delivered_order_num }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="orders">
+                            </div>
+                            <div class="tab-pane fade" id="address">
+                            </div>
+                            <div class="tab-pane fade" id="profile">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <!-- my account end   -->
