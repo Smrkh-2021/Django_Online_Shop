@@ -106,14 +106,15 @@
         {#    })#}
         {# })#}
 
-        $('#orders').on('click', function () {
+
+        $('#orders_btn').on('click', function () {
             console.log('heyyy!')
             $.ajax({
                 type: 'GET',
                 url: '{% url 'orders:panel_orders_list' %}',
                 success: function (response) {
                     console.log(response['order'])
-                    $('#to_fill').html(response['order'])
+                    $('#orders').html(response['order'])
                 },
                 error: function (error) {
 
@@ -122,13 +123,13 @@
         })
 
 
-        $('#address').on('click', function () {
+        $('#address_btn').on('click', function () {
             $.ajax({
                 type: 'GET',
                 url: '{% url 'address-list' %}',
                 success: function (response) {
                     console.log(response['address'])
-                    $('#to_fill').html(response['address'])
+                    $('#address').html(response['address'])
                 },
                 error: function (error) {
 
@@ -137,13 +138,13 @@
         })
 
 
-        $('#profile').on('click', function () {
+        $('#profile_btn').on('click', function () {
             $.ajax({
                 type: 'GET',
                 url: '{% url 'user-list' %}',
                 success: function (response) {
                     console.log(response['user'])
-                    $('#to_fill').html(response['user'])
+                    $('#profile').html(response['user'])
                 },
                 error: function (error) {
 
