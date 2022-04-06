@@ -64,8 +64,14 @@ class CustomerLoginView(FormView):
 
 class CustomerLogoutView(View):
     def get(self, request):
+        url = self.request.GET.get('next_page', None)
         logout(request)
-        response = HttpResponseRedirect(reverse_lazy('products:product_list_view'))
+        if url:
+            response = HttpResponseRedirect(url)
+            return response
+            # self.success_url = url
+        response = HttpResponse(status=200)
+        # response = HttpResponseRedirect(reverse_lazy('products:product_list_view'))
         # if self.request.COOKIES.get('cookie_product'):
         #     response.delete_cookie('cookie_product')
         return response
