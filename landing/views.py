@@ -22,7 +22,6 @@ class ContactUsView(FormView):
     template_name = 'landing/contact.html'
 
     def form_valid(self, form):
-        print('ooomaaaad')
         name = form.cleaned_data['name']
         email = form.cleaned_data['email']
         subject = form.cleaned_data['subject']
