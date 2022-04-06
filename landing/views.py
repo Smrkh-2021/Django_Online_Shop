@@ -16,10 +16,12 @@ from django.shortcuts import render
 
 
 
-class ContactUsView(FormView):
+class ContactUsView(SuccessMessageMixin, FormView):
     form_class = ContactUsForm
-    success_url = 'contactus'
+    success_url = reverse_lazy('landing:contactus')
     template_name = 'landing/contact.html'
+    success_message = _('okkkk')
+
 
     def form_valid(self, form):
         name = form.cleaned_data['name']
@@ -28,7 +30,10 @@ class ContactUsView(FormView):
         message = form.cleaned_data['message']
         send_mail(subject, message, email, ['m64.django@gmail.com', email])
         print('done')
+        messages.success(self.request, _('your message sended'))
         return super().form_valid(form)
+
+
 
     def form_invalid(self, form):
         print('form invalid')
