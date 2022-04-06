@@ -81,6 +81,15 @@
                      style="display:{% if request.user.is_authenticated %}block{% else %}none{% endif %}">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
+                            <div class="coupon_code left" style="margin-bottom: 5px">
+                                <h3>Cancel Cart</h3>
+                                <div class="coupon_inner cancel">
+                                    <p>Cancel Your Cart If You Wish</p>
+                                    <input type="button" id="cancel_btn" cancel_order_id="{{ order.id }}"
+                                           style="background-color:#ffd54c;border: none;height: 40px; border-radius: 3px; color: white"
+                                           value="Cancel Cart">
+                                </div>
+                            </div>
                             <div class="coupon_code left">
                                 <h3>Coupon</h3>
                                 <div class="coupon_inner">
