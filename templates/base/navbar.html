@@ -36,7 +36,7 @@
                                         <li><a href="{% url 'customers:register_view' %}"
                                                style="display:{% if request.user.is_authenticated %}none{% else %}flex{% endif %}">Register </a>
                                         </li>
-                                        <li><a href="{% url 'customers:logout_view' %}"
+                                        <li><a href="{% url 'customers:logout_view' %}?next_page={{ request.get_full_path }}"
                                                style="display:{% if request.user.is_authenticated %}flex{% else %}none{% endif %}">Logout </a>
                                         </li>
                                         <li>
@@ -255,7 +255,7 @@
                                     <li><a href="{% url 'customers:register_view' %}"
                                            style="display:{% if request.user.is_authenticated %}none{% else %}flex{% endif %}">Register </a>
                                     </li>
-                                    <li><a href="{% url 'customers:logout_view' %}"
+                                    <li><a href="{% url 'customers:logout_view' %}?next_page={{ request.get_full_path }}"
                                            style="display:{% if request.user.is_authenticated %}flex{% else %}none{% endif %}">Logout </a>
                                     </li>
                                     <li>
