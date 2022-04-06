@@ -91,6 +91,20 @@
 
 
     <script>
+        {#$('#dashboard').on('click', function () {#}
+        {#    console.log('heyyy!')#}
+        {#    $.ajax({#}
+        {#        type: 'GET',#}
+        {#        url: '{% url 'landing:' %}',#}
+        {#        success: function (response) {#}
+        {#            console.log(response['order'])#}
+        {#            $('#to_fill').html(response['dashboard'])#}
+        {#        },#}
+        {#        error: function (error) {#}
+        {##}
+        {#        },#}
+        {#    })#}
+        {# })#}
 
         $('#orders').on('click', function () {
             console.log('heyyy!')
