@@ -158,6 +158,17 @@ class OrderUpdateView(generics.UpdateAPIView):
             return Response(status=404)
 
 
+class OrderCancelView(generics.UpdateAPIView):
+    """
+    class for update status of order after Canceled
+    """
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
+
+    def update(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return super().update(request, *args, **kwargs)
+
 
 
 
