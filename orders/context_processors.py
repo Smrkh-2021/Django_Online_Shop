@@ -31,3 +31,22 @@ def orderitem_num(request):
         return {
             'orderitem_num': orderitem_num
         }
+
+
+def total_count_of_orders(request):
+    try:
+        user = request.user
+        customer = Customer.objects.get(user=user)
+        orders_count = Order.objects.filter(customer_id=customer.id).count()
+        canceled_orders_count = Order.objects.filter(customer_id=customer.id, status_id=1).count()
+        paid_orders_count = Order.objects.filter(customer_id=customer.id, status_id=2).count()
+        delivered_orders_count = Order.objects.filter(customer_id=customer.id, status_id=4).count()
+        return {
+            'order_num': orders_count,
+            'canceled_order_num': canceled_orders_count,
+            'paid_order_num': paid_orders_count,
+            'delivered_order_num': delivered_orders_count,
+        }
+    except:
+        return []
+
