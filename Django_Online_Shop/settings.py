@@ -193,6 +193,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'products.context_processor.categories',
                 'orders.context_processors.orderitem_num',
+                'orders.context_processors.total_count_of_orders',
             ],
         },
     },
