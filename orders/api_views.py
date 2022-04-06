@@ -168,6 +168,12 @@ class OrderCancelView(generics.UpdateAPIView):
     def update(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
             return super().update(request, *args, **kwargs)
+        try:
+            response = Response(status=200)
+            response.set_cookie('cookie_product', '')
+            return response
+        except:
+            return Response(status=404)
 
 
 
