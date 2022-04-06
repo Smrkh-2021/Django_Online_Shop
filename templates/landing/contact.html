@@ -77,19 +77,30 @@
                             </div>
 
                             <button type="submit"> Send</button>
-{#                            <p class="form-messege"></p>#}
+                            {#                            <p class="form-messege"></p>#}
                         </form>
-                        <div>
+                    </div>
+                    <div>
+                        <p>1</p>
                         {% for error in form.errors.values %}
                             <div class="m-2 p-2" style="background-color: #ffd54c">
                                 {{ error }}
                             </div>
                         {% endfor %}
-                        </div>
+                    </div>
+                    <div>
+                        <p>2</p>
+                        {% for msg in messages %}
+                            {{ msg }}
+{#                            <div class="m-2 p-2" style="background-color: #ffd54c">#}
+{#                                #}
+{#                            </div>#}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!--contact area end-->
