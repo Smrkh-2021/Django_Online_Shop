@@ -19,9 +19,9 @@ class OffCodeAdmin(LogicalAdminModel):
 
 class OrderAdmin(LogicalAdminModel):
     list_display = ['address', 'offcode', 'status', 'customer', 'final_price', 'total_price']
-    list_display_links = ['address', 'offcode', 'customer']
-    list_filter = ['customer', 'address']
-    search_fields = ['address', 'customer']
+    list_display_links = ['address', 'offcode', 'customer', 'status']
+    list_filter = ['customer', 'address', 'status']
+    search_fields = ['address', 'customer', 'status']
 
 
 class OrderItemAdmin(LogicalAdminModel):
