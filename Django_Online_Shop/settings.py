@@ -15,6 +15,7 @@ JAZZMIN_SETTINGS = {
     "site_logo": "assets/img/featured/featured4.jpg",
     # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "The Maktab-64 Admin",
+    "site_brand": "Maktab64 Shop",
 
     # Title on the brand, and login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_header": "Maktab-64",
@@ -132,9 +133,9 @@ SECRET_KEY = 'django-insecure-slkv$uda$z1$%+n-ux3u)2k37_w-km(x^@ai=a4_^9tl=gseh3
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+# APPEND_SLASH = False
 ALLOWED_HOSTS = []
-
+# DATE_INPUT_FORMATS = ['%Y-%m-%d']
 # Application definition
 
 INSTALLED_APPS = [
@@ -143,6 +144,7 @@ INSTALLED_APPS = [
     'jazzmin',
     'rosetta',
     'crispy_forms',
+    'django_extensions',
 
     # django default apps
     'django.contrib.admin',
@@ -157,6 +159,7 @@ INSTALLED_APPS = [
     'customers',
     'products',
     'orders',
+    'landing',
     'rest_framework',
 
 ]
@@ -174,6 +177,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Django_Online_Shop.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -186,6 +191,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'products.context_processor.categories',
+                'orders.context_processors.orderitem_num',
+                'orders.context_processors.total_count_of_orders',
             ],
         },
     },
@@ -304,3 +312,11 @@ LOGGING = {
         },
     }
 }
+
+#email Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'm64.django@gmail.com'
+EMAIL_HOST_PASSWORD = 'Smrkh@1367'

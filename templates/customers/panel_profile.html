@@ -1,0 +1,190 @@
+{% load static %}
+<h3>profile </h3>
+<div class="login">
+    <div class="login_form_container">
+        <div class="account_login_form">
+            <form action="#">
+                <div class="input-radio">
+                    <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mr.</span>
+                    <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mrs.</span>
+                </div>
+                <br>
+                <label>First Name</label>
+                <input type="text" id="first_name" name="first-name" value="{{ user.first_name }}">
+                <label>Last Name</label>
+                <input type="text" name="last_name" id="last_name" value="{{ user.last_name }}">
+                <label>Email</label>
+                <input type="text" name="email" id="email" value="{{ user.email }}">
+                <label>Phone</label>
+                <input type="text" disabled name="phone" id="phone" value="{{ user.phone }}">
+                {#                <label>Birthdate</label>#}
+                {#                <input type="text"  name="birthdate" placeholder="YYYY-MM-DD" id="birthdate" value="{{ user.birthdate }}">#}
+                {#                <span class="example">(E.g.: 1970-05-31)</span>#}
+                <br>
+            </form>
+            <div class="cart_submit">
+                <button type="" class="" id="update_profile">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="cart_submit">
+    <button type="" class="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Change Password
+    </button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#ffd54c">
+                <h4 class="modal-title" id="staticBackdropLabel" style="text-align:center;">Change
+                    Password</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"
+                                      style="background-color: #ffd54c">Old Password</span>
+                                <input type="password" class="form-control" id="old_password" placeholder=""
+                                       aria-label="Province"
+                                       aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"
+                                      style="background-color: #ffd54c">New Password</span>
+                                <input type="password" class="form-control" id="new_password" placeholder=""
+                                       aria-label="number"
+                                       aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"
+                                      style="background-color: #ffd54c">Confirm New Password</span>
+                                <input type="password" class="form-control" id="confirm_password" placeholder=""
+                                       aria-label="number"
+                                       aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <img src="{% static 'assets/img/bg/banner2.jpg' %}" alt="" width="600"
+                                 height="600">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="cart_submit">
+                    <button type="" class="" id="update_password">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function getCookie(name) {
+        var dc = document.cookie;
+        var prefix = name + "=";
+        var begin = dc.indexOf("; " + prefix);
+        if (begin == -1) {
+            begin = dc.indexOf(prefix);
+            if (begin != 0) return null;
+        } else {
+            begin += 2;
+            var end = document.cookie.indexOf(";", begin);
+            if (end == -1) {
+                end = dc.length;
+            }
+        }
+// because unescape has been deprecated, replaced with decodeURI
+//return unescape(dc.substring(begin + prefix.length, end));
+        return decodeURI(dc.substring(begin + prefix.length, end));
+    }
+
+    $('#update_profile').on('click', function () {
+        console.log('update')
+        let first_name = $('#first_name').val()
+        let last_name = $('#last_name').val()
+        let email = $('#email').val()
+        let phone = $('#phone').val()
+        let my_csrf = getCookie('csrftoken')
+        $.ajax({
+            method: 'PATCH',
+            url: '{% url 'user-list' %}{{ user.id }}/',
+            headers: {'X-CSRFToken': my_csrf},
+            data: {
+                'first_name': first_name,
+                'last_name': last_name,
+                'email': email,
+                'phone': phone,
+                'gender': 'male'
+            },
+            success: function (response) {
+                console.log('miad')
+                Swal.fire(
+                    'Ok!',
+                    'Profile Updated',
+                    'success'
+                )
+            },
+            error: function (error) {
+                console.log(error)
+                Swal.fire(
+                    'Oops!',
+                    'error',
+                    'error'
+                )
+            }
+        })
+    })
+
+
+    $('#update_password').on('click', function () {
+        console.log('update pasword')
+        let old_password = $('#old_password').val()
+        let new_password = $('#new_password').val()
+        let confirm_password = $('#confirm_password').val()
+        console.log('old_password', old_password)
+        let my_csrf = getCookie('csrftoken')
+        $.ajax({
+            method: 'PATCH',
+            url: '{% url 'user-list' %}{{ user.id }}/',
+            headers: {'X-CSRFToken': my_csrf},
+            data: {
+                'old_password': old_password,
+                'new_password1': new_password,
+                'new_password2': confirm_password
+            },
+            success: function (response) {
+                console.log('miad')
+                Swal.fire(
+                    'Ok!',
+                    'Password Updated',
+                    'success'
+                )
+            },
+            error: function (error) {
+                console.log(error)
+                let errors = ''
+                for (error of error['responseJSON']['error']) {
+                    errors += error
+                }
+                console.log('omad to error')
+                Swal.fire({
+                    text:errors,
+                    icon: 'errors',
+                    title: 'error'
+                })
+
+            }
+        })
+    })
+</script>

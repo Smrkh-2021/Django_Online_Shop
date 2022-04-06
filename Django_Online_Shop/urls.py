@@ -17,17 +17,24 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.i18n import i18n_patterns
 
 
-
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('products.urls')),
     path('api/products', include('products.api_urls')),
-    path('cart/', include('orders.urls')),
+    path('orders/', include('orders.urls')),
     path('customers/', include('customers.urls')),
     path('rosetta/', include('rosetta.urls')),
     # path('customers/', include('customers.urls')),
-    # path('orders/', include('orders.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('orders_api/', include('orders.api_urls')),
+    path('customers_api/', include('customers.api_urls')),
+    path('', include('landing.urls')),
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+handler404 = 'core.views.handler_404'
+
 

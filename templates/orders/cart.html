@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
-{% load static %}
-{% block body %}
+{% block slider %}{% endblock %}
+{% block banner %}{% endblock %}
+{% block content %}
     <!--shopping cart area start -->
     <div class="shopping_cart_area mt-32">
         <div class="container">
@@ -11,127 +12,333 @@
                             <div class="cart_page table-responsive">
                                 <table>
                                     <thead>
-                                        <tr>
-                                            <th class="product_remove">Delete</th>
-                                            <th class="product_thumb">Image</th>
-                                            <th class="product_name">Product</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product_quantity">Quantity</th>
-                                            <th class="product_total">Total</th>
-                                        </tr>
+                                    <tr>
+                                        <th class="product_remove">Delete</th>
+                                        <th class="product_thumb">Image</th>
+                                        <th class="product_name">Product</th>
+                                        <th class="product-price">Price(Discounted)</th>
+                                        <th class="">Discount</th>
+                                        <th class="product_quantity">Quantity</th>
+                                        <th class="">Total</th>
+                                        <th class="">Update</th>
+                                    </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tbody_id">
+                                    {% for orderitem in items %}
                                         <tr>
-                                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>
-                                            <td class="product_name"><a href="#">Handbag fringilla</a></td>
-                                            <td class="product-price">£65.00</td>
-                                            <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
-                                            <td class="product_total">£130.00</td>
-
-
+                                            <td class="product_remove" orderitem_id="{{ orderitem.id }}"
+                                                orderitem_product_id="{{ orderitem.product.id }}"><a
+                                                    href="#"><i class="fa fa-trash-o"></i></a></td>
+                                            <td class="product_thumb"><img
+                                                    src="{{ orderitem.product.image_main.url }}" alt=""></td>
+                                            <td class="product_name">{{ orderitem.product.name }}</td>
+                                            <td class="product_price" price="{{ orderitem.product.discounted_price }}">
+                                                ${{ orderitem.product.discounted_price }}</td>
+                                            <td>
+                                                {% if orderitem.product.discount.type == 'percent' %}
+                                                    {{ orderitem.product.discount.value }}%
+                                                {% else %}
+                                                    {{ orderitem.product.discount.value }}$
+                                                {% endif %}
+                                            </td>
+                                            <td class="product_quantity">
+                                                <label>Quantity</label>
+                                                <input class="product_quantity" min="1" max="1000"
+                                                       value="{{ orderitem.count }}" type="number">
+                                            </td>
+                                            <td class="product_total">{{ orderitem.product.discounted_price }}$</td>
+                                            <td>
+                                                <div class="cart_submit" style="width: 104%">
+                                                    <input style="background-color:#ffd54c;border: none;height: 40px; border-radius: 3px; color: white"
+                                                           type="button" class="update_item"
+                                                           orderitem_id="{{ orderitem.id }}"
+                                                           orderitem_product_id="{{ orderitem.product.id }}"
+                                                           value="update item">
+                                                </div>
+                                            </td>
                                         </tr>
 
-                                        <tr>
-                                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a></td>
-                                            <td class="product_name"><a href="#">Handbags justo</a></td>
-                                            <td class="product-price">£90.00</td>
-                                            <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
-                                            <td class="product_total">£180.00</td>
-
-
-                                        </tr>
-                                        <tr>
-                                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product5.jpg" alt=""></a></td>
-                                            <td class="product_name"><a href="#">Handbag elit</a></td>
-                                            <td class="product-price">£80.00</td>
-                                            <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
-                                            <td class="product_total">£160.00</td>
-
-
-                                        </tr>
-
+                                        <div class="order_id" style="display: none"
+                                             order_id="{{ orderitem.order.id }}">
+                                        </div>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="cart_submit">
-                                <button type="submit">update cart</button>
-                            </div>
                         </div>
                     </div>
+                    {#                    <div style=" display: flex;flex-direction: row;justify-content: flex-end;align-items: center;margin-bottom: 30px;margin-right: 25px;">#}
+                    {#                        <h3 class="myh3">Cancel Cart</h3>#}
+                    {#                        <div class="coupon_inner">#}
+                    {#                            <input type="button" id="cancel_btn" cancel_order_id="{{ order.id }}"#}
+                    {#                               style="background-color:#ffd54c;border: none;height: 40px; border-radius: 3px; color: white; width:90px;" value="Cancel Cart">#}
+                    {#                        </div>#}
+                    {#                    </div>#}
                 </div>
                 <!--coupon code area start-->
+
                 <div class="coupon_area">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
-                            <div class="coupon_code left">
+                            <div class="coupon_code left" style="margin-bottom: 5px">
+                                <h3>Cancel Cart</h3>
+                                <div class="coupon_inner cancel">
+                                    <p>Cancel Your Cart If You Wish</p>
+                                    <input type="button" id="cancel_btn" cancel_order_id="{{ order.id }}"
+                                           style="background-color:#ffd54c;border: none;height: 40px; border-radius: 3px; color: white"
+                                           value="Cancel Cart">
+                                </div>
+                            </div>
+                            <div class="coupon_code left" style="display:{% if request.user.is_authenticated %}block{% else %}none{% endif %}">
                                 <h3>Coupon</h3>
                                 <div class="coupon_inner">
                                     <p>Enter your coupon code if you have one.</p>
-                                    <input placeholder="Coupon code" type="text">
-                                    <button type="submit">Apply coupon</button>
+                                    <div class="cancel">
+                                        <input placeholder="Coupon Code" type="text">
+                                        <input type="button" id="coupon_btn" coupon_order_id="{{ order.id }}"
+                                               style="background-color:#ffd54c;border: none;height: 40px; border-radius: 3px; color: white"
+                                               value="Apply coupon">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <div class="coupon_code right">
+                            <div class="coupon_code right" style="display:{% if request.user.is_authenticated %}block{% else %}none{% endif %}">
                                 <h3>Cart Totals</h3>
                                 <div class="coupon_inner">
                                     <div class="cart_subtotal">
                                         <p>Subtotal</p>
-                                        <p class="cart_amount">£215.00</p>
+                                        <p class="cart_amount" id="subtotal"></p>
                                     </div>
                                     <div class="cart_subtotal ">
-                                        <p>Shipping</p>
-                                        <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
+                                        <p>Discount(Coupon)</p>
+                                        <p class="cart_amount" id="coupon_disc"></p>
                                     </div>
-                                    <a href="#">Calculate shipping</a>
+                                    {#                                    <a href="#">Calculate shipping</a>#}
 
                                     <div class="cart_subtotal">
                                         <p>Total</p>
-                                        <p class="cart_amount">£215.00</p>
+                                        <p class="cart_amount" id="final_total"></p>
                                     </div>
-                                    <div class="checkout_btn">
-                                        <a href="#">Proceed to Checkout</a>
+                                    <div class="cart_subtotal" id="address_opt">
+                                        <label for="">Address</label>
+                                        <select name="" id="address_id" class="form-control"
+                                                style="margin-left: 20px">
+                                            {% for address in order.customer.address_set.all %}
+                                                <option value="{{ address.id }}">{{ address }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="checkout_btn" style="margin-top: 20px">
+                                        <input type="button" id="checkout_id"
+                                               style="background-color:#ffd54c;border: none;height: 40px; border-radius: 3px; color: white"
+                                               value="Checkout">
+
+                                        {#                                        <input type="button" id="checkout_id"#}
+                                        {#                                               style="cursor: pointer;background-color: #ffd54c"#}
+                                        {#                                               value="Checkout">#}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!--coupon code area end-->
             </form>
         </div>
     </div>
     <!--shopping cart area end -->
+    <script>
 
-    <!--call to action start-->
-    <section class="call_to_action">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="call_action_inner">
-                        <div class="call_text">
-                            <h3>We Have <span>Recommendations</span> for You</h3>
-                            <p>Take 30% off when you spend $150 or more with code Autima11</p>
-                        </div>
-                        <div class="discover_now">
-                            <a href="#">discover now</a>
-                        </div>
-                        <div class="link_follow">
-                            <ul>
-                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
-                                <li><a href="#"><i class="ion-social-youtube"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--call to action end-->
+        {#function refreshPage() {#}
+        {#    window.location.reload();#}
+        {# }#}
+
+        $('.product_quantity input').change(function () {
+            let quantity = $(this).val()
+            let price = $(this).parent().parent().children('td.product_price').attr('price')
+            let product_total_price = quantity * price
+            $(this).parent().parent().children('td.product_total').html(`${product_total_price}$`)
+            $(this).parent().parent().children('td.product_total').attr('total', product_total_price)
+        })
+
+        $(document).ready(function () {
+            $('.product_quantity input').each(function () {
+                let quantity = $(this).val()
+                let price = $(this).parent().parent().children('td.product_price').attr('price')
+                let product_total_price = quantity * price
+                $(this).parent().parent().children('td.product_total').html(`${product_total_price}$`)
+            })
+            let sub_total = 0
+            $('.product_total').each(function () {
+                sub_total += parseFloat($(this).text())
+                $('#subtotal').html(`${sub_total}$`)
+                $('#final_total').html(`${sub_total}$`)
+            })
+        })
+
+        $('#coupon_btn').on('click', function () {
+            let coupon = $(this).parent().children('input').val()
+            let order_id = $(this).attr('coupon_order_id')
+            let sub_total = $('#subtotal').html()
+            console.log('sub_total', sub_total)
+            console.log(order_id)
+            console.log(coupon)
+            $.ajax({
+                type: 'PATCH',
+                url: '{% url 'order-detail' 0 %}'.replace('0', order_id),
+                data: {'coupon': coupon, 'sub_total': sub_total},
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success: function (response) {
+                    console.log('final_price:', response['final_price'])
+                    console.log('discount_coupon:', response['discount_coupon'])
+                    $('#final_total').html(response['final_price'])
+                    $('#coupon_disc').html(response['discount_coupon'])
+                    Swal.fire(
+                        'Accept!',
+                        'Coupon applied',
+                        'success'
+                    )
+                },
+                error: function (error) {
+                    Swal.fire(
+                        'Oops!',
+                        'Something is Wrong',
+                        'Error'
+                    )
+                }
+            })
+        })
+
+        $('.product_remove').on('click', function () {
+            console.log('delete')
+            let parent = $(this).parent()
+            let orderitem_id = $(this).attr('orderitem_id')
+            let orderitem_product_id = $(this).attr('orderitem_product_id')
+            console.log('orderitem_product_id', orderitem_product_id)
+            console.log('orderitem_id', orderitem_id)
+            $.ajax({
+                method: 'DELETE',
+                url: '{% url 'orderitem-list' %}' + `${orderitem_id}`,
+                data: {'product_id': orderitem_product_id},
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success: function (response) {
+                    $('#cart_num').html(response['orderitem_count'])
+                    console.log('miad')
+                    parent.remove()
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        })
+
+        $('.update_item').on('click', function () {
+            let orderitem_id = $(this).attr('orderitem_id')
+            let orderitem_product_id = $(this).attr('orderitem_product_id')
+            let quantity = $(this).parent().parent().parent().children('.product_quantity').children('input').val()
+            console.log('orderitem_id', orderitem_id)
+            console.log('orderitem_product_id', orderitem_product_id)
+            let sub_total = 0
+            {#console.log('coupon', coupon)#}
+            $('.product_total').each(function () {
+                sub_total += parseFloat($(this).text())
+                console.log('this:', parseFloat($(this).text()))
+                console.log(sub_total)
+                $('#subtotal').html(`${sub_total}$`)
+                $('#final_total').html(`${sub_total}$`)
+            })
+            $.ajax({
+                method: 'PATCH',
+                url: '{% url 'orderitem-list' %}' + `${orderitem_id}/`,
+                data: {'product': orderitem_product_id, 'count': quantity},
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success: function (response) {
+                    console.log('miad')
+                    Swal.fire(
+                        'Done!',
+                        'Updated',
+                        'success'
+                    )
+
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        })
+
+        $('#checkout_id').on('click', function () {
+            let total_price = parseFloat($('#subtotal').text())
+            let final_price = parseFloat($('#final_total').text())
+            let order_id = $('.order_id').attr('order_id')
+            let address_id = $('#address_id').val()
+            console.log('order_id', order_id)
+            console.log('address_id', address_id)
+            console.log('final_price', final_price)
+            $.ajax({
+                type: 'PATCH',
+                url: '{% url 'order_update' 0 %}'.replace('0', order_id),
+                data: {'final_price': final_price, 'total_price': total_price, 'address': address_id},
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success: function (response) {
+                    $('#tbody_id').empty()
+                    $('#cart_num').html('0')
+                    Swal.fire(
+                        'Done!',
+                        'Check Out Done',
+                        'success'
+                    )
+                },
+                error: function (error) {
+                    console.log(error)
+                    Swal.fire(
+                        'Oops!',
+                        'Something is Wrong',
+                        'Error'
+                    )
+                }
+
+            })
+        })
+
+        $('#cancel_btn').on('click', function () {
+            console.log('cancel')
+            let order_id = $(this).attr('cancel_order_id')
+            console.log(order_id)
+            $.ajax({
+                type: 'PATCH',
+                url: '{% url 'order_cancel' 0 %}'.replace('0', order_id ? order_id : 5),
+                data: {'status':1},
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success: function (response) {
+                    $('#cart_num').html('0')
+                    $('#tbody_id').empty()
+                    Swal.fire(
+                        'Done!',
+                        'Order Canceled',
+                        'success'
+                    )
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        })
+
+
+        {#$('#update_btn').on('click', function () {#}
+        {#    let sub_total = 0#}
+        {#    $('.product_total').each(function () {#}
+        {#        sub_total += parseFloat($(this).text())#}
+        {#        console.log('this:', parseFloat($(this).text()))#}
+        {#        console.log(sub_total)#}
+        {#        $('#subtotal').html(`${sub_total}$`)#}
+        {#        $('#total').html(`${sub_total}$`)#}
+        {#    })#}
+        {# })#}
+
+
+    </script>
 {% endblock %}

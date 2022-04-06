@@ -1,15 +1,21 @@
 {% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
 
-
+{% if LANGUAGE_CODE == 'fa' %}
+{% endif %}
 <!--call to action start-->
 <section class="call_to_action">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="call_action_inner">
-                    <div class="call_text">
+                    <div class="call_text" style="{% if LANGUAGE_CODE == 'fa' %}direction:rtl{% endif %}">
+                        {% trans  'We Have' %}{% trans  'Recommendations' %}
                         <h3>We Have <span>Recommendations</span> for You</h3>
-                        <p>Take 30% off when you spend $150 or more with code Autima11</p>
+{#                        <p>Take 30% off when you spend $150 or more with code Coupon</p>#}
                     </div>
 {#                    <div class="discover_now">#}
 {#                        <a href="#">discover now</a>#}
@@ -51,9 +57,8 @@
                         <h3>Information</h3>
                         <div class="footer_menu">
                             <ul>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="#">Contact Us</a></li>
-
+                                <li><a href="{% url 'landing:aboutus' %}">About Us</a></li>
+                                <li><a href="{% url 'landing:contactus' %}">Contact Us</a></li>
                             </ul>
                         </div>
                     </div>
@@ -97,7 +102,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="copyright_area">
-                        <p>Copyright &copy; 2021 <a href="#">Maktab-64</a> All Right Reserved.</p>
+                        <p>Copyright &copy; 2022 <a href="#">Maktab-64</a> All Right Reserved.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">

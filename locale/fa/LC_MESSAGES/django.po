@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 12:52+0330\n"
+"POT-Creation-Date: 2022-03-19 23:47+0330\n"
 "PO-Revision-Date: 2022-02-22 13:19+0330\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,15 +39,15 @@ msgstr "کاربران"
 msgid "Phone number must be in the true IR format"
 msgstr "شماره تلفن باید به فرمت ایران باشد"
 
-#: customers/forms.py:10 customers/forms.py:22
+#: customers/forms.py:10 customers/forms.py:28
 msgid "Phone"
 msgstr "تلفن"
 
-#: customers/forms.py:11 customers/forms.py:23
+#: customers/forms.py:11 customers/forms.py:29
 msgid "Password"
 msgstr "رمز عبور"
 
-#: customers/forms.py:24
+#: customers/forms.py:30
 msgid "Confirm Password"
 msgstr "تایید رمز عبور"
 
@@ -103,7 +103,7 @@ msgstr "توضیحات"
 msgid "customer"
 msgstr "مشتری"
 
-#: customers/views.py:16
+#: customers/views.py:21
 msgid "Wellcome"
 msgstr ""
 

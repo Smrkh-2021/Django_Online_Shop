@@ -1,0 +1,220 @@
+{% load static %}
+<div class="table_desc">
+    <div class="cart_page table-responsive">
+        <table>
+            <thead>
+            <tr>
+                <th class="product_remove">Delete</th>
+                <th class="product_thumb">Province</th>
+                <th class="product_name">City</th>
+                <th class="product-price">Street</th>
+                <th class="">Alley</th>
+                <th class="product_quantity">Number</th>
+                {#                <th class="">Description</th>#}
+                <th class="">Update</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for address in addresses %}
+                <tr>
+                    <td class="address_remove" address_id="{{ address.id }}"><a
+                            href="#"><i class="fa fa-trash-o" style="font-size:large"></i></a></td>
+                    <td class="province_cls"><input type="text" value="{{ address.province }}"
+                                                    style="border: none;text-align: center"></td>
+                    <td class="city_cls"><input type="text" value="{{ address.city }}"
+                                                style="border: none;text-align: center"></td>
+                    <td class="street_cls"><input type="text" value="{{ address.street }}"
+                                                  style="border: none;text-align: center"></td>
+                    <td class="alley_cls"><input type="text" value="{{ address.alley }}"
+                                                style="border: none;text-align: center"></td>
+                    <td class="number_cls"><input type="text" value="{{ address.number }}"
+                                                  style="border: none;text-align: center"></td>
+                    {#                    <td class=""><input type="text" value="{{ address.description }}"#}
+                    {#                                        style="border: none;overflow:auto;"></td>#}
+                    <td>
+                        <div class="cart_submit">
+                            <button type="" class="update_item">Save</button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+                {#            <div class="address_id" style="display: none"#}
+                {#                 address_id="{{ address.id }}">#}
+                {#            </div>#}
+            {% endfor %}
+        </table>
+    </div>
+    <div class="cart_submit">
+        <button type="" class="update_item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">New Address</button>
+    </div>
+    <!-- Button trigger modal -->
+    {#    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">#}
+    {#        Launch static backdrop modal#}
+    {#    </button>#}
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#ffd54c">
+                    <h4 class="modal-title" id="staticBackdropLabel" style="text-align:center;">ADD New Address</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text"
+                                          style="background-color: #ffd54c">Province</span>
+                                    <input type="text" class="form-control" id="province_id" placeholder=""
+                                           aria-label="Province"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"
+                                          style="background-color: #ffd54c">City</span>
+                                    <input type="text" class="form-control" id="city_id" placeholder=""
+                                           aria-label="city"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"
+                                      style="background-color: #ffd54c">Street</span>
+                                    <input type="text" class="form-control" id="street_id" placeholder=""
+                                           aria-label="street"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"
+                                      style="background-color: #ffd54c">Alley</span>
+                                    <input type="text" class="form-control" id="alley_id" placeholder=""
+                                           aria-label="alley"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"
+                                      style="background-color: #ffd54c">Number</span>
+                                    <input type="text" class="form-control" id="number_id" placeholder=""
+                                           aria-label="number"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <img src="{% static 'assets/img/bg/banner2.jpg' %}" alt="" width="600" height="600">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="cart_submit">
+                        <button type="" class="" id="create_address">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function getCookie(name) {
+        var dc = document.cookie;
+        var prefix = name + "=";
+        var begin = dc.indexOf("; " + prefix);
+        if (begin == -1) {
+            begin = dc.indexOf(prefix);
+            if (begin != 0) return null;
+        } else {
+            begin += 2;
+            var end = document.cookie.indexOf(";", begin);
+            if (end == -1) {
+                end = dc.length;
+            }
+        }
+// because unescape has been deprecated, replaced with decodeURI
+//return unescape(dc.substring(begin + prefix.length, end));
+        return decodeURI(dc.substring(begin + prefix.length, end));
+    }
+
+    $('.address_remove').on('click', function () {
+        console.log('delete')
+        let parent = $(this).parent()
+        let address_id = $(this).attr('address_id')
+        let my_csrf = getCookie('csrftoken')
+        console.log('address_id', address_id)
+        $.ajax({
+            method: 'DELETE',
+            url: '{% url 'address-list' %}' + `${address_id}`,
+            headers: {'X-CSRFToken': my_csrf},
+            success: function (response) {
+                console.log('miad')
+                parent.remove()
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    })
+
+
+    $('.update_item').on('click', function () {
+        console.log('save')
+        let address_id = $(this).parent().parent().parent().children('.address_remove').attr('address_id')
+        let province = $(this).parent().parent().parent().children('td.province_cls').children('input').val()
+        let city = $(this).parent().parent().parent().children('td.city_cls').children('input').val()
+        let street = $(this).parent().parent().parent().children('td.street_cls').children('input').val()
+        let alley = $(this).parent().parent().parent().children('td.alley_cls').children('input').val()
+        let number = $(this).parent().parent().parent().children('td.number_cls').children('input').val()
+        let my_csrf = getCookie('csrftoken')
+        console.log('address_id', address_id)
+        console.log('province', province)
+        $.ajax({
+            method: 'PUT',
+            url: '{% url 'address-list' %}' + `${address_id}/`,
+            headers: {'X-CSRFToken': my_csrf},
+            data: {'province': province, 'city': city, 'street': street, 'alley': alley, 'number': number},
+            success: function (response) {
+                console.log('miad')
+                Swal.fire(
+                    'Saved',
+                    'Address Saved',
+                    'success'
+                )
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    })
+
+
+    $('#create_address').on('click', function () {
+        console.log('Create')
+        let province = $('#province_id').val()
+        let city = $('#city_id').val()
+        let street = $('#street_id').val()
+        let alley = $('#alley_id').val()
+        let number = $('#number_id').val()
+        let my_csrf = getCookie('csrftoken')
+        console.log('province', province)
+        $.ajax({
+            method: 'POST',
+            url: '{% url 'address-list' %}',
+            headers: {'X-CSRFToken': my_csrf},
+            data: {'province': province, 'city': city, 'street': street, 'alley': alley, 'number': number},
+            success: function (response) {
+                console.log('miad')
+                Swal.fire(
+                    'Ok!',
+                    'Address Created',
+                    'success'
+                )
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    })
+</script>

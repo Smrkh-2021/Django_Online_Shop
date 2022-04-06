@@ -1,0 +1,108 @@
+{% extends 'base/base.html' %}
+{% block slider %}{% endblock %}
+{% block banner %}{% endblock %}
+{% block content %}
+    <!--breadcrumbs area start-->
+    <div class="breadcrumbs_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <ul>
+                            <li><a href="{% url 'products:product_list_view' %}">home</a></li>
+                            <li>Contact us</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--breadcrumbs area end-->
+
+    <!--contact map start-->
+    <div class="contact_map mt-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="map-area">
+                        <div id="googleMap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--contact map end-->
+
+    <!--contact area start-->
+    <div class="contact_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="contact_message content">
+                        <h3>contact us</h3>
+                        <p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum
+                            est notare quam littera gothica, quam nunc putamus parum claram anteposuerit litterarum
+                            formas human. qui sequitur mutationem consuetudium lectorum. Mirum est notare quam</p>
+                        <ul>
+                            <li><i class="fa fa-fax"></i> Address : Azadi Sq - sharif university</li>
+                            <li><i class="fa fa-phone"></i> <a href="tel:021-91077225">021-91077225</a></li>
+                            <li><i class="fa fa-envelope-o"></i><a href="mailto:m64.django@gmail.com">m64.django@gmail.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="contact_message form">
+                        <h3>Tell us your project</h3>
+                        <form id="contact-form" method="post" action="">
+                            {% csrf_token %}
+                            <div>
+                                <p class="m-0">Your Name (required)</p>
+                                {{ form.name }}
+                            </div>
+                            <br>
+                            <div>
+                                <p class="m-0">Your Email (required)</p>
+                                {{ form.email }}
+                            </div>
+                            <br>
+                            <div>
+                                <p class="m-0">Subject</p>
+                                {{ form.subject }}
+                            </div>
+                            <br>
+                            <div>
+                                <p class="m-0">Message</p>
+                                {{ form.message }}
+                            </div>
+
+                            <button type="submit"> Send</button>
+                            {#                            <p class="form-messege"></p>#}
+                        </form>
+                    </div>
+                    <div>
+                        <p>1</p>
+                        {% for error in form.errors.values %}
+                            <div class="m-2 p-2" style="background-color: #ffd54c">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <p>2</p>
+                        {% for msg in messages %}
+                            {{ msg }}
+{#                            <div class="m-2 p-2" style="background-color: #ffd54c">#}
+{#                                #}
+{#                            </div>#}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!--contact area end-->
+
+{% endblock %}

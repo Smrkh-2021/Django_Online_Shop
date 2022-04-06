@@ -1,12 +1,13 @@
 from django.urls import path
 from .views import *
+from .api_views import OrderItemViewSet
 
-# ProductListApi, ProductDetailApi,
 
 app_name = 'orders'
 
 urlpatterns = [
-    # path('', CartView.as_view(), name='cart_view'),
-
+    path('', OrderItemListView.as_view(), name='orderitem_list'),
+    # path('delitem/<int:pk>', OrderItemDeleteView.as_view(), name='orderitem_delete'),
+    path('panelorders/', OrderListView.as_view(), name='panel_orders_list')
 ]
 

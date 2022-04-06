@@ -1,7 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
-from .validators import Validation
+from .validators import check_phone
 # Create your models here.
 from django.utils.datetime_safe import datetime
 
@@ -46,6 +46,7 @@ class BaseModel(models.Model):
 
     def deactivate(self):
         self.is_active = False
+        self.save()
 
 
 class MyUserManager(UserManager):
@@ -60,10 +61,13 @@ class MyUserManager(UserManager):
 class User(AbstractUser):
 
     """
-    User Model for Change Default User Name to Phone Number for Auth Pages
+    Custome User Model for Change Default User Name to Phone Number
     """
     USERNAME_FIELD = 'phone'
-    phone = models.CharField(max_length=13, unique=True, verbose_name=_("phone number"), help_text=_("Enter your phone number"))
+    phone = models.CharField(max_length=13, unique=True,validators=[check_phone] , verbose_name=_("phone number"), help_text=_("Enter your phone number"))
+    # birthdate = models.DateField(default=None, null=True, blank=True, verbose_name=_("Birth Date"))
+    gender = models.CharField(max_length=7, default=None, null=True, blank=True,
+                              choices=[('male', 'MALE'), ('female', 'FEMALE')], verbose_name=_("Gender"))
     objects = MyUserManager()
 
     class Meta:
@@ -72,8 +76,8 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         self.username = self.phone
-        if User.objects.filter(id=self.id):
-            self.set_password(self.password)
+        # if User.objects.filter(id=self.id):
+        #     self.set_password(self.password)
         super().save(*args, **kwargs)
 
 

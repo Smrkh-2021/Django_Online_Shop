@@ -7,6 +7,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
         model = OrderItem
         fields = '__all__'
 
+    # yes = serializers.IntegerField(read_only=True)
+
 
 
 class OrderSerializer(serializers.ModelSerializer):

@@ -11,11 +11,15 @@ from products.models import Product, Category
 
 
 class ProductView(ListView):
+    """
+    class for show products in home page
+    """
     model = Product
     template_name = 'products/home.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         kwargs['root_categories'] = Category.objects.filter(parent=None)
+        kwargs['last_products'] = Product.objects.order_by('-id')[:7]
         return super().get_context_data(object_list=object_list, **kwargs)
 
 

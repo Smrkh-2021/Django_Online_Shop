@@ -1,0 +1,49 @@
+{#<div class="tab-content dashboard_content">#}
+{#    <div class="tab-pane fade">#}
+<h2>Orders</h2>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>N.m</th>
+            <th>OffCode</th>
+            <th>Status</th>
+            <th>Total Price</th>
+            <th>Final Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ order.offcode }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.total_price }}</td>
+                <td>{{ order.final_price }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{#{% if is_paginated %}#}
+{#    <div class="pagination">#}
+{#            <span class="page-links">#}
+{#                {% if page_obj.has_previous %}#}
+{#                    <a href="{% url 'orders:panel_orders_list' %}?page={{ page_obj.previous_page_number }}">previous</a>#}
+{#                {% endif %}#}
+{#                <span class="page-current">#}
+{#                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.#}
+{#                </span>#}
+{#                {% if page_obj.has_next %}#}
+{#                    <a href="{% url 'orders:panel_orders_list' %}?page={{ page_obj.next_page_number }}">next</a>#}
+{#                {% endif %}#}
+{#            </span>#}
+    </div>
+{#{% endif %}#}
+{#    </div>#}
+{#</div>#}
+
+
+
+

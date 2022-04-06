@@ -1,7 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block banner %}{% endblock %}
 {% block content %}
-<!--breadcrumbs area start-->
+    <!--breadcrumbs area start-->
     <div class="breadcrumbs_area">
         <div class="container">
             <div class="row">
@@ -27,33 +28,42 @@
 
                         <div id="img-1" class="zoomWrapper single-zoom">
                             <a href="#">
-                                <img id="zoom1" src="{{ product.image_main.url }}" data-zoom-image="{{ product.image_main.url }}" alt="big-1">
+                                <img id="zoom1" src="{{ product.image_main.url }}"
+                                     data-zoom-image="{{ product.image_main.url }}" alt="big-1">
                             </a>
                         </div>
 
                         <div class="single-zoom-thumb">
                             <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
                                 <li>
-                                    <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product8.jpg" data-zoom-image="assets/img/product/product8.jpg">
-                                        <img src="{{ product.image_main.url }}" alt="zo-th-1" />
+                                    <a href="#" class="elevatezoom-gallery active" data-update=""
+                                       data-image="{{ product.image_main.url }}"
+                                       data-zoom-image="{{ product.image_main.url }}">
+                                        <img src="{{ product.image_main.url }}" alt="zo-th-1"/>
                                     </a>
 
                                 </li>
                                 <li>
-                                    <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product9.jpg" data-zoom-image="assets/img/product/product9.jpg">
-                                        <img src="{{ product.image_main.url }}" alt="zo-th-1" />
+                                    <a href="#" class="elevatezoom-gallery active" data-update=""
+                                       data-image="{{ product.image_main.url }}"
+                                       data-zoom-image="{{ product.image_main.url }}">
+                                        <img src="{{ product.image_main.url }}" alt="zo-th-1"/>
                                     </a>
 
                                 </li>
                                 <li>
-                                    <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product10.jpg" data-zoom-image="assets/img/product/product10.jpg">
-                                        <img src="{{ product.image_main.url }}" alt="zo-th-1" />
+                                    <a href="#" class="elevatezoom-gallery active" data-update=""
+                                       data-image="{{ product.image_accessories.url }}"
+                                       data-zoom-image="{{ product.image_accessories.url }}">
+                                        <img src="{{ product.image_accessories.url }}" alt="zo-th-1"/>
                                     </a>
 
                                 </li>
                                 <li>
-                                    <a href="#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product13.jpg" data-zoom-image="assets/img/product/product13.jpg">
-                                        <img src="{{ product.image_main.url }}" alt="zo-th-1" />
+                                    <a href="#" class="elevatezoom-gallery active" data-update=""
+                                       data-image="{{ product.image_accessories.url }}"
+                                       data-zoom-image="{{ product.image_accessories.url }}">
+                                        <img src="{{ product.image_accessories.url }}" alt="zo-th-1"/>
                                     </a>
 
                                 </li>
@@ -66,12 +76,12 @@
                         <form action="#">
 
                             <h1>{{ product.name }}</h1>
-{#                            <div class="product_nav">#}
-{#                                <ul>#}
-{#                                    <li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a></li>#}
-{#                                    <li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>#}
-{#                                </ul>#}
-{#                            </div>#}
+                            {#                            <div class="product_nav">#}
+                            {#                                <ul>#}
+                            {#                                    <li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a></li>#}
+                            {#                                    <li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>#}
+                            {#                                </ul>#}
+                            {#                            </div>#}
                             <div class=" product_ratting">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -90,43 +100,46 @@
                             </div>
                             <div class="product_variant color">
                                 <h3>Available Options</h3>
-{#                                <label>color</label>#}
-{#                                <ul>#}
-{#                                    <li class="color1"><a href="#"></a></li>#}
-{#                                    <li class="color2"><a href="#"></a></li>#}
-{#                                    <li class="color3"><a href="#"></a></li>#}
-{#                                    <li class="color4"><a href="#"></a></li>#}
-{#                                </ul>#}
-                            </div>
-                            <div class="product_variant quantity">
-                                <label>quantity</label>
-                                <input min="1" max="100" value="1" type="number">
-                                <button class="button" type="submit">add to cart</button>
-
+                                {#                                <label>color</label>#}
+                                {#                                <ul>#}
+                                {#                                    <li class="color1"><a href="#"></a></li>#}
+                                {#                                    <li class="color2"><a href="#"></a></li>#}
+                                {#                                    <li class="color3"><a href="#"></a></li>#}
+                                {#                                    <li class="color4"><a href="#"></a></li>#}
+                                {#                                </ul>#}
                             </div>
                             <div class=" product_d_action">
                                 <ul>
-                                    <li><p>Count: {{ product.count }}</p></li>
+                                    <li><p>Stock: {{ product.stock }}</p></li>
                                     <br>
                                     <li><p>Brand: {{ product.brand }}</p></li>
-{#                                    <br>#}
+                                    <br>
+                                    <li><p>Category: {{ product.category.name }}</p></li>
                                 </ul>
                             </div>
-                            <div class="product_meta">
-                                <span>Category: <a href="#">{{ product.category.name }}</a></span>
+{#                            <div class="product_meta">#}
+{#                                <span><a href="#"></a></span>#}
+{#                            </div>#}
+                            <div class="product_variant quantity">
+{#                                <label></label>#}
+                                {#<input min="1" max="100" value="1" type="number">#}
+                                <input  class="button cart_btn" pr-id= {{ product.id }} type="button" value="add to cart" style="background-color:#ffd54c;width: 100px;height:40px; border: none;cursor: pointer;border-radius:3px">
                             </div>
-
                         </form>
                         <div class="priduct_social">
                             <ul>
-                                <li><a class="facebook" href="#" title="facebook"><i class="fa fa-facebook"></i> Like</a></li>
-                                <li><a class="twitter" href="#" title="twitter"><i class="fa fa-twitter"></i> tweet</a></li>
-                                <li><a class="pinterest" href="#" title="pinterest"><i class="fa fa-pinterest"></i> save</a></li>
-                                <li><a class="google-plus" href="#" title="google +"><i class="fa fa-google-plus"></i> share</a></li>
-                                <li><a class="linkedin" href="#" title="linkedin"><i class="fa fa-linkedin"></i> linked</a></li>
+                                <li><a class="facebook" href="#" title="facebook"><i class="fa fa-facebook"></i>
+                                    Like</a></li>
+                                <li><a class="twitter" href="#" title="twitter"><i class="fa fa-twitter"></i> tweet</a>
+                                </li>
+                                <li><a class="pinterest" href="#" title="pinterest"><i class="fa fa-pinterest"></i> save</a>
+                                </li>
+                                <li><a class="google-plus" href="#" title="google +"><i class="fa fa-google-plus"></i>
+                                    share</a></li>
+                                <li><a class="linkedin" href="#" title="linkedin"><i class="fa fa-linkedin"></i> linked</a>
+                                </li>
                             </ul>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -134,4 +147,35 @@
     </div>
     <!--product details end-->
 
+
+    <script>
+
+            $('.cart_btn').on('click', function () {
+            let product_id = $(this).attr('pr-id')
+            let cart_num = $('#cart_num').html()
+            console.log('cart_num', cart_num)
+            console.log('product_id', product_id)
+            {#let count = $('.count').val()#}
+            let data = {"product": product_id, "count": 1}
+            $.ajax({
+                type: "POST",
+                url: '{% url 'orderitem-list' %}',
+                data: data,
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success: function (response) {
+                    console.log(response['orderitem_count'])
+                    $('#cart_num').html(response['orderitem_count'])
+                    Swal.fire(
+                        'Good job!',
+                        'ADD to Cart',
+                        'success'
+                    )
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        })
+
+    </script>
 {% endblock %}

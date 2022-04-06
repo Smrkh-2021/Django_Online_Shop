@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.datetime_safe import datetime
 from products.models import Product, BaseDiscount
 from customers.models import Customer, Address
 from django.utils.translation import gettext_lazy as _
@@ -29,7 +30,16 @@ class OffCode(BaseDiscount):
         verbose_name = _("Off Code")
         verbose_name_plural = _("Off Codes")
 
-    code = models.PositiveIntegerField(verbose_name=_('off code'))
+    code = models.CharField(verbose_name=_('off code'), max_length=50)
+
+    def offcode_finalprice(self, price):
+        if self.expire_time >= datetime.now().date():
+            if self.type == 'price':
+                final_price = price - self.value
+                return final_price if final_price > 0 else 0
+            elif self.type == 'percent':
+                return price - int(price * (self.value / 100))
+        return price
 
     def __str__(self):
         return f'Off Code: {self.value} {self.type}'
@@ -37,14 +47,14 @@ class OffCode(BaseDiscount):
 
 class Order(BaseModel):
     """
-     Order Model: This is Order/Cart that have mane Order Items
+     Order Model: This is Order/Cart that have many Order Items
     """
 
     class Meta:
         verbose_name = _("Order")
         verbose_name_plural = _("Orders")
 
-    address = models.ForeignKey(to=Address, on_delete=models.RESTRICT)
+    address = models.ForeignKey(to=Address, on_delete=models.RESTRICT, null=True, blank=True)
     offcode = models.ForeignKey(OffCode, on_delete=models.CASCADE, null=True, blank=True)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -52,7 +62,7 @@ class Order(BaseModel):
     total_price = models.PositiveIntegerField(default=0, verbose_name=_('Total Price'), help_text=_("Total Price"))
 
     def __str__(self):
-        return f'Order for Customer: {self.customer.username}'
+        return f'Order for Customer: {self.customer.user}'
 
 
 class OrderItem(BaseModel):
@@ -69,7 +79,7 @@ class OrderItem(BaseModel):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Order no {self.order.id}: {self.product.name} | {self.count}"
+        return f"Order id: {self.order.id}, {self.product.name}, quntity:{self.count}"
 
 
     def total_price(self):
