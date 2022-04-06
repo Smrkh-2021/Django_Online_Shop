@@ -140,7 +140,6 @@
                                 </li>
                             </ul>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -148,4 +147,35 @@
     </div>
     <!--product details end-->
 
+
+    <script>
+
+            $('.cart_btn').on('click', function () {
+            let product_id = $(this).attr('pr-id')
+            let cart_num = $('#cart_num').html()
+            console.log('cart_num', cart_num)
+            console.log('product_id', product_id)
+            {#let count = $('.count').val()#}
+            let data = {"product": product_id, "count": 1}
+            $.ajax({
+                type: "POST",
+                url: '{% url 'orderitem-list' %}',
+                data: data,
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success: function (response) {
+                    console.log(response['orderitem_count'])
+                    $('#cart_num').html(response['orderitem_count'])
+                    Swal.fire(
+                        'Good job!',
+                        'ADD to Cart',
+                        'success'
+                    )
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        })
+
+    </script>
 {% endblock %}
